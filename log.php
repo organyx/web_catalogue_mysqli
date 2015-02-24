@@ -3,18 +3,20 @@
 
 <?php
 if (!function_exists("GetSQLValueString")) {
-function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
+function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "")
 {
+/*Global variable $con is necessary, because it is not known inside the function and you need it for mysqli_real_escape_string($con, $theValue); the Variable $con ist defined as mysqli_connect("localhost","user","password", "database") with an include-script.
+*/
+  Global $con;
+
   if (PHP_VERSION < 6) {
     $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
   }
-
-  $theValue = function_exists("mysql_real_escape_string") ? mysql_real_escape_string($theValue) : mysql_escape_string($theValue);
-
+  $theValue = mysqli_real_escape_string($con, $theValue);
   switch ($theType) {
     case "text":
       $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
-      break;    
+      break;   
     case "long":
     case "int":
       $theValue = ($theValue != "") ? intval($theValue) : "NULL";
@@ -29,19 +31,27 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
       $theValue = ($theValue != "") ? $theDefinedValue : $theNotDefinedValue;
       break;
   }
-  return $theValue;
+   return $theValue;
 }
 }
 
-mysql_select_db($database_WebCatalogue, $WebCatalogue);
+function mysqli_result($res, $row, $field=0) {
+  //$res->data_seek($row);
+  mysqli_data_seek($res, $row);
+ // $datarow = $res->fetch_array();
+  $datarow = mysql_fetch_array($res);
+  return $datarow[$field];
+}
+
+((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
 $query_Login = "SELECT * FROM users";
-$Login = mysql_query($query_Login, $WebCatalogue) or die(mysql_error());
-$row_Login = mysql_fetch_assoc($Login);
-$totalRows_Login = mysql_num_rows($Login);
+$Login = mysqli_query( $WebCatalogue, $query_Login) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
+$row_Login = mysqli_fetch_assoc($Login);
+$totalRows_Login = mysqli_num_rows($Login);
 $query_Login = "SELECT * FROM users";
-$Login = mysql_query($query_Login, $WebCatalogue) or die(mysql_error());
-$row_Login = mysql_fetch_assoc($Login);
-$totalRows_Login = mysql_num_rows($Login);
+$Login = mysqli_query( $WebCatalogue, $query_Login) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
+$row_Login = mysqli_fetch_assoc($Login);
+$totalRows_Login = mysqli_num_rows($Login);
 ?>
 <?php
 // *** Validate request to login to this site.
@@ -61,16 +71,16 @@ if (isset($_POST['Email'])) {
   $MM_redirectLoginSuccess = "Account.php";
   $MM_redirectLoginFailed = "Index.php";
   $MM_redirecttoReferrer = true;
-  mysql_select_db($database_WebCatalogue, $WebCatalogue);
+  ((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
   	
   $LoginRS__query=sprintf("SELECT userID, email, userID FROM users WHERE userID=%s AND email=%s",
   GetSQLValueString($loginUsername, "int"), GetSQLValueString($password, "text")); 
    
-  $LoginRS = mysql_query($LoginRS__query, $WebCatalogue) or die(mysql_error());
-  $loginFoundUser = mysql_num_rows($LoginRS);
+  $LoginRS = mysqli_query( $WebCatalogue, $LoginRS__query) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
+  $loginFoundUser = mysqli_num_rows($LoginRS);
   if ($loginFoundUser) {
     
-    $loginStrGroup  = mysql_result($LoginRS,0,'userID');
+    $loginStrGroup  = mysqli_result($LoginRS,0,'userID');
     
 	if (PHP_VERSION >= 5.1) {session_regenerate_id(true);} else {session_regenerate_id();}
     //declare two session variables and assign them
@@ -106,17 +116,17 @@ if (isset($_POST['Email'])) {
   $MM_redirectLoginSuccess = "Account.php";
   $MM_redirectLoginFailed = "Index.php";
   $MM_redirecttoReferrer = true;
-  mysql_select_db($database_WebCatalogue, $WebCatalogue);
+  ((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
   	
   $LoginRS__query=sprintf("SELECT email, password, Userlevel FROM users WHERE email=%s AND password=%s",
   GetSQLValueString($loginUsername, "text"), GetSQLValueString($password, "text")); 
    
-  $LoginRS = mysql_query($LoginRS__query, $WebCatalogue) or die(mysql_error());
-  $loginFoundUser = mysql_num_rows($LoginRS);
+  $LoginRS = mysqli_query( $WebCatalogue, $LoginRS__query) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
+  $loginFoundUser = mysqli_num_rows($LoginRS);
   if ($loginFoundUser) {
 	 
    
-    $loginStrGroup  = mysql_result($LoginRS,0,'Userlevel');
+    $loginStrGroup  = mysqli_result($LoginRS,0,'Userlevel');
 	
  
 	 if(isset($_SESSION['lvl'])){
@@ -167,6 +177,6 @@ if (isset($_POST['Email'])) {
       </table>
       
       <?php }  
-mysql_free_result($Login);
+((mysqli_free_result($Login) || (is_object($Login) && (get_class($Login) == "mysqli_result"))) ? true : false);
 
 ?>

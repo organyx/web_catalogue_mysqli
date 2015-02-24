@@ -55,7 +55,7 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
     $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
   }
 
-  $theValue = function_exists("mysql_real_escape_string") ? mysql_real_escape_string($theValue) : mysql_escape_string($theValue);
+  $theValue = function_exists("mysqli_real_escape_string") ? ((isset($GLOBALS["___mysqli_ston"]) && is_object($GLOBALS["___mysqli_ston"])) ? mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $theValue) : ((trigger_error("[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.", E_USER_ERROR)) ? "" : "")) : ((isset($GLOBALS["___mysqli_ston"]) && is_object($GLOBALS["___mysqli_ston"])) ? mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $theValue) : ((trigger_error("[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.", E_USER_ERROR)) ? "" : ""));
 
   switch ($theType) {
     case "text":
@@ -100,8 +100,8 @@ if ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "UpdateForm")) {
                        GetSQLValueString($_POST['Description'], "text"),
                        GetSQLValueString($_POST['UserIDhiddenField'], "int"));
 
-  mysql_select_db($database_WebCatalogue, $WebCatalogue);
-  $Result1 = mysql_query($updateSQL, $WebCatalogue) or die(mysql_error());
+  ((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
+  $Result1 = mysqli_query( $WebCatalogue, $updateSQL) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
 
   $updateGoTo = "up.php";
   if (isset($_SERVER['QUERY_STRING'])) {
@@ -115,17 +115,17 @@ $colname_User = "-1";
 if (isset($_SESSION['MM_Username'])) {
   $colname_User = $_SESSION['MM_Username'];
 }
-mysql_select_db($database_WebCatalogue, $WebCatalogue);
+((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
 $query_User = sprintf("SELECT * FROM users WHERE email = %s", GetSQLValueString($colname_User, "text"));
-$User = mysql_query($query_User, $WebCatalogue) or die(mysql_error());
-$row_User = mysql_fetch_assoc($User);
-$totalRows_User = mysql_num_rows($User);
+$User = mysqli_query( $WebCatalogue, $query_User) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
+$row_User = mysqli_fetch_assoc($User);
+$totalRows_User = mysqli_num_rows($User);
 
-mysql_select_db($database_WebCatalogue, $WebCatalogue);
+((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
 $query_ManageUsers = "SELECT * FROM users ORDER BY registration DESC";
-$ManageUsers = mysql_query($query_ManageUsers, $WebCatalogue) or die(mysql_error());
-$row_ManageUsers = mysql_fetch_assoc($ManageUsers);
-$totalRows_ManageUsers = mysql_num_rows($ManageUsers);
+$ManageUsers = mysqli_query( $WebCatalogue, $query_ManageUsers) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
+$row_ManageUsers = mysqli_fetch_assoc($ManageUsers);
+$totalRows_ManageUsers = mysqli_num_rows($ManageUsers);
 ?>
 <?php if(isset($_SESSION['MM_Username'])) { ?>
               <table width="300" align="right">

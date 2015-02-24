@@ -45,18 +45,20 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers,
 ?>
 <?php
 if (!function_exists("GetSQLValueString")) {
-function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
+function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "")
 {
+/*Global variable $con is necessary, because it is not known inside the function and you need it for mysqli_real_escape_string($con, $theValue); the Variable $con ist defined as mysqli_connect("localhost","user","password", "database") with an include-script.
+*/
+  Global $con;
+
   if (PHP_VERSION < 6) {
     $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
   }
-
-  $theValue = function_exists("mysql_real_escape_string") ? mysql_real_escape_string($theValue) : mysql_escape_string($theValue);
-
+  $theValue = mysqli_real_escape_string($con, $theValue);
   switch ($theType) {
     case "text":
       $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
-      break;    
+      break;   
     case "long":
     case "int":
       $theValue = ($theValue != "") ? intval($theValue) : "NULL";
@@ -71,7 +73,7 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
       $theValue = ($theValue != "") ? $theDefinedValue : $theNotDefinedValue;
       break;
   }
-  return $theValue;
+   return $theValue;
 }
 }
 
@@ -79,17 +81,17 @@ $colname_User = "-1";
 if (isset($_SESSION['MM_Username'])) {
   $colname_User = $_SESSION['MM_Username'];
 }
-mysql_select_db($database_WebCatalogue, $WebCatalogue);
+((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
 $query_User = sprintf("SELECT * FROM users WHERE email = %s", GetSQLValueString($colname_User, "text"));
-$User = mysql_query($query_User, $WebCatalogue) or die(mysql_error());
-$row_User = mysql_fetch_assoc($User);
-$totalRows_User = mysql_num_rows($User);
+$User = mysqli_query( $WebCatalogue, $query_User) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
+$row_User = mysqli_fetch_assoc($User);
+$totalRows_User = mysqli_num_rows($User);
 
-mysql_select_db($database_WebCatalogue, $WebCatalogue);
+((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
 $query_ManageUsers = "SELECT * FROM users ORDER BY registration DESC";
-$ManageUsers = mysql_query($query_ManageUsers, $WebCatalogue) or die(mysql_error());
-$row_ManageUsers = mysql_fetch_assoc($ManageUsers);
-$totalRows_ManageUsers = mysql_num_rows($ManageUsers);
+$ManageUsers = mysqli_query( $WebCatalogue, $query_ManageUsers) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
+$row_ManageUsers = mysqli_fetch_assoc($ManageUsers);
+$totalRows_ManageUsers = mysqli_num_rows($ManageUsers);
 ?>
 
 

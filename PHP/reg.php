@@ -5,18 +5,20 @@
 
 
 if (!function_exists("GetSQLValueString")) {
-function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
+function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "")
 {
+/*Global variable $con is necessary, because it is not known inside the function and you need it for mysqli_real_escape_string($con, $theValue); the Variable $con ist defined as mysqli_connect("localhost","user","password", "database") with an include-script.
+*/
+  Global $con;
+
   if (PHP_VERSION < 6) {
     $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
   }
-
-  $theValue = function_exists("mysql_real_escape_string") ? mysql_real_escape_string($theValue) : mysql_escape_string($theValue);
-
+  $theValue = mysqli_real_escape_string($con, $theValue);
   switch ($theType) {
     case "text":
       $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
-      break;    
+      break;   
     case "long":
     case "int":
       $theValue = ($theValue != "") ? intval($theValue) : "NULL";
@@ -31,7 +33,7 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
       $theValue = ($theValue != "") ? $theDefinedValue : $theNotDefinedValue;
       break;
   }
-  return $theValue;
+   return $theValue;
 }
 }
 
@@ -41,9 +43,9 @@ if (isset($_POST[$MM_flag])) {
   $MM_dupKeyRedirect="Register.php";
   $loginUsername = $_POST['Email'];
   $LoginRS__query = sprintf("SELECT email FROM `users` WHERE email=%s", GetSQLValueString($loginUsername, "text"));
-  mysql_select_db($database_WebCatalogue, $WebCatalogue);
-  $LoginRS=mysql_query($LoginRS__query, $WebCatalogue) or die(mysql_error());
-  $loginFoundUser = mysql_num_rows($LoginRS);
+  ((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
+  $LoginRS=mysqli_query( $WebCatalogue, $LoginRS__query) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
+  $loginFoundUser = mysqli_num_rows($LoginRS);
 
   //if there is a row in the database, the username was found - can not add the requested username
   if($loginFoundUser){
@@ -160,8 +162,8 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "RegisterForm")) {
                        GetSQLValueString($user_printscreen_location, "text"),
                        GetSQLValueString($user_printscreen_location, "text"));
 
-  mysql_select_db($database_WebCatalogue, $WebCatalogue);
-  $Result1 = mysql_query($insertSQL, $WebCatalogue) or die(mysql_error());
+  ((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
+  $Result1 = mysqli_query( $WebCatalogue, $insertSQL) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
 
   $insertGoTo = "Register.php";
   if (isset($_SERVER['QUERY_STRING'])) {
@@ -171,11 +173,11 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "RegisterForm")) {
   header(sprintf("Location: %s", $insertGoTo));
 }
 
-mysql_select_db($database_WebCatalogue, $WebCatalogue);
+((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
 $query_Registration = "SELECT * FROM `users`";
-$Registration = mysql_query($query_Registration, $WebCatalogue) or die(mysql_error());
-$row_Registration = mysql_fetch_assoc($Registration);
-$totalRows_Registration = mysql_num_rows($Registration);
+$Registration = mysqli_query( $WebCatalogue, $query_Registration) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
+$row_Registration = mysqli_fetch_assoc($Registration);
+$totalRows_Registration = mysqli_num_rows($Registration);
 
 ?>
 
@@ -298,5 +300,5 @@ $totalRows_Registration = mysql_num_rows($Registration);
         <input type="hidden" name="MM_insert" value="RegisterForm">
       </form>
 <?php
-mysql_free_result($Registration);
+((mysqli_free_result($Registration) || (is_object($Registration) && (get_class($Registration) == "mysqli_result"))) ? true : false);
 ?>

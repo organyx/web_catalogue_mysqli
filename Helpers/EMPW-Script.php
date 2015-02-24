@@ -12,7 +12,7 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
     $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
   }
 
-  $theValue = function_exists("mysql_real_escape_string") ? mysql_real_escape_string($theValue) : mysql_escape_string($theValue);
+  $theValue = function_exists("mysqli_real_escape_string") ? ((isset($GLOBALS["___mysqli_ston"]) && is_object($GLOBALS["___mysqli_ston"])) ? mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $theValue) : ((trigger_error("[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.", E_USER_ERROR)) ? "" : "")) : ((isset($GLOBALS["___mysqli_ston"]) && is_object($GLOBALS["___mysqli_ston"])) ? mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $theValue) : ((trigger_error("[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.", E_USER_ERROR)) ? "" : ""));
 
   switch ($theType) {
     case "text":
@@ -40,13 +40,13 @@ $colname_EmailPassword = "-1";
 if (isset($_SESSION['EMPW'])) {
   $colname_EmailPassword = $_SESSION['EMPW'];
 }
-mysql_select_db($database_WebCatalogue, $WebCatalogue);
+((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
 $query_EmailPassword = sprintf("SELECT * FROM `users` WHERE email = %s", GetSQLValueString($colname_EmailPassword, "text"));
-$EmailPassword = mysql_query($query_EmailPassword, $WebCatalogue) or die(mysql_error());
-$row_EmailPassword = mysql_fetch_assoc($EmailPassword);
-$totalRows_EmailPassword = mysql_num_rows($EmailPassword);
+$EmailPassword = mysqli_query( $WebCatalogue, $query_EmailPassword) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
+$row_EmailPassword = mysqli_fetch_assoc($EmailPassword);
+$totalRows_EmailPassword = mysqli_num_rows($EmailPassword);
 
-mysql_free_result($EmailPassword);
+((mysqli_free_result($EmailPassword) || (is_object($EmailPassword) && (get_class($EmailPassword) == "mysqli_result"))) ? true : false);
 ?>
 <?php 
 

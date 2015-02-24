@@ -1,7 +1,7 @@
 <?php @session_start(); ?>
 <?php require_once('Connections/WebCatalogue.php'); ?>
 <?php require_once('Helpers/security.php'); ?>
-<?php include "PHP/adminAccess.php"?>
+<?php include "PHP/adminAccess.php" ?>
 <!doctype html>
 <html>
 <head>
@@ -52,5 +52,5 @@
 </body>
 </html>
 <?php
-mysql_free_result($User);
+((mysqli_free_result($User) || (is_object($User) && (get_class($User) == "mysqli_result"))) ? true : false);
 ?>

@@ -47,18 +47,20 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers,
 ?>
 <?php
 if (!function_exists("GetSQLValueString")) {
-function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
+function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "")
 {
+/*Global variable $con is necessary, because it is not known inside the function and you need it for mysqli_real_escape_string($con, $theValue); the Variable $con ist defined as mysqli_connect("localhost","user","password", "database") with an include-script.
+*/
+  Global $con;
+
   if (PHP_VERSION < 6) {
     $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
   }
-
-  $theValue = function_exists("mysql_real_escape_string") ? mysql_real_escape_string($theValue) : mysql_escape_string($theValue);
-
+  $theValue = mysqli_real_escape_string($con, $theValue);
   switch ($theType) {
     case "text":
       $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
-      break;    
+      break;   
     case "long":
     case "int":
       $theValue = ($theValue != "") ? intval($theValue) : "NULL";
@@ -73,7 +75,7 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
       $theValue = ($theValue != "") ? $theDefinedValue : $theNotDefinedValue;
       break;
   }
-  return $theValue;
+   return $theValue;
 }
 }
 
@@ -88,8 +90,8 @@ if ((isset($_POST['DeleteUserHiddenField'])) && ($_POST['DeleteUserHiddenField']
   $deleteSQL = sprintf("DELETE FROM `users` WHERE userID=%s",
                        GetSQLValueString($_POST['DeleteUserHiddenField'], "int"));
 
-  mysql_select_db($database_WebCatalogue, $WebCatalogue);
-  $Result1 = mysql_query($deleteSQL, $WebCatalogue) or die(mysql_error());
+  ((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
+  $Result1 = mysqli_query( $WebCatalogue, $deleteSQL) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
 
   $deleteGoTo = "AdminManageUsers.php";
   if (isset($_SERVER['QUERY_STRING'])) {
@@ -104,8 +106,8 @@ if ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "ApproveUserForm")) 
   $updateSQL = sprintf("UPDATE `users` SET approval=CURRENT_TIMESTAMP() WHERE userID=%s",
                        GetSQLValueString($_POST['ApproveIDhiddenField'], "int"));
 
-  mysql_select_db($database_WebCatalogue, $WebCatalogue);
-  $Result1 = mysql_query($updateSQL, $WebCatalogue) or die(mysql_error());
+  ((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
+  $Result1 = mysqli_query( $WebCatalogue, $updateSQL) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
 }
 
 if ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "MakeAdminForm")) {
@@ -113,19 +115,19 @@ if ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "MakeAdminForm")) {
                        GetSQLValueString($_POST['MakeUserAdminHiddenField'], "int"),
                        GetSQLValueString($_POST['MakeUserAdminIDhiddenField'], "int"));
 
-  mysql_select_db($database_WebCatalogue, $WebCatalogue);
-  $Result1 = mysql_query($updateSQL, $WebCatalogue) or die(mysql_error());
+  ((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
+  $Result1 = mysqli_query( $WebCatalogue, $updateSQL) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
 }
 
 $colname_User = "-1";
 if (isset($_SESSION['MM_Username'])) {
   $colname_User = $_SESSION['MM_Username'];
 }
-mysql_select_db($database_WebCatalogue, $WebCatalogue);
+((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
 $query_User = sprintf("SELECT * FROM `users` WHERE email = %s", GetSQLValueString($colname_User, "text"));
-$User = mysql_query($query_User, $WebCatalogue) or die(mysql_error());
-$row_User = mysql_fetch_assoc($User);
-$totalRows_User = mysql_num_rows($User);
+$User = mysqli_query( $WebCatalogue, $query_User) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
+$row_User = mysqli_fetch_assoc($User);
+$totalRows_User = mysqli_num_rows($User);
 
 $maxRows_ManageUsers = 10;
 $pageNum_ManageUsers = 0;
@@ -134,17 +136,17 @@ if (isset($_GET['pageNum_ManageUsers'])) {
 }
 $startRow_ManageUsers = $pageNum_ManageUsers * $maxRows_ManageUsers;
 
-mysql_select_db($database_WebCatalogue, $WebCatalogue);
+((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
 $query_ManageUsers = "SELECT * FROM users ORDER BY registration DESC";
 $query_limit_ManageUsers = sprintf("%s LIMIT %d, %d", $query_ManageUsers, $startRow_ManageUsers, $maxRows_ManageUsers);
-$ManageUsers = mysql_query($query_limit_ManageUsers, $WebCatalogue) or die(mysql_error());
-$row_ManageUsers = mysql_fetch_assoc($ManageUsers);
+$ManageUsers = mysqli_query( $WebCatalogue, $query_limit_ManageUsers) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
+$row_ManageUsers = mysqli_fetch_assoc($ManageUsers);
 
 if (isset($_GET['totalRows_ManageUsers'])) {
   $totalRows_ManageUsers = $_GET['totalRows_ManageUsers'];
 } else {
-  $all_ManageUsers = mysql_query($query_ManageUsers);
-  $totalRows_ManageUsers = mysql_num_rows($all_ManageUsers);
+  $all_ManageUsers = mysqli_query($GLOBALS["___mysqli_ston"], $query_ManageUsers);
+  $totalRows_ManageUsers = mysqli_num_rows($all_ManageUsers);
 }
 $totalPages_ManageUsers = ceil($totalRows_ManageUsers/$maxRows_ManageUsers)-1;
 
@@ -210,7 +212,7 @@ $queryString_ManageUsers = sprintf("&totalRows_ManageUsers=%d%s", $totalRows_Man
                   
                 </table>
                 <br>
-                <?php } while ($row_ManageUsers = mysql_fetch_assoc($ManageUsers)); ?>
+                <?php } while ($row_ManageUsers = mysqli_fetch_assoc($ManageUsers)); ?>
           <?php } // Show if recordset not empty ?></td>
         </tr>
         <tr>
@@ -224,7 +226,7 @@ $queryString_ManageUsers = sprintf("&totalRows_ManageUsers=%d%s", $totalRows_Man
         </tr>
       </table>
 <?php
-mysql_free_result($User);
+((mysqli_free_result($User) || (is_object($User) && (get_class($User) == "mysqli_result"))) ? true : false);
 
-mysql_free_result($ManageUsers);
+((mysqli_free_result($ManageUsers) || (is_object($ManageUsers) && (get_class($ManageUsers) == "mysqli_result"))) ? true : false);
 ?>

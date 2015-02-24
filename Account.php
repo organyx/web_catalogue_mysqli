@@ -63,8 +63,8 @@
 </html>
 <?php
 if(isset($User)) {
-mysql_free_result($User); }
+((mysqli_free_result($User) || (is_object($User) && (get_class($User) == "mysqli_result"))) ? true : false); }
 
 if(isset($ManageUsers)) {
-mysql_free_result($ManageUsers); }
+((mysqli_free_result($ManageUsers) || (is_object($ManageUsers) && (get_class($ManageUsers) == "mysqli_result"))) ? true : false); }
 ?>

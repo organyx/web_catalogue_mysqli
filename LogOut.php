@@ -15,18 +15,20 @@ exit;
 ?>
 <?php
 if (!function_exists("GetSQLValueString")) {
-function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
+function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "")
 {
+/*Global variable $con is necessary, because it is not known inside the function and you need it for mysqli_real_escape_string($con, $theValue); the Variable $con ist defined as mysqli_connect("localhost","user","password", "database") with an include-script.
+*/
+  Global $con;
+
   if (PHP_VERSION < 6) {
     $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
   }
-
-  $theValue = function_exists("mysql_real_escape_string") ? mysql_real_escape_string($theValue) : mysql_escape_string($theValue);
-
+  $theValue = mysqli_real_escape_string($con, $theValue);
   switch ($theType) {
     case "text":
       $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
-      break;    
+      break;   
     case "long":
     case "int":
       $theValue = ($theValue != "") ? intval($theValue) : "NULL";
@@ -41,7 +43,7 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
       $theValue = ($theValue != "") ? $theDefinedValue : $theNotDefinedValue;
       break;
   }
-  return $theValue;
+   return $theValue;
 }
 }
 
@@ -49,11 +51,11 @@ $colname_LogOut = "-1";
 if (isset($_SESSION['MM_Username'])) {
   $colname_LogOut = $_SESSION['MM_Username'];
 }
-mysql_select_db($database_WebCatalogue, $WebCatalogue);
+((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
 $query_LogOut = sprintf("SELECT * FROM `users` WHERE email = %s", GetSQLValueString($colname_LogOut, "text"));
-$LogOut = mysql_query($query_LogOut, $WebCatalogue) or die(mysql_error());
-$row_LogOut = mysql_fetch_assoc($LogOut);
-$totalRows_LogOut = mysql_num_rows($LogOut);
+$LogOut = mysqli_query( $WebCatalogue, $query_LogOut) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
+$row_LogOut = mysqli_fetch_assoc($LogOut);
+$totalRows_LogOut = mysqli_num_rows($LogOut);
 ?>
 <!doctype html>
 <html>
@@ -94,5 +96,5 @@ $totalRows_LogOut = mysql_num_rows($LogOut);
 </body>
 </html>
 <?php
-mysql_free_result($LogOut);
+((mysqli_free_result($LogOut) || (is_object($LogOut) && (get_class($LogOut) == "mysqli_result"))) ? true : false);
 ?>

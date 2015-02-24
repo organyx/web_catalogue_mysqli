@@ -9,7 +9,7 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
     $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
   }
 
-  $theValue = function_exists("mysql_real_escape_string") ? mysql_real_escape_string($theValue) : mysql_escape_string($theValue);
+  $theValue = function_exists("mysqli_real_escape_string") ? ((isset($GLOBALS["___mysqli_ston"]) && is_object($GLOBALS["___mysqli_ston"])) ? mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $theValue) : ((trigger_error("[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.", E_USER_ERROR)) ? "" : "")) : ((isset($GLOBALS["___mysqli_ston"]) && is_object($GLOBALS["___mysqli_ston"])) ? mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $theValue) : ((trigger_error("[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.", E_USER_ERROR)) ? "" : ""));
 
   switch ($theType) {
     case "text":
@@ -39,9 +39,9 @@ if (isset($_POST[$MM_flag])) {
   $MM_dupKeyRedirect="reg.php";
   $loginUsername = $_POST['Email'];
   $LoginRS__query = sprintf("SELECT email FROM `users` WHERE email=%s", GetSQLValueString($loginUsername, "text"));
-  mysql_select_db($database_WebCatalogue, $WebCatalogue);
-  $LoginRS=mysql_query($LoginRS__query, $WebCatalogue) or die(mysql_error());
-  $loginFoundUser = mysql_num_rows($LoginRS);
+  ((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
+  $LoginRS=mysqli_query( $WebCatalogue, $LoginRS__query) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
+  $loginFoundUser = mysqli_num_rows($LoginRS);
 
   //if there is a row in the database, the username was found - can not add the requested username
   if($loginFoundUser){
@@ -158,8 +158,8 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "RegisterForm")) {
                        GetSQLValueString($user_printscreen_location, "text"),
                        GetSQLValueString($user_printscreen_location, "text"));
 
-  mysql_select_db($database_WebCatalogue, $WebCatalogue);
-  $Result1 = mysql_query($insertSQL, $WebCatalogue) or die(mysql_error());
+  ((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
+  $Result1 = mysqli_query( $WebCatalogue, $insertSQL) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
 
   $insertGoTo = "index.php";
   if (isset($_SERVER['QUERY_STRING'])) {
@@ -169,15 +169,15 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "RegisterForm")) {
   header(sprintf("Location: %s", $insertGoTo));
 }
 
-mysql_select_db($database_WebCatalogue, $WebCatalogue);
+((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
 $query_Registration = "SELECT * FROM `users`";
-$Registration = mysql_query($query_Registration, $WebCatalogue) or die(mysql_error());
-$row_Registration = mysql_fetch_assoc($Registration);
-$totalRows_Registration = mysql_num_rows($Registration);
+$Registration = mysqli_query( $WebCatalogue, $query_Registration) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
+$row_Registration = mysqli_fetch_assoc($Registration);
+$totalRows_Registration = mysqli_num_rows($Registration);
 $query_Registration = "SELECT * FROM users";
-$Registration = mysql_query($query_Registration, $WebCatalogue) or die(mysql_error());
-$row_Registration = mysql_fetch_assoc($Registration);
-$totalRows_Registration = mysql_num_rows($Registration);
+$Registration = mysqli_query( $WebCatalogue, $query_Registration) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
+$row_Registration = mysqli_fetch_assoc($Registration);
+$totalRows_Registration = mysqli_num_rows($Registration);
 ?>
 <?php
 // *** Validate request to login to this site.
@@ -199,13 +199,13 @@ $enc_pass = aes_encrypt($_POST['Password']);
   $MM_redirectLoginSuccess = "Account.php";
   $MM_redirectLoginFailed = "Index.php";
   $MM_redirecttoReferrer = true;
-  mysql_select_db($database_WebCatalogue, $WebCatalogue);
+  ((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
   	
   $LoginRS__query=sprintf("SELECT email, password, userID FROM users WHERE email=%s AND password=%s",
   GetSQLValueString($loginUsername, "text"), GetSQLValueString($password, "text")); 
    
-  $LoginRS = mysql_query($LoginRS__query, $WebCatalogue) or die(mysql_error());
-  $loginFoundUser = mysql_num_rows($LoginRS);
+  $LoginRS = mysqli_query( $WebCatalogue, $LoginRS__query) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
+  $loginFoundUser = mysqli_num_rows($LoginRS);
   if ($loginFoundUser) {
     
     $loginStrGroup  = mysql_result($LoginRS,0,'userID');
