@@ -35,12 +35,40 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 }
 
-function mysqli_result($res, $row, $field=0) {
+function mysqli_result1() {
+
+  //$a = mysqli_query($WebCatalogue, "SELECT userID FROM users WHERE 'email' = '". $_SESSION['MM_Username']."'");
+  //$b = mysqli_fetch_assoc($a);
+
+  //((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
+  $con=mysqli_connect("localhost","root","","web_catalogue");
+  $query = "SELECT `Userlevel` FROM `users` WHERE `email` = '". $_POST['Email'] ."'";
+  $result = mysqli_query($con, $query);
+  $row2 = mysqli_fetch_assoc($result);
+
   //$res->data_seek($row);
-  mysqli_data_seek($res, $row);
+  //mysqli_data_seek($res, $row);
  // $datarow = $res->fetch_array();
-  $datarow = mysql_fetch_array($res);
-  return $datarow[$field];
+  //$datarow = mysql_fetch_array($d);
+  return $row2['Userlevel'];
+}
+
+function mysqli_result2() {
+
+  //$a = mysqli_query($WebCatalogue, "SELECT userID FROM users WHERE 'email' = '". $_SESSION['MM_Username']."'");
+  //$b = mysqli_fetch_assoc($a);
+
+  //((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
+  $con=mysqli_connect("localhost","root","","web_catalogue");
+  $query = "SELECT `userID` FROM `users` WHERE `email` = '". $_POST['Email'] ."'";
+  $result = mysqli_query($con, $query);
+  $row2 = mysqli_fetch_assoc($result);
+
+  //$res->data_seek($row);
+  //mysqli_data_seek($res, $row);
+ // $datarow = $res->fetch_array();
+  //$datarow = mysql_fetch_array($d);
+  return $row2['userID'];
 }
 
 ((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
@@ -80,7 +108,9 @@ if (isset($_POST['Email'])) {
   $loginFoundUser = mysqli_num_rows($LoginRS);
   if ($loginFoundUser) {
     
-    $loginStrGroup  = mysqli_result($LoginRS,0,'userID');
+   // $loginStrGroup  = mysqli_result($LoginRS,0,'userID');
+    $loginStrGroup  = mysqli_result2();
+  
     
 	if (PHP_VERSION >= 5.1) {session_regenerate_id(true);} else {session_regenerate_id();}
     //declare two session variables and assign them
@@ -126,8 +156,9 @@ if (isset($_POST['Email'])) {
   if ($loginFoundUser) {
 	 
    
-    $loginStrGroup  = mysqli_result($LoginRS,0,'Userlevel');
-	
+    //$loginStrGroup  = mysqli_result($LoginRS,0,'Userlevel');
+	$loginStrGroup  = mysqli_result1();
+  
  
 	 if(isset($_SESSION['lvl'])){
          $_SESSION['lvl']=$loginStrGroup;
