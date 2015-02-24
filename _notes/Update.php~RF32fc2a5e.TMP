@@ -1,0 +1,172 @@
+<?php @session_start(); ?>
+<?php require_once('Connections/WebCatalogue.php'); ?>
+<?php
+if (!function_exists("GetSQLValueString")) {
+function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
+{
+  if (PHP_VERSION < 6) {
+    $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
+  }
+
+  $theValue = function_exists("mysql_real_escape_string") ? mysql_real_escape_string($theValue) : mysql_escape_string($theValue);
+
+  switch ($theType) {
+    case "text":
+      $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
+      break;    
+    case "long":
+    case "int":
+      $theValue = ($theValue != "") ? intval($theValue) : "NULL";
+      break;
+    case "double":
+      $theValue = ($theValue != "") ? doubleval($theValue) : "NULL";
+      break;
+    case "date":
+      $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
+      break;
+    case "defined":
+      $theValue = ($theValue != "") ? $theDefinedValue : $theNotDefinedValue;
+      break;
+  }
+  return $theValue;
+}
+}
+
+$editFormAction = $_SERVER['PHP_SELF'];
+if (isset($_SERVER['QUERY_STRING'])) {
+  $editFormAction .= "?" . htmlentities($_SERVER['QUERY_STRING']);
+}
+
+if ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "UpdateForm")) {
+  $updateSQL = sprintf("UPDATE `user` SET password=%s, `language`=%s, url=%s, title=%s, `description`=%s WHERE userID=%s",
+                       GetSQLValueString($_POST['password'], "text"),
+                       GetSQLValueString($_POST['Language'], "text"),
+                       GetSQLValueString($_POST['Url'], "text"),
+                       GetSQLValueString($_POST['Title'], "text"),
+                       GetSQLValueString($_POST['Description'], "text"),
+                       GetSQLValueString($_POST['UserIDHiddenField'], "int"));
+
+  mysql_select_db($database_WebCatalogue, $WebCatalogue);
+  $Result1 = mysql_query($updateSQL, $WebCatalogue) or die(mysql_error());
+
+  $updateGoTo = "Account.php";
+  if (isset($_SERVER['QUERY_STRING'])) {
+    $updateGoTo .= (strpos($updateGoTo, '?')) ? "&" : "?";
+    $updateGoTo .= $_SERVER['QUERY_STRING'];
+  }
+  header(sprintf("Location: %s", $updateGoTo));
+}
+
+$colname_User = "-1";
+if (isset($_SESSION['MM_Username'])) {
+  $colname_User = $_SESSION['MM_Username'];
+}
+mysql_select_db($database_WebCatalogue, $WebCatalogue);
+$query_User = sprintf("SELECT * FROM `user` WHERE email = %s", GetSQLValueString($colname_User, "text"));
+$User = mysql_query($query_User, $WebCatalogue) or die(mysql_error());
+$row_User = mysql_fetch_assoc($User);
+$totalRows_User = mysql_num_rows($User);
+?>
+<!doctype html>
+<html>
+<head>
+<link href="CSS/Layout.css" rel="stylesheet" type="text/css">
+<link href="CSS/Menu.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+h1,h2,h3,h4,h5,h6 {
+	font-weight: lighter;
+}
+</style>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+</head>
+
+<body>
+<div id="Holder">
+  <div id="Header"></div>
+  <div id="NavBar">
+    	<nav>
+        	<ul>
+            	<li><a href="Login.php">Login</a></li>
+                <li><a href="Register.php">Register</a></li>
+                <li><a href="Index.php">Main</a></li>
+                <li><a href="ForgotPassword.php">Forgot Password</a></li>
+                
+            </ul>
+        </nav>
+  </div>
+  <div id="Content">
+    	<div id="PageHeading">
+    	  <h1>Update Account</h1>
+   	  </div>
+    	<div id="contentLeft">
+    	  <h2>Account Links</h2>
+    	  <p><a href="Account.php">My Account</a></p>
+    	  <br>
+    	  <h6>Your message</h6>
+    	</div>
+    <div id="contentRight">
+      <form action="<?php echo $editFormAction; ?>" id="UpdateForm" name="UpdateForm" method="POST">
+        <table width="600" border="0" align="center">
+          <tr>
+            <td><h6>Account:</h6> <?php echo $row_User['first_name']; ?> <?php echo $row_User['last_name']; ?> <h6>| Username: </h6><?php echo $row_User['email']; ?></td>
+          </tr>
+        </table>
+        <table width="400" border="0" align="center">
+          <tr>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td><label for="password"><h6>New Password:</h6><br></label>
+            <input name="password" type="password" class="StyleTextField" id="password" value="<?php echo $row_User['password']; ?>"></td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td><label for="Language"><h6>Language:</h6><br></label>
+            <input name="Language" type="text" class="StyleTextField" id="Language" value="<?php echo $row_User['language']; ?>"></td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td><label for="Url"><h6>URL:</h6><br></label>
+            <input name="Url" type="text" class="StyleTextField" id="Url" value="<?php echo $row_User['url']; ?>"></td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td><label for="Title"><h6>Title:</h6><br></label>
+            <input name="Title" type="text" class="StyleTextField" id="Title" value="<?php echo $row_User['title']; ?>"></td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td><label for="Description"><h6>Description:</h6><br></label>
+            <input name="Description" type="text" class="StyleTextField" id="Description" value="<?php echo $row_User['description']; ?>"></td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td><input type="submit" name="UpdateButton" id="UpdateButton" value="Update">
+            <input name="UserIDHiddenField" type="hidden" id="UserIDHiddenField" value="<?php echo $row_User['userID']; ?>"></td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+          </tr>
+        </table>
+        <input type="hidden" name="MM_update" value="UpdateForm">
+      </form>
+    </div>
+  </div>
+  <div id="Footer"><p><a href="Admin.php">Admin</a></p></div>
+</div>
+</body>
+</html>
+<?php
+mysql_free_result($User);
+?>
