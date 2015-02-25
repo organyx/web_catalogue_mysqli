@@ -1,186 +1,9 @@
-<?php require_once('Connections/WebCatalogue.php'); ?>
-<?php
-
-	
-
-
-if (!function_exists("GetSQLValueString")) {
-function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "")
-{
-/*Global variable $con is necessary, because it is not known inside the function and you need it for mysqli_real_escape_string($con, $theValue); the Variable $con ist defined as mysqli_connect("localhost","user","password", "database") with an include-script.
-*/
-  Global $WebCatalogue;
-
-  if (PHP_VERSION < 6) {
-    $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
-  }
-  $theValue = mysqli_real_escape_string($WebCatalogue, $theValue);
-  switch ($theType) {
-    case "text":
-      $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
-      break;   
-    case "long":
-    case "int":
-      $theValue = ($theValue != "") ? intval($theValue) : "NULL";
-      break;
-    case "double":
-      $theValue = ($theValue != "") ? doubleval($theValue) : "NULL";
-      break;
-    case "date":
-      $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
-      break;
-    case "defined":
-      $theValue = ($theValue != "") ? $theDefinedValue : $theNotDefinedValue;
-      break;
-  }
-   return $theValue;
-}
-}
-
-// *** Redirect if username exists
-$MM_flag="MM_insert";
-if (isset($_POST[$MM_flag])) {
-  $MM_dupKeyRedirect="Register.php";
-  $loginUsername = $_POST['Email'];
-  $LoginRS__query = sprintf("SELECT email FROM `users` WHERE email=%s", GetSQLValueString($loginUsername, "text"));
-  ((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
-  $LoginRS=mysqli_query( $WebCatalogue, $LoginRS__query) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
-  $loginFoundUser = mysqli_num_rows($LoginRS);
-
-  //if there is a row in the database, the username was found - can not add the requested username
-  if($loginFoundUser){
-    $MM_qsChar = "?";
-    //append the username to the redirect page
-    if (substr_count($MM_dupKeyRedirect,"?") >=1) $MM_qsChar = "&";
-    $MM_dupKeyRedirect = $MM_dupKeyRedirect . $MM_qsChar ."requsername=".$loginUsername;
-    header ("Location: $MM_dupKeyRedirect");
-    exit;
-	
-  }
-  
-  $passwordToConfirm = $_POST['Password'];
-  $passwordConfirm = $_POST['PasswordConfirm'];
-  if($passwordToConfirm != $passwordConfirm)
-  {
-	  echo "Passwords don't match";
-    header ("Location: $MM_dupKeyRedirect");
-    exit;
-  }
-  else
-  {
-	  $secure_password = aes_encrypt($passwordConfirm);
-	  $secure_password = base64_encode($secure_password);
-  }
-  
-  $default_picture = "Assets/img/default.png/";
-  $user_folder_path = "Assets/img/" . basename($_POST['Email']) . "/";
-
- 	if (!file_exists($user_folder_path)) 
- 	{
-	   $dir = mkdir($user_folder_path, 0777, true);
-	}
-	
-	if(($_FILES["PreviewPicture"]["size"] == 0))
-	{
-		copy("Assets/img/default.png", "Assets/img/" . basename($_POST['Email']) . "/default.png");
-	}
-	
- 	$target_dir = "Assets/img/" . basename($_POST['Email']) . "/";
-	$target_file = $target_dir . basename($_FILES["PreviewPicture"]["name"]);
-	$uploadOk = 1;
-	$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-	// Check if image file is a actual image or fake image
-	if(isset($_POST["submit"])) {
-	    $check = getimagesize($_FILES["PreviewPicture"]["tmp_name"]);
-	    if($check !== false) {
-	        echo "File is an image - " . $check["mime"] . ".";
-	        $uploadOk = 1;
-	    } else {
-	        echo "File is not an image.";
-	        $uploadOk = 0;
-	        echo "File is not an image.";
-	    }
-	}
-	// Check file size
-	if ($_FILES["PreviewPicture"]["size"] > 2000000) {
-	    echo "Sorry, your file is too large.";
-	    $uploadOk = 0;
-	}
-	// Check if file already exists
-	if (file_exists($target_file)) {
-	     echo "Sorry, file already exists.";
-	    $uploadOk = 0;
-	} 
-	// Allow certain file formats
-	if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-	&& $imageFileType != "gif" ) {
-		echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-	    $uploadOk = 0;
-	} 
-	// Check if $uploadOk is set to 0 by an error
-	if ($uploadOk == 0) {
-	    echo "Sorry, your file was not uploaded.";
-	// if everything is ok, try to upload file
-	} else {
-	    if (move_uploaded_file($_FILES["PreviewPicture"]["tmp_name"], $target_file)) {
-	        echo "The file ". basename( $_FILES["PreviewPicture"]["name"]). " has been uploaded.";
-	    } else {
-	         echo "Sorry, your file was not uploaded.";
-	    }
-	}
-
-	if(($_FILES["PreviewPicture"]["size"] == 0))
-	{
-		$user_printscreen_location = $user_folder_path . "default.png";
-	}
-	else
-	{
-		$user_printscreen_location = $target_file;
-	}
-	
-}
-
-
-
-
-
-$editFormAction = $_SERVER['PHP_SELF'];
+<?php $editFormAction = $_SERVER['PHP_SELF'];
 if (isset($_SERVER['QUERY_STRING'])) {
   $editFormAction .= "?" . htmlentities($_SERVER['QUERY_STRING']);
-}
+} ?>
 
-if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "RegisterForm")) {
-  $insertSQL = sprintf("INSERT INTO users (email, password, first_name, last_name, `language`, url, title, `description`, preview, preview_thumb) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
-                       GetSQLValueString($_POST['Email'], "text"),
-                       GetSQLValueString($secure_password, "text"),
-                       GetSQLValueString($_POST['FirstName'], "text"),
-                       GetSQLValueString($_POST['LastName'], "text"),
-                       GetSQLValueString($_POST['Language'], "text"),
-                       GetSQLValueString($_POST['Url'], "text"),
-                       GetSQLValueString($_POST['Title'], "text"),
-                       GetSQLValueString($_POST['Description'], "text"),
-                       GetSQLValueString($user_printscreen_location, "text"),
-                       GetSQLValueString($user_printscreen_location, "text"));
-
-  ((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
-  $Result1 = mysqli_query( $WebCatalogue, $insertSQL) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
-
-  $insertGoTo = "Register.php";
-  if (isset($_SERVER['QUERY_STRING'])) {
-    $insertGoTo .= (strpos($insertGoTo, '?')) ? "&" : "?";
-    $insertGoTo .= $_SERVER['QUERY_STRING'];
-  }
-  header(sprintf("Location: %s", $insertGoTo));
-}
-
-((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
-$query_Registration = "SELECT * FROM `users`";
-$Registration = mysqli_query( $WebCatalogue, $query_Registration) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
-$row_Registration = mysqli_fetch_assoc($Registration);
-$totalRows_Registration = mysqli_num_rows($Registration);
-
-?>
-
+<!--
 <div id="returnmessage"><p></p></div>
 <form action="<?php echo $editFormAction; ?>" method="POST" enctype="multipart/form-data" name="RegisterForm" id="RegisterForm">
         <table class="TableStyleBig center WidthAuto">
@@ -299,6 +122,80 @@ $totalRows_Registration = mysqli_num_rows($Registration);
         </table>
         <input type="hidden" name="MM_insert" value="RegisterForm">
       </form>
-<?php
-((mysqli_free_result($Registration) || (is_object($Registration) && (get_class($Registration) == "mysqli_result"))) ? true : false);
-?>
+-->
+
+<div id="regForm" style="width: 680px">
+        <div class="w2ui-page page-0">
+          <div class="w2ui-field">
+                <label></label>
+                <div>
+                    <p id="returnmessage"></p>
+                </div>
+            </div>
+            <div class="w2ui-field">
+                <label>First Name:</label>
+                <div>
+                    <input name="first_name" id="first_name" type="text" maxlength="100" size="60"/>
+                </div>
+            </div>
+            <div class="w2ui-field">
+                <label>Last Name:</label>
+                <div>
+                    <input name="last_name" id="last_name" type="text" maxlength="100" size="60"/>
+                </div>
+            </div>
+            <div class="w2ui-field">
+                <label>Email:</label>
+                <div>
+                    <input name="email" id="email" type="email" maxlength="100" size="60"/>
+                </div>
+            </div>
+            <div class="w2ui-field">
+                <label>Password:</label>
+                <div>
+                    <input name="password" id="password" type="password" maxlength="100" size="60"/>
+                </div>
+            </div>
+            <div class="w2ui-field">
+                <label>Confirm Password:</label>
+                <div>
+                    <input name="passwordwc" id="passwordwc" type="password" maxlength="100" size="60"/>
+                </div>
+            </div>
+            <div class="w2ui-field">
+                <label>Language:</label>
+                <div>
+                    <input name="lang" id="lang" type="text" maxlength="100" size="60"/>
+                </div>
+            </div>
+            <div class="w2ui-field">
+                <label>Url:</label>
+                <div>
+                    <input name="url" id="url" type="text" maxlength="100" size="60"/>
+                </div>
+            </div>
+            <div class="w2ui-field">
+                <label>Title:</label>
+                <div>
+                    <input name="title" id="title" type="text" maxlength="100" size="60"/>
+                </div>
+            </div>
+            <div class="w2ui-field">
+                <label>Description:</label>
+                <div>
+                    <textarea name="descr" id="descr" style="width: 385px; height: 80px;"></textarea>
+                </div>
+            </div>
+            <div class="w2ui-field">
+                <label>Preview picture:</label>
+                <div>
+                     <input name="file" id="file" type="file" style="width: 385px; height: 30px;"/>
+                </div>
+            </div>
+            <input type="hidden" name="MM_insert" id="MM_insert" value="RegisterForm">
+        </div>
+        <div class="w2ui-buttons">
+            <input type="button" value="Reset" name="reset"/>
+            <input type="button" value="Register" name="register" id="register" />
+        </div>
+    </div>
