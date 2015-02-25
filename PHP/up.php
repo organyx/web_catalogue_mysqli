@@ -40,7 +40,7 @@ $editFormAction = $_SERVER['PHP_SELF'];
 if (isset($_SERVER['QUERY_STRING'])) {
   $editFormAction .= "?" . htmlentities($_SERVER['QUERY_STRING']);
 }
-
+/*
 if(isset($_POST["MM_update"]))
 {
 	$passwordConfirm = $_POST['Password'];
@@ -66,7 +66,7 @@ if ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "UpdateForm")) {
     $updateGoTo .= $_SERVER['QUERY_STRING'];
   }
   header(sprintf("Location: %s", $updateGoTo));
-}
+}*/
 
 $colname_User = "-1";
 if (isset($_SESSION['MM_Username'])) {
@@ -96,70 +96,60 @@ $totalRows_ManageUsers = mysqli_num_rows($ManageUsers);
     	  <h6>&nbsp;</h6>
     	</div>
     <div id="contentRight">
-      <table class="TableStyleBig center WidthAuto">
-        <tr>
-          <td align="center">Account: <?php echo $row_User['email']; ?></td>
-        </tr>
-        <tr>
-          <td><form action="<?php echo $editFormAction; ?>" id="UpdateForm" name="UpdateForm" method="POST"><table class="TableStyleRegUp WidthAuto" align="center">
-            <tr>
-              <td>&nbsp;</td>
-            </tr>
-            <tr>
-              <td><table>
-                <tr class="updateLayout">
-                  <td><label for="Password">Password:</label><br><br>
-                    <input name="Password" type="password" class="styletxtfield" id="Password" value="<?php $dec_pass = base64_decode($row_User['password']); echo aes_decrypt($dec_pass);  ?>"></td>
-                  <td><label for="PasswordConfirm">Confirm Password:</label><br><br>
-                    <input name="PasswordConfirm" type="password" class="styletxtfield" id="PasswordConfirm" value="<?php $dec_pass = base64_decode($row_User['password']); echo aes_decrypt($dec_pass);  ?>"></td>
-                </tr>
-              </table></td>
-            </tr>
-            <tr>
-              <td>&nbsp;</td>
-            </tr>
-            <tr>
-              <td><label for="Language">Language:</label><br><br>
-                <input name="Language" type="text" class="styletxtfield" id="Language" value="<?php echo $row_User['language']; ?>"></td>
-            </tr>
-            <tr>
-              <td>&nbsp;</td>
-            </tr>
-            <tr>
-              <td><label for="URL">Url:</label><br><br>
-                <input name="URL" type="text" class="styletxtfield" id="URL" value="<?php echo $row_User['url']; ?>"></td>
-            </tr>
-            <tr>
-              <td>&nbsp;</td>
-            </tr>
-            <tr>
-              <td><label for="Title">Title:</label><br><br>
-                <input name="Title" type="text" class="styletxtfield" id="Title" value="<?php echo $row_User['title']; ?>"></td>
-            </tr>
-            <tr>
-              <td>&nbsp;</td>
-            </tr>
-            <tr>
-              <td><label for="Description">Description:</label><br><br>
-                <input name="Description" type="text" class="styletxtarea" id="Description" value="<?php echo $row_User['description']; ?>"></td>
-            </tr>
-            <tr>
-              <td>&nbsp;</td>
-            </tr>
-            <tr>
-              <td><input name="UserIDhiddenField" type="hidden" id="UserIDhiddenField" value="<?php echo $row_User['userID']; ?>">                <input type="submit" name="UpdateButton" id="UpdateButton" value="Update Account"></td>
-            </tr>
-            <tr>
-              <td>&nbsp;</td>
-            </tr>
-          </table>
-              <input type="hidden" name="MM_update" value="UpdateForm">
-          </form>
-            
-          </td>
-        </tr>
-        <tr>
-          <td>&nbsp;</td>
-        </tr>
-      </table>
+    
+
+     
+      <div id="upForm" style="width: 680px">
+        <div class="w2ui-page page-0">
+          <div class="w2ui-field">
+                <label></label>
+                <div>
+                    <p id="returnmessage"></p>
+                </div>
+            </div>
+            <div class="w2ui-field">
+                <label>Password:</label>
+                <div>
+                    <input name="password" id="password" type="text" maxlength="100" size="60" value="<?php $dec_pass = base64_decode($row_User['password']); echo aes_decrypt($dec_pass);  ?>"/>
+                </div>
+            </div>
+            <div class="w2ui-field">
+                <label>Confirm Password:</label>
+                <div>
+                    <input name="passwordwc" id="passwordwc" type="text" maxlength="100" size="60" value="<?php $dec_pass = base64_decode($row_User['password']); echo aes_decrypt($dec_pass);  ?>"/>
+                </div>
+            </div>
+            <div class="w2ui-field">
+                <label>Language:</label>
+                <div>
+                    <input name="lang" id="lang" maxlength="100" size="60" value="<?php echo $row_User['language']; ?>"/>
+                </div>
+            </div>
+            <div class="w2ui-field">
+                <label>Url:</label>
+                <div>
+                    <input name="url" id="url" maxlength="100" size="60" value="<?php echo $row_User['url']; ?>"/>
+                </div>
+            </div>
+            <div class="w2ui-field">
+                <label>Title:</label>
+                <div>
+                    <input name="title" id="title" maxlength="100" size="60" value="<?php echo $row_User['title']; ?>"/>
+                </div>
+            </div>
+            <div class="w2ui-field">
+                <label>Description:</label>
+                <div>
+                    <textarea name="descr" id="descr" style="width: 385px; height: 80px;"><?php echo $row_User['description']; ?></textarea>
+                </div>
+            </div>
+            <input name="UserIDhiddenField" type="hidden" id="UserIDhiddenField" value="<?php echo $row_User['userID']; ?>">  
+            <input name="MM_update" type="hidden" id="MM_update" value="UpdateForm">
+        </div>
+        <div class="w2ui-buttons">
+            <input type="button" value="Reset" name="reset"/>
+            <input type="button" value="Update" name="update"/>
+        </div>
+    </div>
+  
     </div>
