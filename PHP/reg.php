@@ -189,13 +189,15 @@ if (isset($_SERVER['QUERY_STRING'])) {
             <div class="w2ui-field">
                 <label>Preview picture:</label>
                 <div>
-                     <input name="file" id="file" type="file" style="width: 385px; height: 30px;"/>
+                    
+                        <input name="file" id="file" type="file" title="file" style="width: 385px; height: 30px;"/>
+                     
                 </div>
             </div>
             <input type="hidden" name="MM_insert" id="MM_insert" value="RegisterForm">
         </div>
         <div class="w2ui-buttons">
-            <input type="button" value="Reset" name="reset"/>
+            <input type="button" value="Reset" name="reset" id="reset" />
             <input type="button" value="Register" name="register" id="register" />
         </div>
     </div>

@@ -13,7 +13,7 @@
 <script type="text/javascript" src="Javascript/reg.js"></script>
 
 
-<meta charset="utf-8">
+<meta charset="utf-8" content="text/html">
 <title>Registration Page</title>
 </head>
 
