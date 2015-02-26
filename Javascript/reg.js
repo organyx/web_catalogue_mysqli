@@ -5,7 +5,7 @@ $(function () {
         url   : 'server/post',
         fields: [
             { field: 'first_name', type: 'text', required: true },
-            { field: 'last_name', type: 'text', required: false },
+            { field: 'last_name', type: 'text', required: true },
             { field: 'email', type: 'email', required: true },
             { field: 'password', type: 'password', required: true },
             { field: 'passwordwc', type: 'password', required: true },
@@ -67,7 +67,9 @@ $(function () {
 									}
 							});
 						 }
-
+                     
+                    //this.save();
+                    //this.validate();
             },
             reset: function() {
             		$('#returnmessage').empty();

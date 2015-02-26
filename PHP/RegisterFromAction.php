@@ -53,6 +53,14 @@ if (isset($_POST[$MM_flag])) {
     $flag = false;
     exit;
   }
+  if(ctype_alpha($_POST['first_name1']) && ctype_alpha($_POST['last_name1'])) {
+    
+  }
+  else {
+    echo "Personal fields contain invalid data.";
+    $flag = false;
+    exit;
+  }
   $LoginRS__query = sprintf("SELECT email FROM `users` WHERE email=%s", GetSQLValueString($loginUsername, "text"));
   ((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
   $LoginRS=mysqli_query( $WebCatalogue, $LoginRS__query) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
@@ -63,6 +71,7 @@ if (isset($_POST[$MM_flag])) {
     $MM_qsChar = "?";
     echo "Username Already Taken.";
     $flag = false;
+    exit;
     //append the username to the redirect page
     /*
     if (substr_count($MM_dupKeyRedirect,"?") >=1) $MM_qsChar = "&";
@@ -92,20 +101,24 @@ if (isset($_POST[$MM_flag])) {
     $secure_password = base64_encode($secure_password);
     $flag = true;
   }
-  
+  /*
   if(!isset($_FILES['file1']))
   {
     $_FILES['file1'] = $_POST['file1'][0];
     $_FILES['file1']['tmp_name'] = $_POST['file1'][0]['name'];
     echo "<pre>".print_r($_FILES['file1'])."</pre><br/>";
   }
-  
+  else
+  {
+    echo "<pre>".print_r($_FILES['file1'])."</pre><br/>";
+  }
+  */
 
   $default_picture = "Assets/img/default.png/";
   $user_folder_path = "Assets/img/" . basename($_POST['email1']) . "/";
-
-  
   $user_folder_path_check = "../Assets/img/" . basename($_POST['email1']) . "/";
+
+  if(isset($_POST['file1'])) {
   $up = is_uploaded_file($_POST['file1'][0]['name']);
   $b = is_writable($user_folder_path_check);
 
@@ -125,7 +138,7 @@ if (isset($_POST[$MM_flag])) {
       echo "File not moved<br/>";
     }
   }
-
+}
 
 
 
