@@ -2,6 +2,5 @@
 <?php require_once('../Connections/WebCatalogue.php'); ?>
 <?php require_once('../Helpers/security.php'); ?>
 
-<div id="contentRight">
+
 	<?php include "../PHP/list.php" ?>
-</div>

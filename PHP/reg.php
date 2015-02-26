@@ -189,9 +189,9 @@ if (isset($_SERVER['QUERY_STRING'])) {
             <div class="w2ui-field">
                 <label>Preview picture:</label>
                 <div>
-                    
+                     <form action="PHP/RegisterFromAction.php" enctype="multipart/form-data" method="POST" id="uploadform" name="uploadForm">
                         <input name="file" id="file" type="file" title="file" style="width: 385px; height: 30px;"/>
-                     
+                     </form>
                 </div>
             </div>
             <input type="hidden" name="MM_insert" id="MM_insert" value="RegisterForm">

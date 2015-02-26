@@ -28,7 +28,7 @@
         </nav>
   </div>
   <div id="Content">
-      <div id="layout" style="width: 100%; height: 600px;"></div>
+      <div id="layout" style="width: 100%; height: 800px;"></div>
   </div>
   <div id="Footer"></div>
 </div>
