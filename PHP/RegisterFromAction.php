@@ -61,6 +61,14 @@ if (isset($_POST[$MM_flag])) {
     $flag = false;
     exit;
   }
+  if(filter_var($_POST['url1'], FILTER_VALIDATE_URL)) {
+    
+  }
+  else {
+    echo "Url is broken.";
+    $flag = false;
+    exit;
+  }
   $LoginRS__query = sprintf("SELECT email FROM `users` WHERE email=%s", GetSQLValueString($loginUsername, "text"));
   ((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
   $LoginRS=mysqli_query( $WebCatalogue, $LoginRS__query) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
@@ -199,6 +207,7 @@ if (isset($_POST[$MM_flag])) {
         } else {
              echo "Sorry, your file was not uploaded. Failed to move. <br/>" . "<br/> Move to: ". "Assets/img/" . basename($_POST['email1']) . "/" . basename($_POST["file1"][0]["name"]) ."<br/>";
              $flag = false;
+             exit;
         }
     }
   }
