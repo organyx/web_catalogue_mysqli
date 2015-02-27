@@ -1,6 +1,6 @@
 <?php 
 	@session_start();
-	$_SESSION['EMPW'] = $_POST['email1'];
+	$_SESSION['EMPW'] = $_POST['email'];
 	require_once('security.php');
  ?>
 <?php require_once('../Connections/WebCatalogue.php'); ?>
