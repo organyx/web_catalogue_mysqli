@@ -93,13 +93,14 @@ if ((isset($_POST['DeleteUserHiddenField'])) && ($_POST['DeleteUserHiddenField']
   ((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
   $Result1 = mysqli_query( $WebCatalogue, $deleteSQL) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
 
-  $deleteGoTo = "AdminManageUsers.php";
-  if (isset($_SERVER['QUERY_STRING'])) {
-    $deleteGoTo .= (strpos($deleteGoTo, '?')) ? "&" : "?";
-    $deleteGoTo .= $_SERVER['QUERY_STRING'];
-  }
+  //echo "User Deleted";
+  // $deleteGoTo = "AdminManageUsers.php";
+  // if (isset($_SERVER['QUERY_STRING'])) {
+  //   $deleteGoTo .= (strpos($deleteGoTo, '?')) ? "&" : "?";
+  //   $deleteGoTo .= $_SERVER['QUERY_STRING'];
+  // }
 
-  header(sprintf("Location: %s", $deleteGoTo));
+  //header(sprintf("Location: %s", $deleteGoTo));
 }
 
 if ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "ApproveUserForm")) {
@@ -108,6 +109,8 @@ if ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "ApproveUserForm")) 
 
   ((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
   $Result1 = mysqli_query( $WebCatalogue, $updateSQL) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
+
+  //echo "User Approved";
 }
 
 if ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "MakeAdminForm")) {
@@ -117,6 +120,8 @@ if ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "MakeAdminForm")) {
 
   ((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
   $Result1 = mysqli_query( $WebCatalogue, $updateSQL) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
+
+  //echo "User is new Admin";
 }
 
 $colname_User = "-1";
@@ -226,6 +231,8 @@ $queryString_ManageUsers = sprintf("&totalRows_ManageUsers=%d%s", $totalRows_Man
         </tr>
       </table>
 <?php
+((mysqli_free_result($Result1) || (is_object($Result1) && (get_class($Result1) == "mysqli_result"))) ? true : false);
+
 ((mysqli_free_result($User) || (is_object($User) && (get_class($User) == "mysqli_result"))) ? true : false);
 
 ((mysqli_free_result($ManageUsers) || (is_object($ManageUsers) && (get_class($ManageUsers) == "mysqli_result"))) ? true : false);

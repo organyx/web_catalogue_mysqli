@@ -11,6 +11,7 @@ $(document).ready(function(){
 
     $("#reset").click(function(e){
             $('#result').empty();
+            //$('#returnmessa').empty();
             $('#searchForm').closest('#searchForm').find("input[type=text]").val("");
       });
 
@@ -21,8 +22,47 @@ $(document).ready(function(){
         data: {name: $('input#email').val()},
         success: function(response) {
             $('div#result').html(response);
-        }
-    });
-}
+            }
+        });
+    }
+/*
+
+            $('button#DeleteUserButton').click(function(){
+                var del = $('#DeleteUserForm').serialize();
+                $.ajax({
+                  type: 'POST',
+                  url: 'PHP/adminUsers.php',
+                  data: del,
+                  success: function(data) {
+                    //$('#returnmessage').html(data);
+                  },
+                });
+            });
+
+            $('button#ApproveUserButton').click(function(){
+                var app = $('#ApproveUserForm').serialize();
+                $.ajax({
+                  type: 'POST',
+                  url: 'PHP/adminUsers.php',
+                  data: app,
+                  success: function(data) {
+                    //$('#returnmessage').html(data);
+                  },
+                });
+            });
+
+            $('button#MakeAdminButton').click(function(){
+                var make = $('#MakeAdminForm').serialize();
+                $.ajax({
+                  type: 'POST',
+                  url: 'PHP/adminUsers.php',
+                  data: make,
+                  success: function(data) {
+                    //$('#returnmessage').html(data);
+                  },
+                });
+            });
+*/
+
 });
 // JavaScript Document

@@ -79,6 +79,11 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 }
 
+$editFormAction = $_SERVER['PHP_SELF'];
+if (isset($_SERVER['QUERY_STRING'])) {
+  $editFormAction .= "?" . htmlentities($_SERVER['QUERY_STRING']);
+}
+
 if(isset($_POST['name']) && ($_POST['name'] != ""))
 {
   $colname_User = "-1";
@@ -144,6 +149,7 @@ else {
           <td>&nbsp;</td>
         </tr>
       </table>
+      <!--
                     <table class="center">
                       <tr>
                         <td><form id="DeleteUserForm" name="DeleteUserForm" method="POST">
@@ -164,6 +170,7 @@ else {
                         </form></td>
                       </tr>
                     </table>
+                    -->
     </div>
     <?php } else { ?>
     <div><p>User not found.</p></div>

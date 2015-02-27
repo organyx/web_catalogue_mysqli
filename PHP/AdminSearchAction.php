@@ -1,4 +1,4 @@
-<div id="grid" style="width: 100%; height: 100px;">
+<div id="grid" class="search">
 	<form id="searchForm" method="post">  
     <label for="email">Email</label>
     <input type="text" id="email" name="email" placeholder="User..." />
@@ -8,3 +8,4 @@
 </div>
 
 <div id="result"></div>
+<div id="returnmessage"></div>
