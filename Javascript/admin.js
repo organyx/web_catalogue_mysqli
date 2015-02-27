@@ -11,7 +11,6 @@ $(document).ready(function(){
 
     $("#reset").click(function(e){
             $('#result').empty();
-            //$('#returnmessa').empty();
             $('#searchForm').closest('#searchForm').find("input[type=text]").val("");
       });
 
