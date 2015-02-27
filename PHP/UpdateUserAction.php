@@ -33,10 +33,12 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 }
 
+//echo "<pre>" . print_r($_POST) . "</pre>";
+
 $passCheck = false;
-$passwordToConfirm = $_POST['password1'];
-$passwordConfirm = $_POST['passwordwc1'];
-if(isset($_POST["mm_up"]) && isset($passwordToConfirm) &&(isset($passwordConfirm)))
+$passwordToConfirm = $_POST['password'];
+$passwordConfirm = $_POST['passwordwc'];
+if(isset($_POST["MM_update"]) && isset($passwordToConfirm) &&(isset($passwordConfirm)))
 {
 	if($passwordToConfirm !== $passwordConfirm) 
   {
@@ -45,7 +47,7 @@ if(isset($_POST["mm_up"]) && isset($passwordToConfirm) &&(isset($passwordConfirm
   }
   else
   {
-    $passwordConfirm = $_POST['password1'];
+    $passwordConfirm = $_POST['password'];
     $cleansedstring = preg_replace('#\W#', '', $passwordConfirm);
     //$secure_password = aes_encrypt($passwordConfirm);
     //$secure_password = base64_encode($secure_password);
@@ -59,14 +61,14 @@ if(isset($_POST["mm_up"]) && isset($passwordToConfirm) &&(isset($passwordConfirm
 }
 
 
-if ((isset($_POST["mm_up"])) && ($_POST["mm_up"] == "UpdateForm") && ($passCheck == true)) {
+if ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "UpdateForm") && ($passCheck == true)) {
   $updateSQL = sprintf("UPDATE users SET password=%s, language=%s, url=%s, title=%s, `description`=%s WHERE userID=%s",
                        GetSQLValueString($secure_password, "text"),
-					             GetSQLValueString($_POST['lang1'], "text"),
-                       GetSQLValueString($_POST['url1'], "text"),
-                       GetSQLValueString($_POST['title1'], "text"),
-                       GetSQLValueString($_POST['descr1'], "text"),
-                       GetSQLValueString($_POST['userID1'], "int"));
+					             GetSQLValueString($_POST['lang'], "text"),
+                       GetSQLValueString($_POST['url'], "text"),
+                       GetSQLValueString($_POST['title'], "text"),
+                       GetSQLValueString($_POST['descr'], "text"),
+                       GetSQLValueString($_POST['UserIDhiddenField'], "int"));
 
   ((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
   $Result1 = mysqli_query( $WebCatalogue, $updateSQL) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));

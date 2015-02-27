@@ -124,80 +124,80 @@ if (isset($_SERVER['QUERY_STRING'])) {
       </form>
 -->
 
-<div id="regForm" style="width: 680px">
-        <div class="w2ui-page page-0">
-          <div class="w2ui-field">
+<form method="POST" id="registrationForm" action="javascript:void(null);" >
+        <div >
+          <div >
                 <label></label>
                 <div>
                     <p id="returnmessage"></p>
                 </div>
             </div>
-            <div class="w2ui-field">
+            <div >
                 <label>First Name:</label>
                 <div>
                     <input name="first_name" id="first_name" type="text" maxlength="100" size="60"/>
                 </div>
             </div>
-            <div class="w2ui-field">
+            <div >
                 <label>Last Name:</label>
                 <div>
                     <input name="last_name" id="last_name" type="text" maxlength="100" size="60"/>
                 </div>
             </div>
-            <div class="w2ui-field">
+            <div>
                 <label>Email:</label>
                 <div>
                     <input name="email" id="email" type="email" maxlength="100" size="60"/>
                 </div>
             </div>
-            <div class="w2ui-field">
+            <div >
                 <label>Password:</label>
                 <div>
                     <input name="password" id="password" type="password" maxlength="100" size="60"/>
                 </div>
             </div>
-            <div class="w2ui-field">
+            <div >
                 <label>Confirm Password:</label>
                 <div>
                     <input name="passwordwc" id="passwordwc" type="password" maxlength="100" size="60"/>
                 </div>
             </div>
-            <div class="w2ui-field">
+            <div>
                 <label>Language:</label>
                 <div>
                     <input name="lang" id="lang" type="text" maxlength="100" size="60"/>
                 </div>
             </div>
-            <div class="w2ui-field">
+            <div >
                 <label>Url:</label>
                 <div>
                     <input name="url" id="url" type="text" maxlength="100" size="60"/>
                 </div>
             </div>
-            <div class="w2ui-field">
+            <div >
                 <label>Title:</label>
                 <div>
                     <input name="title" id="title" type="text" maxlength="100" size="60"/>
                 </div>
             </div>
-            <div class="w2ui-field">
+            <div >
                 <label>Description:</label>
                 <div>
                     <textarea name="descr" id="descr" style="width: 385px; height: 80px;"></textarea>
                 </div>
             </div>
-            <div class="w2ui-field">
+            <div >
                 <label>Preview picture:</label>
                 <div>
-                     <form action="PHP/RegisterFromAction.php" enctype="multipart/form-data" method="POST" id="uploadform" name="uploadForm">
-                        <input name="file" id="file" type="file" title="file" style="width: 385px; height: 30px;"/>
-                     </form>
+                    <input name="file" id="file" type="file" title="file" style="width: 385px; height: 30px;"/>
                 </div>
             </div>
             <input type="hidden" name="MM_insert" id="MM_insert" value="RegisterForm">
         </div>
-        <div class="w2ui-buttons">
+
+        <div>
             <input type="button" value="Reset" name="reset" id="reset" />
-            <input type="button" value="Register" name="submit" id="register" />
+            <input type="submit" value="Register" name="submit" id="register" />
         </div>
+      </form>
     </div>

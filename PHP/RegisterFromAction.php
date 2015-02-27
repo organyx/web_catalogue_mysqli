@@ -38,13 +38,26 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 }
 
+echo "<pre>" . print_r($_POST) . "</pre>";
+if(isset($_FILES)) {
+  echo "<pre>" . print_r($_FILES) . "</pre>";
+}
+
+if(isset($_REQUEST)) {
+  echo "<pre>" . print_r($_REQUEST) . "</pre>";
+}
+
+if(isset($_GET)) {
+  echo "<pre>" . print_r($_GET) . "</pre>";
+}
+
 // *** Redirect if username exists
-$MM_flag="mm_in";
+$MM_flag="MM_insert";
 if (isset($_POST[$MM_flag])) {
 
   $flag = false;
   $MM_dupKeyRedirect="Register.php";
-  $loginUsername = $_POST['email1'];
+  $loginUsername = $_POST['email'];
   if(filter_var($loginUsername, FILTER_VALIDATE_EMAIL)) {
     
   }
@@ -53,7 +66,7 @@ if (isset($_POST[$MM_flag])) {
     $flag = false;
     exit;
   }
-  if(ctype_alpha($_POST['first_name1']) && ctype_alpha($_POST['last_name1'])) {
+  if(ctype_alpha($_POST['first_name']) && ctype_alpha($_POST['last_name'])) {
     
   }
   else {
@@ -61,7 +74,7 @@ if (isset($_POST[$MM_flag])) {
     $flag = false;
     exit;
   }
-  if(filter_var($_POST['url1'], FILTER_VALIDATE_URL)) {
+  if(filter_var($_POST['url'], FILTER_VALIDATE_URL)) {
     
   }
   else {
@@ -94,8 +107,8 @@ if (isset($_POST[$MM_flag])) {
   }*/
 
   //echo "PIC <pre>" . print_r($_POST['picture1']) . "</pre>";
-  $passwordToConfirm = $_POST['password1'];
-  $passwordConfirm = $_POST['passwordwc1'];
+  $passwordToConfirm = $_POST['password'];
+  $passwordConfirm = $_POST['passwordwc'];
   if($passwordToConfirm != $passwordConfirm)
   {
     echo "Passwords don't match";
@@ -123,20 +136,20 @@ if (isset($_POST[$MM_flag])) {
   */
 
   $default_picture = "Assets/img/default.png/";
-  $user_folder_path = "Assets/img/" . basename($_POST['email1']) . "/";
-  $user_folder_path_check = "../Assets/img/" . basename($_POST['email1']) . "/";
-
-  if(isset($_POST['file1'])) {
-  $up = is_uploaded_file($_POST['file1'][0]['name']);
+  $user_folder_path = "Assets/img/" . basename($_POST['email']) . "/";
+  $user_folder_path_check = "../Assets/img/" . basename($_POST['email']) . "/";
+/*
+  if(isset($_FILES['file'])) {
+  $up = is_uploaded_file($_FILES['file']['name']);
   $b = is_writable($user_folder_path_check);
 
   if (is_writable($user_folder_path_check)) 
   {
     echo "Writable? : " . $b . "<br/>";
     echo "Is Uploaded? : " . $up . "<br/>";
-    echo $_POST["file1"][0]["name"]. "<br/>";
-    echo $user_folder_path_check . $_POST["file1"][0]["name"]. "<br/>";
-    $moved = move_uploaded_file($_FILES['file1']['tmp_name'], "D:/SOFTWARE/xampp/htdocs/web_catalogue_mysqli/Assets/img/5@3.com/".$_POST['file1'][0]['name']);
+    echo $_FILES["file"]["name"]. "<br/>";
+    echo $user_folder_path_check . $_FILES["file"]["name"]. "<br/>";
+    $moved = move_uploaded_file($_FILES['file']['tmp_name'], "D:/SOFTWARE/xampp/htdocs/web_catalogue_mysqli/Assets/img/5@3.com/".$_FILES['file']['name']);
     if($moved){
       echo $moved;
       echo "File moved<br/>";
@@ -146,7 +159,7 @@ if (isset($_POST[$MM_flag])) {
       echo "File not moved<br/>";
     }
   }
-}
+}*/
 
 
 
@@ -154,24 +167,24 @@ if (isset($_POST[$MM_flag])) {
 
   if (!file_exists($user_folder_path_check) && !is_dir($user_folder_path_check) && !is_writable($user_folder_path_check)) 
   {
-     $dir = mkdir("../Assets/img/" . basename($_POST['email1']), 0777, true);
+     $dir = mkdir("../Assets/img/" . basename($_POST['email']), 0777, true);
   }
   
-  if(!isset($_POST['file1'][0]))
+  if(!isset($_FILES['file']) && $_FILES['file']['size'] != 0)
   {
-     copy("../Assets/img/default.png", "../Assets/img/" . basename($_POST['email1']) . "/default.png");
+     copy("../Assets/img/default.png", "../Assets/img/" . basename($_POST['email']) . "/default.png");
   }
   
 
-  if(isset($_POST['file1'])) {
-    $target_dir = "../Assets/img/" . basename($_POST['email1']) . "/";
-    $target_file = $target_dir . basename($_POST["file1"][0]["name"] . "/");
+  if(isset($_FILES['file'])) {
+    $target_dir = "../Assets/img/" . basename($_POST['email']) . "/";
+    $target_file = $target_dir . basename($_FILES['file']["name"] . "/");
     $uploadOk = 1;
     
     $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
     // Check if image file is a actual image or fake image
     if(isset($_POST["submit"]) && $flag != false) {
-        $check = getimagesize($_POST["file1"][0]["tmp_name"]);
+        $check = getimagesize($_FILES['file']["tmp_name"]);
         if($check !== false) {
             echo "File is an image - " . $check["mime"] . ".";
             $uploadOk = 1;
@@ -181,7 +194,7 @@ if (isset($_POST[$MM_flag])) {
         }
     }
     // Check file size
-    if ($_POST["file1"][0]["size"] > 2000000 && $uploadOk == 1) {
+    if ($_FILES['file']["size"] > 2000000 && $uploadOk == 1) {
         echo "Sorry, your file is too large.";
         $uploadOk = 0;
     }
@@ -201,24 +214,24 @@ if (isset($_POST[$MM_flag])) {
         echo "Sorry, your file was not uploaded.";
     // if everything is ok, try to upload file
     } else {
-        if (move_uploaded_file($_POST["file1"][0]["name"], $target_file . basename($_POST["file1"][0]["name"]))) {
-            echo "The file ". basename( $_POST["file1"][0]["name"]). " has been uploaded.";
+        if (move_uploaded_file($_FILES['file']['tmp_name'], $target_file)) {
+            echo "The file ". basename( $_FILES['file']["name"]). " has been uploaded.";
             $flag = true;
         } else {
-             echo "Sorry, your file was not uploaded. Failed to move. <br/>" . "<br/> Move to: ". "Assets/img/" . basename($_POST['email1']) . "/" . basename($_POST["file1"][0]["name"]) ."<br/>";
+             echo "Sorry, your file was not uploaded. Failed to move. <br/>" . "<br/> Move to: ". "Assets/img/" . basename($_POST['email']) . "/" . basename($_POST["file1"][0]["name"]) ."<br/>";
              $flag = false;
              
         }
     }
   }
 
-  if(!isset($_POST["file1"]) || ($_POST["file1"][0]["size"] == 0))
+  if(!isset($_FILES["file"]) || ($_FILES['file']["size"] == 0))
   {
     $user_printscreen_location = $user_folder_path . "default.png";
   }
   else
   {
-    $user_printscreen_location = $user_folder_path . basename($_POST['file1'][0]['name']);
+    $user_printscreen_location = $user_folder_path . basename($_FILES['file']['name']);
   }
   
 }
@@ -229,16 +242,16 @@ if (isset($_SERVER['QUERY_STRING'])) {
   $editFormAction .= "?" . htmlentities($_SERVER['QUERY_STRING']);
 }
 
-if ((isset($_POST["mm_in"])) && ($_POST["mm_in"] == "RegisterForm") && $flag == true) {
+if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "RegisterForm") && $flag == true) {
   $insertSQL = sprintf("INSERT INTO users (email, password, first_name, last_name, `language`, url, title, `description`, preview, preview_thumb) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
-                       GetSQLValueString($_POST['email1'], "text"),
+                       GetSQLValueString($_POST['email'], "text"),
                        GetSQLValueString($secure_password, "text"),
-                       GetSQLValueString($_POST['first_name1'], "text"),
-                       GetSQLValueString($_POST['last_name1'], "text"),
-                       GetSQLValueString($_POST['lang1'], "text"),
-                       GetSQLValueString($_POST['url1'], "text"),
-                       GetSQLValueString($_POST['title1'], "text"),
-                       GetSQLValueString($_POST['descr1'], "text"),
+                       GetSQLValueString($_POST['first_name'], "text"),
+                       GetSQLValueString($_POST['last_name'], "text"),
+                       GetSQLValueString($_POST['lang'], "text"),
+                       GetSQLValueString($_POST['url'], "text"),
+                       GetSQLValueString($_POST['title'], "text"),
+                       GetSQLValueString($_POST['descr'], "text"),
                        GetSQLValueString($user_printscreen_location, "text"),
                        GetSQLValueString($user_printscreen_location, "text"));
 
