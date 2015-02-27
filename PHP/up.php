@@ -100,54 +100,56 @@ $totalRows_ManageUsers = mysqli_num_rows($ManageUsers);
 
      
       <form method="POST" id="updateForm" action="javascript:void(null);" >
-        <div >
-          <div >
+      <div class="w2ui-form w2ui-500">
+        <div class="w2ui-page">
+          <div class="w2ui-field">
                 <label></label>
                 <div>
                     <p id="returnmessage"></p>
                 </div>
             </div>
-            <div >
+            <div class="w2ui-field">
                 <label>Password:</label>
                 <div>
                     <input name="password" id="password" type="password" maxlength="100" size="60" value="<?php $dec_pass = base64_decode($row_User['password']); echo aes_decrypt($dec_pass);  ?>"/>
                 </div>
             </div>
-            <div >
+            <div class="w2ui-field">
                 <label>Confirm Password:</label>
                 <div>
                     <input name="passwordwc" id="passwordwc" type="password" maxlength="100" size="60" value="<?php $dec_pass = base64_decode($row_User['password']); echo aes_decrypt($dec_pass);  ?>"/>
                 </div>
             </div>
-            <div >
+            <div class="w2ui-field">
                 <label>Language:</label>
                 <div>
                     <input name="lang" id="lang" maxlength="100" size="60" value="<?php echo $row_User['language']; ?>"/>
                 </div>
             </div>
-            <div >
+            <div class="w2ui-field">
                 <label>Url:</label>
                 <div>
                     <input name="url" id="url" maxlength="100" size="60" value="<?php echo $row_User['url']; ?>"/>
                 </div>
             </div>
-            <div >
+            <div class="w2ui-field">
                 <label>Title:</label>
                 <div>
                     <input name="title" id="title" maxlength="100" size="60" value="<?php echo $row_User['title']; ?>"/>
                 </div>
             </div>
-            <div >
+            <div class="w2ui-field">
                 <label>Description:</label>
                 <div>
                     <textarea name="descr" id="descr" style="width: 385px; height: 80px;"><?php echo $row_User['description']; ?></textarea>
                 </div>
             </div>
-            <input name="UserIDhiddenField" type="hidden" id="UserIDhiddenField" value="<?php echo $row_User['userID']; ?>">  
+            <input name="UserIDhiddenField" type="hidden" id="UserIDhiddenField"  value="<?php echo $row_User['userID']; ?>">  
             <input name="MM_update" type="hidden" id="MM_update" value="UpdateForm">
         </div>
-        <div>
-            <input type="submit" value="Update" name="update" id="update">
+        <div class="w2ui-buttons">
+            <input type="submit" value="Update" name="update" id="update" class="btn">
+        </div>
         </div>
     </form>
   

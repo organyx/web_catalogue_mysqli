@@ -37,7 +37,7 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
    return $theValue;
 }
 }
-
+/*
 echo "<pre>" . print_r($_POST) . "</pre>";
 if(isset($_FILES)) {
   echo "<pre>" . print_r($_FILES) . "</pre>";
@@ -49,7 +49,7 @@ if(isset($_REQUEST)) {
 
 if(isset($_GET)) {
   echo "<pre>" . print_r($_GET) . "</pre>";
-}
+}*/
 
 // *** Redirect if username exists
 $MM_flag="MM_insert";

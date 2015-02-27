@@ -30,7 +30,7 @@ $(document).ready(function(){
 
      $("#reset").click(function(e){
             $('#returnmessage').empty();
-            $('#registrationForm').clear();
+            $('#registrationForm').closest('form').find("input[type=text],input[type=email],input[type=password],input[type=file], textarea").val("");
       });
 
 

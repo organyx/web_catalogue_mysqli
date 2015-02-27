@@ -45,11 +45,19 @@
     	  <h6>Type in your email <br>to recieve your password</h6>
     	</div>
     <div id="contentRight">
-     	<div><p id="returnmessage"></p></div>
+     	
 
-        <form method="POST" id="sendPassForm" action="javascript:void(null);">
-        <div >
-            <div >
+        <form method="POST" id="sendPassForm" action="javascript:void(null);" >
+       
+        <div class="w2ui-form w2ui-200">
+        <div class="w2ui-page">
+             <div class="w2ui-field">
+                <label></label>
+                <div>
+                    <p id="returnmessage"></p>
+                </div>
+            </div>
+            <div class="w2ui-field">
                 <label>Email:</label>
                 <div>
                     <input name="email" type="email" id="email" maxlength="100" size="60"/>
@@ -57,8 +65,9 @@
             </div>
         </div>
     
-        <div >
+        <div class="w2ui-buttons">
             <button type="submit" id="sendPass" class="btn" name="send">Send</button>
+        </div>
         </div>
     </form>
 

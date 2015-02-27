@@ -184,6 +184,100 @@ h6 {
 	transition:all .2s ease-in-out;
 }
 
+.w2ui-100 {
+	height: 100px;
+}
+
+.w2ui-200 {
+	height: 200px;
+}
+
+.w2ui-400 {
+	height: 400px;
+}
+
+.w2ui-500 {
+	height: 500px;
+}
+
+.w2ui-600 {
+	height: 600px;
+}
+
+.w2ui-form {
+  position: relative;
+  color: #000000;
+  background-color: #f5f6f7;
+  border: 1px solid #c0c0c0;
+  border-radius: 3px;
+  padding: 0px;
+  overflow: hidden !important;
+  min-height: 100px;
+}
+
+.w2ui-form .w2ui-buttons {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  text-align: center;
+  border-top: 1px solid #d5d8d8;
+  border-bottom: 0px solid #d5d8d8;
+  background-color: #fafafa;
+  padding: 15px 0px !important;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.w2ui-form .w2ui-page {
+  position: absolute;
+  left: 0;
+  right: 0;
+  overflow: auto;
+  padding: 10px;
+  border-left: 1px solid inherit;
+  border-right: 1px solid inherit;
+  background-color: inherit;
+  border-radius: 3px;
+}
+
+.w2ui-form .w2ui-buttons input[type="submit"],
+.w2ui-form .w2ui-buttons button {
+  min-width: 80px;
+  margin-right: 5px;
+}
+
+.w2ui-field > label {
+  display: block;
+  float: left;
+  margin-top: 7px;
+  margin-bottom: 3px;
+  width: 120px;
+  padding: 0px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: right;
+  min-height: 20px;
+  color: #666;
+}
+.w2ui-field > div {
+  /* do not include width */
+  margin-bottom: 3px;
+  margin-left: 128px;
+  padding: 3px;
+  min-height: 28px;
+  float: none;
+}
+
+.w2field {
+  padding: 3px;
+  border-radius: 3px;
+  border: 1px solid silver;
+}
+
+
+
 @media screen and (max-width:980px){
 	#Holder {
 		width: auto;
