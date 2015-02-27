@@ -170,15 +170,12 @@ if (isset($_POST[$MM_flag])) {
      $dir = mkdir("../Assets/img/" . basename($_POST['email']), 0777, true);
   }
   
-  if(!isset($_FILES['file']) && $_FILES['file']['size'] != 0)
-  {
-     copy("../Assets/img/default.png", "../Assets/img/" . basename($_POST['email']) . "/default.png");
-  }
+  
   
 
   if(isset($_FILES['file'])) {
-    $target_dir = "../Assets/img/" . basename($_POST['email']) . "/";
-    $target_file = $target_dir . basename($_FILES['file']["name"] . "/");
+    $target_dir = "Assets/img/" . basename($_POST['email']) . "/";
+    $target_file = $target_dir . basename($_FILES['file']["name"]);
     $uploadOk = 1;
     
     $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
@@ -194,20 +191,20 @@ if (isset($_POST[$MM_flag])) {
         }
     }
     // Check file size
-    if ($_FILES['file']["size"] > 2000000 && $uploadOk == 1) {
+    if ($_FILES['file']["size"] > 2000000) {
         echo "Sorry, your file is too large.";
         $uploadOk = 0;
     }
     // Check if file already exists
-    if (file_exists($target_file) && $uploadOk == 1) {
-         echo "Sorry, file already exists.";
-        $uploadOk = 0;
-    } 
+    // if (file_exists($target_file)) {
+    //      echo "Sorry, file already exists.";
+    //     $uploadOk = 0;
+    // } 
     // Allow certain file formats
-    if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-    && $imageFileType != "gif" && $uploadOk == 1) {
-      echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-        $uploadOk = 0;
+    if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
+
+      echo "Sorry, only JPG, JPEG & PNG files are allowed.";
+      $uploadOk = 0;
     } 
     // Check if $uploadOk is set to 0 by an error
     if ($uploadOk == 0) {
@@ -215,14 +212,19 @@ if (isset($_POST[$MM_flag])) {
     // if everything is ok, try to upload file
     } else {
         if (move_uploaded_file($_FILES['file']['tmp_name'], $target_file)) {
-            echo "The file ". basename( $_FILES['file']["name"]). " has been uploaded.";
+            echo "The file ". basename($_FILES['file']["name"]). " has been uploaded.";
             $flag = true;
         } else {
-             echo "Sorry, your file was not uploaded. Failed to move. <br/>" . "<br/> Move to: ". "Assets/img/" . basename($_POST['email']) . "/" . basename($_POST["file1"][0]["name"]) ."<br/>";
+             echo "Sorry, your file was not uploaded. Failed to move. <br/>" . "<br/> Move to: ". "Assets/img/" . basename($_POST['email']) . "/" . basename($_FILES["file"]["name"]) ."<br/>";
              $flag = false;
              
         }
     }
+  }
+
+  if($_FILES['file']['size'] == 0)
+  {
+     copy("../Assets/img/default.png", "../Assets/img/" . basename($_POST['email']) . "/default.png");
   }
 
   if(!isset($_FILES["file"]) || ($_FILES['file']["size"] == 0))
@@ -257,7 +259,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "RegisterForm") && $
 
   ((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
   $Result1 = mysqli_query( $WebCatalogue, $insertSQL) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
-  echo "<br/>Registration Succesful. <br/>";
+  echo "<br/><br/>Registration Succesful. <br/>";
 } else {
   echo "<br/>Registration Failed. <br/>";
 }

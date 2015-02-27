@@ -1,11 +1,40 @@
 $(document).ready(function(){
+
     $('#btnSearch').click(function(){
        makeAjaxRequest();
+    });
+
+    $('#DeleteUserButton2').click(function(){
+        deleteUser();     
+    });
+
+    $('#ApproveUserButton2').click(function(){
+        approveUser();
+    });
+
+     $('#MakeAdminButton2').click(function(){
+        makeUserAdmin();     
     });
      
     $('#searchForm').submit(function(e){
         e.preventDefault();
         makeAjaxRequest();
+        return false;
+    });
+
+    $('#DeleteUserForm2').submit(function(e){
+        e.preventDefault();
+        deleteUser();
+        return false;
+    });
+    $('#ApproveUserForm2').submit(function(e){
+        e.preventDefault();
+        approveUser();
+        return false;
+    });
+    $('#MakeAdminForm2').submit(function(e){
+        e.preventDefault();
+        makeUserAdmin();
         return false;
     });
 
@@ -21,46 +50,56 @@ $(document).ready(function(){
         data: {name: $('input#email').val()},
         success: function(response) {
             $('div#result').html(response);
+
+           
             }
         });
     }
 
-
-            $('button#DeleteUserButton2').click(function(){
+    function deleteUser() {
+        //var name = $('input#email').val();
                 var del = $('#DeleteUserForm2').serialize();
                 $.ajax({
-                  type: 'POST',
-                  url: 'PHP/adminUsers.php',
+                  type: 'post',
+                  url: 'PHP/AdminSearchAcc.php',
                   data: del,
                   success: function(data) {
-                    //$('#returnmessage').html(data);
+                    $('div#result').html(data);
                   },
                 });
-            });
+    }
 
-            $('button#ApproveUserButton2').click(function(){
+    function approveUser() {
+           //var name = $('input#email').val();
                 var app = $('#ApproveUserForm2').serialize();
                 $.ajax({
-                  type: 'POST',
-                  url: 'PHP/adminUsers.php',
+                  type: 'post',
+                  url: 'PHP/AdminSearchAcc.php',
                   data: app,
                   success: function(data) {
-                    //$('#returnmessage').html(data);
+                    $('div#result').html(data);
                   },
                 });
-            });
+    }
 
-            $('button#MakeAdminButton2').click(function(){
+   
+    function makeUserAdmin() {
+        //var name = $('input#email').val();
                 var make = $('#MakeAdminForm2').serialize();
                 $.ajax({
-                  type: 'POST',
-                  url: 'PHP/adminUsers.php',
+                  type: 'post',
+                  url: 'PHP/AdminSearchAcc.php',
                   data: make,
                   success: function(data) {
-                    //$('#returnmessage').html(data);
+                    $('div#result').html(data);
                   },
                 });
-            });
+    }      
+
+           
+
+
+            
 
 
 });

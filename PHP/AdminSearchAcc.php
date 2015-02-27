@@ -4,8 +4,8 @@
 if (!isset($_SESSION)) {
   session_start();
 }
-$MM_authorizedUsers = "1";
-$MM_donotCheckaccess = "true";
+$MM_authorizedUsers = "2";
+$MM_donotCheckaccess = "false";
 
 // *** Restrict Access To Page: Grant or deny access to this page
 function isAuthorized($strUsers, $strGroups, $UserName, $UserGroup) { 
@@ -26,7 +26,7 @@ function isAuthorized($strUsers, $strGroups, $UserName, $UserGroup) {
     if (in_array($UserGroup, $arrGroups)) { 
       $isValid = true; 
     } 
-    if (($strUsers == "") && true) { 
+    if (($strUsers == "") && false) { 
       $isValid = true; 
     } 
   } 
@@ -91,7 +91,7 @@ if ((isset($_POST['DeleteUserHiddenField2'])) && ($_POST['DeleteUserHiddenField2
   ((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
   $Result1 = mysqli_query( $WebCatalogue, $deleteSQL) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
 
-  //echo "User Deleted";
+  echo "User Deleted";
 }
 
 if ((isset($_POST["MM_update2"])) && ($_POST["MM_update2"] == "ApproveUserForm2")) {
@@ -101,7 +101,7 @@ if ((isset($_POST["MM_update2"])) && ($_POST["MM_update2"] == "ApproveUserForm2"
   ((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
   $Result1 = mysqli_query( $WebCatalogue, $updateSQL) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
 
-  //echo "User Approved";
+  echo "User Approved";
 }
 
 if ((isset($_POST["MM_update2"])) && ($_POST["MM_update2"] == "MakeAdminForm2")) {
@@ -112,31 +112,34 @@ if ((isset($_POST["MM_update2"])) && ($_POST["MM_update2"] == "MakeAdminForm2"))
   ((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
   $Result1 = mysqli_query( $WebCatalogue, $updateSQL) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
 
-  //echo "User is new Admin";
+  echo "User is new Admin";
 }
 
-if(isset($_POST['name']) && ($_POST['name'] != ""))
+//echo print_r($_POST);
+if(isset($_POST['name']))
 {
-  $colname_User = "-1";
-if (isset($_SESSION['MM_Username'])) {
-  $colname_User = $_POST['name'];
-}
-((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
-$query_User = sprintf("SELECT * FROM users WHERE email = %s", GetSQLValueString($colname_User, "text"));
-$User = mysqli_query( $WebCatalogue, $query_User) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
-$row_User = mysqli_fetch_assoc($User);
-$totalRows_User = mysqli_num_rows($User);
+  if(($_POST['name'] != "")){
+    $colname_User = "-1";
+    if (isset($_SESSION['MM_Username'])) {
+      $colname_User = $_POST['name'];
+    }
+    ((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
+    $query_User = sprintf("SELECT * FROM users WHERE email = %s", GetSQLValueString($colname_User, "text"));
+    $User = mysqli_query( $WebCatalogue, $query_User) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
+    $row_User = mysqli_fetch_assoc($User);
+    $totalRows_User = mysqli_num_rows($User);
 
-((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
-$query_ManageUsers = "SELECT * FROM users ORDER BY registration DESC";
-$ManageUsers = mysqli_query( $WebCatalogue, $query_ManageUsers) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
-$row_ManageUsers = mysqli_fetch_assoc($ManageUsers);
-$totalRows_ManageUsers = mysqli_num_rows($ManageUsers);
+    ((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
+    $query_ManageUsers = "SELECT * FROM users ORDER BY registration DESC";
+    $ManageUsers = mysqli_query( $WebCatalogue, $query_ManageUsers) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
+    $row_ManageUsers = mysqli_fetch_assoc($ManageUsers);
+    $totalRows_ManageUsers = mysqli_num_rows($ManageUsers);
+  }
+  else {
+    echo "User not specified.";
+  }
+}
 
-}
-else {
-  echo "User not specified.";
-}
 ?>
 
 <?php if(isset($_POST['name']) && ($_POST['name'] != "")) { ?>
@@ -183,7 +186,7 @@ else {
       
                     <table class="center">
                       <tr>
-                        <td><form id="DeleteUserForm2" name="DeleteUserForm2" method="POST">
+                        <td><form action="<?php echo $editFormAction; ?>" id="DeleteUserForm2" name="DeleteUserForm2" method="POST">
                           <input name="DeleteUserHiddenField2" type="hidden" id="DeleteUserHiddenField2" value="<?php echo $row_ManageUsers['userID']; ?>">
                           <input type="submit" name="DeleteUserButton2" id="DeleteUserButton2" value="Delete User">
                         </form></td>
