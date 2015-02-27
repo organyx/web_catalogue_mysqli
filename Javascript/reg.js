@@ -17,7 +17,7 @@ $(function () {
 
         ],
         actions: {
-            register: function () {
+            submit: function () {
             		var first_name = $("#first_name").val();
 					var last_name = $("#last_name").val();
 					var email = $("#email").val();

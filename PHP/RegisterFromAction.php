@@ -207,7 +207,7 @@ if (isset($_POST[$MM_flag])) {
         } else {
              echo "Sorry, your file was not uploaded. Failed to move. <br/>" . "<br/> Move to: ". "Assets/img/" . basename($_POST['email1']) . "/" . basename($_POST["file1"][0]["name"]) ."<br/>";
              $flag = false;
-             exit;
+             
         }
     }
   }

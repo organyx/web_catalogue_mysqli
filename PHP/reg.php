@@ -198,6 +198,6 @@ if (isset($_SERVER['QUERY_STRING'])) {
         </div>
         <div class="w2ui-buttons">
             <input type="button" value="Reset" name="reset" id="reset" />
-            <input type="button" value="Register" name="register" id="register" />
+            <input type="button" value="Register" name="submit" id="register" />
         </div>
     </div>
