@@ -96,6 +96,18 @@ $(document).ready(function(){
                 });
     }      
 
+
+    // function toSomething() {
+    //     var thisIsBull = $('#shit').serialize();
+    //     $.ajax({
+    //         type: 'post',
+    //         url: 'PHP/AdminSearchAcc.php',
+    //         data: thisIsBull,
+    //         success: function(data) {
+    //             $('div#result').html(data);
+    //         }
+    //     });
+    // }
            
 
 
