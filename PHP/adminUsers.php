@@ -231,7 +231,6 @@ $queryString_ManageUsers = sprintf("&totalRows_ManageUsers=%d%s", $totalRows_Man
         </tr>
       </table>
 <?php
-((mysqli_free_result($Result1) || (is_object($Result1) && (get_class($Result1) == "mysqli_result"))) ? true : false);
 
 ((mysqli_free_result($User) || (is_object($User) && (get_class($User) == "mysqli_result"))) ? true : false);
 

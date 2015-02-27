@@ -84,6 +84,37 @@ if (isset($_SERVER['QUERY_STRING'])) {
   $editFormAction .= "?" . htmlentities($_SERVER['QUERY_STRING']);
 }
 
+if ((isset($_POST['DeleteUserHiddenField2'])) && ($_POST['DeleteUserHiddenField2'] != "")) {
+  $deleteSQL = sprintf("DELETE FROM `users` WHERE userID=%s",
+                       GetSQLValueString($_POST['DeleteUserHiddenField2'], "int"));
+
+  ((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
+  $Result1 = mysqli_query( $WebCatalogue, $deleteSQL) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
+
+  //echo "User Deleted";
+}
+
+if ((isset($_POST["MM_update2"])) && ($_POST["MM_update2"] == "ApproveUserForm2")) {
+  $updateSQL = sprintf("UPDATE `users` SET approval=CURRENT_TIMESTAMP() WHERE userID=%s",
+                       GetSQLValueString($_POST['ApproveIDhiddenField2'], "int"));
+
+  ((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
+  $Result1 = mysqli_query( $WebCatalogue, $updateSQL) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
+
+  //echo "User Approved";
+}
+
+if ((isset($_POST["MM_update2"])) && ($_POST["MM_update2"] == "MakeAdminForm2")) {
+  $updateSQL = sprintf("UPDATE users SET Userlevel=%s WHERE userID=%s",
+                       GetSQLValueString($_POST['MakeUserAdminHiddenField2'], "int"),
+                       GetSQLValueString($_POST['MakeUserAdminIDhiddenField2'], "int"));
+
+  ((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
+  $Result1 = mysqli_query( $WebCatalogue, $updateSQL) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
+
+  //echo "User is new Admin";
+}
+
 if(isset($_POST['name']) && ($_POST['name'] != ""))
 {
   $colname_User = "-1";
@@ -149,28 +180,28 @@ else {
           <td>&nbsp;</td>
         </tr>
       </table>
-      <!--
+      
                     <table class="center">
                       <tr>
-                        <td><form id="DeleteUserForm" name="DeleteUserForm" method="POST">
-                          <input name="DeleteUserHiddenField" type="hidden" id="DeleteUserHiddenField" value="<?php echo $row_ManageUsers['userID']; ?>">
-                          <input type="submit" name="DeleteUserButton" id="DeleteUserButton" value="Delete User">
+                        <td><form id="DeleteUserForm2" name="DeleteUserForm2" method="POST">
+                          <input name="DeleteUserHiddenField2" type="hidden" id="DeleteUserHiddenField2" value="<?php echo $row_ManageUsers['userID']; ?>">
+                          <input type="submit" name="DeleteUserButton2" id="DeleteUserButton2" value="Delete User">
                         </form></td>
-                        <td><form action="<?php echo $editFormAction; ?>" id="ApproveUserForm" name="ApproveUserForm" method="POST">
-                          <input name="ApproveUserHiddenField" type="hidden" id="ApproveUserHiddenField" value="<?php echo "CURRENT_TIMESTAMP()"; ?>">
-                          <input name="ApproveIDhiddenField" type="hidden" id="ApproveIDhiddenField" value="<?php echo $row_ManageUsers['userID']; ?>">
-                          <input type="submit" name="ApproveUserButton" id="ApproveUserButton" value="Approve User">
-                          <input type="hidden" name="MM_update" value="ApproveUserForm">
+                        <td><form action="<?php echo $editFormAction; ?>" id="ApproveUserForm2" name="ApproveUserForm2" method="POST">
+                          <input name="ApproveUserHiddenField2" type="hidden" id="ApproveUserHiddenField2" value="<?php echo "CURRENT_TIMESTAMP()"; ?>">
+                          <input name="ApproveIDhiddenField2" type="hidden" id="ApproveIDhiddenField2" value="<?php echo $row_ManageUsers['userID']; ?>">
+                          <input type="submit" name="ApproveUserButton2" id="ApproveUserButton2" value="Approve User">
+                          <input type="hidden" name="MM_update2" value="ApproveUserForm2">
                         </form></td>
-                        <td><form action="<?php echo $editFormAction; ?>" id="MakeAdminForm" name="MakeAdminForm" method="POST">
-                        <input name="MakeUserAdminHiddenField" type="hidden" id="ApproveUserHiddenField" value="<?php echo "2"; ?>">
-                          <input type="submit" name="MakeAdminButton" id="MakeAdminButton" value="Give Admin Rights">
-                          <input name="MakeUserAdminIDhiddenField" type="hidden" id="ApproveIDhiddenField" value="<?php echo $row_ManageUsers['userID']; ?>">
-                          <input type="hidden" name="MM_update" value="MakeAdminForm">
+                        <td><form action="<?php echo $editFormAction; ?>" id="MakeAdminForm2" name="MakeAdminForm2" method="POST">
+                        <input name="MakeUserAdminHiddenField2" type="hidden" id="ApproveUserHiddenField2" value="<?php echo "2"; ?>">
+                          <input type="submit" name="MakeAdminButton2" id="MakeAdminButton2" value="Give Admin Rights">
+                          <input name="MakeUserAdminIDhiddenField2" type="hidden" id="ApproveIDhiddenField2" value="<?php echo $row_ManageUsers['userID']; ?>">
+                          <input type="hidden" name="MM_update2" value="MakeAdminForm2">
                         </form></td>
                       </tr>
                     </table>
-                    -->
+                    
     </div>
     <?php } else { ?>
     <div><p>User not found.</p></div>

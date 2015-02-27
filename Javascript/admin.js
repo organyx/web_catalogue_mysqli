@@ -25,10 +25,10 @@ $(document).ready(function(){
             }
         });
     }
-/*
 
-            $('button#DeleteUserButton').click(function(){
-                var del = $('#DeleteUserForm').serialize();
+
+            $('button#DeleteUserButton2').click(function(){
+                var del = $('#DeleteUserForm2').serialize();
                 $.ajax({
                   type: 'POST',
                   url: 'PHP/adminUsers.php',
@@ -39,8 +39,8 @@ $(document).ready(function(){
                 });
             });
 
-            $('button#ApproveUserButton').click(function(){
-                var app = $('#ApproveUserForm').serialize();
+            $('button#ApproveUserButton2').click(function(){
+                var app = $('#ApproveUserForm2').serialize();
                 $.ajax({
                   type: 'POST',
                   url: 'PHP/adminUsers.php',
@@ -51,8 +51,8 @@ $(document).ready(function(){
                 });
             });
 
-            $('button#MakeAdminButton').click(function(){
-                var make = $('#MakeAdminForm').serialize();
+            $('button#MakeAdminButton2').click(function(){
+                var make = $('#MakeAdminForm2').serialize();
                 $.ajax({
                   type: 'POST',
                   url: 'PHP/adminUsers.php',
@@ -62,7 +62,7 @@ $(document).ready(function(){
                   },
                 });
             });
-*/
+
 
 });
 // JavaScript Document
