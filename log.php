@@ -183,7 +183,7 @@ if (isset($_POST['Email'])) {
 ?>
  <?php if(!isset($_SESSION['MM_Username'])) {?>
       <form ACTION="<?php echo $loginFormAction; ?>" id="LoginForm" name="LoginForm" method="POST">
-      <table width="300" align="right">
+      <table id="login">
         <tr>
           <td align="right"><label for="Email">Email:</label>
           <input type="text" name="Email" id="Email"></td>
@@ -196,7 +196,7 @@ if (isset($_POST['Email'])) {
       </table>
       </form>
       <?php } else { ?>
-      <table width="300" align="right">
+      <table id="logged" width="300" align="right">
         <tr>
           <td align="right"><label>User: <?php echo $_SESSION['MM_Username']; ?></label></td>
           <td align="right"><a class="link" href="LogOut.php">LogOut</a></td>

@@ -48,6 +48,15 @@ nav label {
 	text-decoration:none;
 }
 
+#log {
+	float: right;
+}
+
+#LoginForm {
+	text-align: right;
+}
+
+
 
 
 @media screen and (max-width: 700px)

@@ -190,27 +190,27 @@ h6 {
 	transition:all .2s ease-in-out;
 }
 
-.w2ui-100 {
+.ui-100 {
 	height: 100px;
 }
 
-.w2ui-200 {
+.ui-200 {
 	height: 200px;
 }
 
-.w2ui-400 {
+.ui-400 {
 	height: 400px;
 }
 
-.w2ui-500 {
+.ui-500 {
 	height: 500px;
 }
 
-.w2ui-600 {
+.ui-600 {
 	height: 600px;
 }
 
-.w2ui-form {
+.ui-form {
   position: relative;
   color: #000000;
   background-color: #f5f6f7;
@@ -221,7 +221,7 @@ h6 {
   min-height: 100px;
 }
 
-.w2ui-form .w2ui-buttons {
+.ui-form .ui-buttons {
   position: absolute;
   left: 0;
   right: 0;
@@ -235,7 +235,7 @@ h6 {
   border-bottom-right-radius: 3px;
 }
 
-.w2ui-form .w2ui-page {
+.ui-form .ui-page {
   position: absolute;
   left: 0;
   right: 0;
@@ -247,13 +247,13 @@ h6 {
   border-radius: 3px;
 }
 
-.w2ui-form .w2ui-buttons input[type="submit"],
-.w2ui-form .w2ui-buttons button {
+.ui-form .ui-buttons input[type="submit"],
+.ui-form .ui-buttons button {
   min-width: 80px;
   margin-right: 5px;
 }
 
-.w2ui-field > label {
+.ui-field > label {
   display: block;
   float: left;
   margin-top: 7px;
@@ -267,7 +267,7 @@ h6 {
   min-height: 20px;
   color: #666;
 }
-.w2ui-field > div {
+.ui-field > div {
   /* do not include width */
   margin-bottom: 3px;
   margin-left: 128px;
@@ -276,11 +276,7 @@ h6 {
   float: none;
 }
 
-.w2field {
-  padding: 3px;
-  border-radius: 3px;
-  border: 1px solid silver;
-}
+
 
 
 

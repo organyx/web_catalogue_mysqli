@@ -37,6 +37,7 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
    return $theValue;
 }
 }
+
 /*
 echo "<pre>" . print_r($_POST) . "</pre>";
 if(isset($_FILES)) {
@@ -51,6 +52,7 @@ if(isset($_GET)) {
   echo "<pre>" . print_r($_GET) . "</pre>";
 }*/
 
+
 // *** Redirect if username exists
 $MM_flag="MM_insert";
 if (isset($_POST[$MM_flag])) {
@@ -58,6 +60,14 @@ if (isset($_POST[$MM_flag])) {
   $flag = false;
   $MM_dupKeyRedirect="Register.php";
   $loginUsername = $_POST['email'];
+
+ if(empty($_POST['first_name']))
+  {
+    echo "Please enter your name.";
+    $flag = false;
+    exit;
+  }
+
   if(filter_var($loginUsername, FILTER_VALIDATE_EMAIL)) {
     
   }
@@ -74,14 +84,8 @@ if (isset($_POST[$MM_flag])) {
     $flag = false;
     exit;
   }
-  if(filter_var($_POST['url'], FILTER_VALIDATE_URL)) {
-    
-  }
-  else {
-    echo "Url is broken.";
-    $flag = false;
-    exit;
-  }
+
+
   $LoginRS__query = sprintf("SELECT email FROM `users` WHERE email=%s", GetSQLValueString($loginUsername, "text"));
   ((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
   $LoginRS=mysqli_query( $WebCatalogue, $LoginRS__query) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
@@ -90,7 +94,7 @@ if (isset($_POST[$MM_flag])) {
   //if there is a row in the database, the username was found - can not add the requested username
   if($loginFoundUser){
     $MM_qsChar = "?";
-    echo "Username Already Taken.";
+    echo "Username Already Exists.";
     $flag = false;
     exit;
     //append the username to the redirect page
@@ -100,6 +104,30 @@ if (isset($_POST[$MM_flag])) {
     header ("Location: $MM_dupKeyRedirect");
     exit;
   */
+  }
+
+
+  if(empty($_POST['password'])) 
+  {
+    echo "Password field cannot be empty.";
+    $flag = false;
+    exit;
+  }
+
+  if(empty($_POST['passwordwc']))
+  {
+    echo "Please confirm your password.";
+    $flag = false;
+    exit;
+  }
+
+  if(filter_var($_POST['url'], FILTER_VALIDATE_URL)) {
+    
+  }
+  else {
+    echo "Url is broken.";
+    $flag = false;
+    exit;
   }
   /*
   if(isset($_POST['file1'])){
@@ -111,7 +139,7 @@ if (isset($_POST[$MM_flag])) {
   $passwordConfirm = $_POST['passwordwc'];
   if($passwordToConfirm != $passwordConfirm)
   {
-    echo "Passwords don't match";
+    echo "Passwords don't match.";
     //header ("Location: $MM_dupKeyRedirect");
     $flag = false;
     exit;
@@ -171,9 +199,8 @@ if (isset($_POST[$MM_flag])) {
   }
   
   
-  
 
-  if(isset($_FILES['file'])) {
+  if(isset($_FILES['file']) && $_FILES['file']['size'] != 0) {
     $target_dir = "Assets/img/" . basename($_POST['email']) . "/";
     $target_file = $target_dir . basename($_FILES['file']["name"]);
     $uploadOk = 1;
@@ -211,13 +238,14 @@ if (isset($_POST[$MM_flag])) {
         echo "Sorry, your file was not uploaded.";
     // if everything is ok, try to upload file
     } else {
-        if (move_uploaded_file($_FILES['file']['tmp_name'], $target_file)) {
+      //Change absolute to relative when moving
+        if (move_uploaded_file($_FILES['file']['tmp_name'], $_SERVER["DOCUMENT_ROOT"] . "/web_catalogue_mysqli/" . $target_file)) {
             echo "The file ". basename($_FILES['file']["name"]). " has been uploaded.";
             $flag = true;
         } else {
              echo "Sorry, your file was not uploaded. Failed to move. <br/>" . "<br/> Move to: ". "Assets/img/" . basename($_POST['email']) . "/" . basename($_FILES["file"]["name"]) ."<br/>";
              $flag = false;
-             
+             //echo var_dump(is_writable("D:\SOFTWARE\xampp\htdocs\web_catalogue_mysqli\Assets\img\p@d.l"));
         }
     }
   }

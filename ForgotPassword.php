@@ -49,15 +49,15 @@
 
         <form method="POST" id="sendPassForm" action="javascript:void(null);" >
        
-        <div class="w2ui-form w2ui-200">
-        <div class="w2ui-page">
-             <div class="w2ui-field">
+        <div class="ui-form ui-200">
+        <div class="ui-page">
+             <div class="ui-field">
                 <label></label>
                 <div>
                     <p id="returnmessage"></p>
                 </div>
             </div>
-            <div class="w2ui-field">
+            <div class="ui-field">
                 <label>Email:</label>
                 <div>
                     <input name="email" type="email" id="email" maxlength="100" size="60"/>
@@ -65,7 +65,7 @@
             </div>
         </div>
     
-        <div class="w2ui-buttons">
+        <div class="ui-buttons">
             <button type="submit" id="sendPass" class="btn" name="send">Send</button>
         </div>
         </div>

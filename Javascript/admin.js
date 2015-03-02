@@ -51,10 +51,49 @@ $(document).ready(function(){
         success: function(response) {
             $('div#result').html(response);
 
+/*
+            switch(response.type) {
+                case "delete":  
+                    var del = $('#DeleteUserForm2').serialize();
+                    $.ajax({
+                      type: 'post',
+                      url: 'PHP/AdminSearchAcc.php',
+                      data: del,
+                      success: function(data) {
+                        $('div#result').html(data);
+                      },
+                    });
+                    break;
+                case "approve":
+                    var app = $('#ApproveUserForm2').serialize();
+                    $.ajax({
+                      type: 'post',
+                      url: 'PHP/AdminSearchAcc.php',
+                      data: app,
+                      success: function(data) {
+                        $('div#result').html(data);
+                      },
+                    });
+                    break;
+                case "make":
+                    var make = $('#MakeAdminForm2').serialize();
+                    $.ajax({
+                      type: 'post',
+                      url: 'PHP/AdminSearchAcc.php',
+                      data: make,
+                      success: function(data) {
+                        $('div#result').html(data);
+                      },
+                    });
+                    break;
+
+            }*/
            
             }
         });
     }
+
+    
 
     function deleteUser() {
         //var name = $('input#email').val();
