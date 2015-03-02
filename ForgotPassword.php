@@ -67,6 +67,7 @@
     
         <div class="ui-buttons">
             <button type="submit" id="sendPass" class="btn" name="send">Send</button>
+            <button type="button" id="reset" class="btn" name="reset">Reset</button>
         </div>
         </div>
     </form>

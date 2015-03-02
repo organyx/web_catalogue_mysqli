@@ -67,7 +67,7 @@ if($totalRows_EmailPassword > 0)
 
 else
 {
-	echo "Wrong Email";
+	echo "Email not Found.";
 }
 
 

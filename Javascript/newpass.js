@@ -54,5 +54,11 @@ function sendPass() {
      $("#sendPass").click(function(e){
   			sendPass();
       });
+
+
+     $("#reset").click(function(e){
+            $('#returnmessage').empty();
+            $('#sendPassForm').closest('form').find("input[type=email]").val("");
+      });
 });
 // JavaScript Document
