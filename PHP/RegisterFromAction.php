@@ -223,10 +223,10 @@ if (isset($_POST[$MM_flag])) {
         $uploadOk = 0;
     }
     // Check if file already exists
-    // if (file_exists($target_file)) {
-    //      echo "Sorry, file already exists.";
-    //     $uploadOk = 0;
-    // } 
+    if (file_exists($target_file)) {
+        echo "Sorry, file already exists.";
+        $uploadOk = 0;
+    } 
     // Allow certain file formats
     if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
 
