@@ -56,9 +56,6 @@ nav label {
 	text-align: right;
 }
 
-
-
-
 @media screen and (max-width: 700px)
 {
 	#NavBar {
@@ -78,12 +75,12 @@ nav label {
 @media screen and (max-width: 478px)
 {
 	#NavBar {
-		height: 80px;
+		height: 120px;
 	}
 	
 	nav ul li {
 		float:left;
-		height:20px;
+		height:30px;
 		line-height:20px;
 		font-size:13px;
 	}
