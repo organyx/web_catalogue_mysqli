@@ -186,7 +186,7 @@ $totalRows_Registration = mysql_num_rows($Registration);
             <td>&nbsp;</td>
           </tr>
           <tr>
-            <td><table class="TableStyleRegUp center WidthAuto">
+            <td><table class="TableWidth400 center WidthAuto">
               <tr>
                 <td><table >
                   <tr class="updateLayout">

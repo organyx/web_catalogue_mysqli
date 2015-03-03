@@ -33,7 +33,7 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 
 
       <form  name="EMPWForm" id="EMPWForm"> 
-      <table class="center TableStyleAccount WidthAuto w2ui-page page-0">
+      <table class="center TableWidth500 WidthAuto w2ui-page page-0">
       <tr><td><p id="returnmessage"></p></td></tr>
         <tr>
           <td class="w2ui-field"> <label for="EMPWEmail"><h6>Email:</h6><br></label>

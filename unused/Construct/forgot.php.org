@@ -116,7 +116,7 @@ if (isset($_POST['Email'])) {
     	</div>
     <div id="contentRight">
       <form action="../Helpers/EMPW-Script.php" method="post" name="EMPWForm" id="EMPWForm"> 
-      <table class="center TableStyleAccount WidthAuto">
+      <table class="center TableWidth500 WidthAuto">
       <tr><td>&nbsp;</td></tr>
         <tr>
           <td> <label for="EMPWEmail"><h6>Email:</h6><br></label>

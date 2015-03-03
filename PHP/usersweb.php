@@ -123,7 +123,7 @@ $totalRows_SelectedUser = mysqli_num_rows($SelectedUser);
     	  <br>
     	</div>
     <div id="contentRight">
-      <table  class="TableStyleBig center WidthAuto">
+      <table  class="TableWidth670 center WidthAuto">
         <tr>
           <td align="center">&nbsp;</td>
         </tr>

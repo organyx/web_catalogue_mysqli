@@ -95,7 +95,7 @@ $queryString_ManageUsers = sprintf("&totalRows_ManageUsers=%d%s", $totalRows_Man
         <tr>
           <td align="center" valign="top"><?php if ($totalRows_ManageUsers > 0) { $i = 0;// Show if recordset not empty ?>
               <?php do { ?>
-                <table border="1" align="center" class="TableStyleIndex TableStyle center WidthAuto">
+                <table border="1" align="center" class="TableWidth630 TableStyle center WidthAuto">
                 
                   <tr><?php echo ($startRow_ManageUsers + 1) + $i ?>
                     <td width="400" height="50" align="center" ><h2><a href="UserWeb.php?a=<?php echo $row_ManageUsers['userID']; ?>"><?php echo $row_ManageUsers['title']; ?></a></h2></td>

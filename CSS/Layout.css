@@ -144,19 +144,19 @@ h6 {
     margin-right: auto;
 }
 
-.TableStyleBig {
+.TableWidth670 {
 	width:670px;
 }
 
-.TableStyleAccount {
+.TableWidth500 {
 	width:500px;
 }
 
-.TableStyleRegUp {
+.TableWidth400 {
 	width:400px;
 }
 
-.TableStyleIndex {
+.TableWidth630 {
 	width:630px;
 }
 
@@ -258,7 +258,7 @@ h6 {
   float: left;
   margin-top: 7px;
   margin-bottom: 3px;
-  width: 120px;
+  width: 140px;
   padding: 0px;
   white-space: nowrap;
   overflow: hidden;
@@ -268,7 +268,6 @@ h6 {
   color: #666;
 }
 .ui-field > div {
-  /* do not include width */
   margin-bottom: 3px;
   margin-left: 128px;
   padding: 3px;

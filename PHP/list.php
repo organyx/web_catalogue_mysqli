@@ -43,14 +43,6 @@ if (isset($_SESSION['MM_Username'])) {
 $query_User = sprintf("SELECT * FROM `users` WHERE email = %s", GetSQLValueString($colname_User, "text"));
 $User = mysqli_query( $WebCatalogue, $query_User) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
 $row_User = mysqli_fetch_assoc($User);
-$totalRows_User = mysqli_num_rows($User);$colname_User = "-1";
-if (isset($_SESSION['MM_Username'])) {
-  $colname_User = $_SESSION['MM_Username'];
-}
-((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
-$query_User = sprintf("SELECT * FROM users WHERE email = %s", GetSQLValueString($colname_User, "text"));
-$User = mysqli_query( $WebCatalogue, $query_User) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
-$row_User = mysqli_fetch_assoc($User);
 $totalRows_User = mysqli_num_rows($User);
 
 $maxRows_ManageUsers = 10;
@@ -91,14 +83,14 @@ if (!empty($_SERVER['QUERY_STRING'])) {
 $queryString_ManageUsers = sprintf("&totalRows_ManageUsers=%d%s", $totalRows_ManageUsers, $queryString_ManageUsers);
 ?>
 
-<table class="TableStyleBig center WidthAuto">
+<table class="TableWidth670 center WidthAuto">
         <tr>
           <td align="right" valign="top">Showing:&nbsp;<?php echo ($startRow_ManageUsers + 1) ?> to <?php echo min($startRow_ManageUsers + $maxRows_ManageUsers, $totalRows_ManageUsers) ?> of <?php echo $totalRows_ManageUsers ?></td>
         </tr>
         <tr>
           <td align="center" valign="top"><?php if ($totalRows_ManageUsers > 0) { $i = 0;// Show if recordset not empty ?>
               <?php do { ?>
-                <table border="1" align="center" class="TableStyleIndex TableStyle center WidthAuto">
+                <table border="1" align="center" class="TableWidth630 TableStyle center WidthAuto">
                 
                   <tr><?php echo ($startRow_ManageUsers + 1) + $i ?>
                     <td width="400" height="50" align="center" ><h2><a href="UserWeb.php?a=<?php echo $row_ManageUsers['userID']; ?>"><?php echo $row_ManageUsers['title']; ?></a></h2></td>
@@ -122,3 +114,17 @@ $queryString_ManageUsers = sprintf("&totalRows_ManageUsers=%d%s", $totalRows_Man
               <?php } // Show if not first page ?></td>
         </tr>
       </table>
+
+
+<?php
+
+
+if(isset($User)) {
+((mysqli_free_result($User) || (is_object($User) && (get_class($User) == "mysqli_result"))) ? true : false); }
+
+
+if(isset($ManageUsers)) {
+((mysqli_free_result($ManageUsers) || (is_object($ManageUsers) && (get_class($ManageUsers) == "mysqli_result"))) ? true : false); }
+
+
+?>

@@ -34,7 +34,7 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
    return $theValue;
 }
 }
-
+/*
 function mysqli_result1() {
   $con=mysqli_connect("localhost","root","","web_catalogue");
   $query = "SELECT `Userlevel` FROM `users` WHERE `email` = '". $_POST['email1'] ."'";
@@ -53,7 +53,7 @@ function mysqli_result2() {
 
   return $row2['userID'];
 }
-
+*/
 
 if (isset($_POST['email1'])) {
   $loginUsername=$_POST['email1'];

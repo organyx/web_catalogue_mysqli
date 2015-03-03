@@ -267,7 +267,7 @@ $enc_pass = aes_encrypt($_POST['Password']);
             <td>&nbsp;</td>
           </tr>
           <tr>
-            <td><table class="TableStyleRegUp center WidthAuto">
+            <td><table class="TableWidth400 center WidthAuto">
               <tr>
                 <td><table >
                   <tr class="updateLayout">

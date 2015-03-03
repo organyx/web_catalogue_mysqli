@@ -171,7 +171,7 @@ $enc_pass = aes_encrypt($_POST['Password']);
         <tr>
           <td align="center" valign="top"><?php if ($totalRows_ManageUsers > 0) { // Show if recordset not empty ?>
               <?php do { ?>
-                <table class="TableStyleIndex TableStyle center WidthAuto">
+                <table class="TableWidth630 TableStyle center WidthAuto">
                   <tr>
                     <td width="400" height="33" align="center" ><?php echo $row_ManageUsers['title']; ?></td>
                     <td width="150" height="50" rowspan="3" class="TableStyleBorderLeft"><a class="fancybox"  href="<?php echo $row_ManageUsers['preview_thumb']; ?>"> <img src="<?php echo $row_ManageUsers['preview_thumb']; ?>" alt="" height="140px" width="140px" class="img-thumbnail"/></a></td>

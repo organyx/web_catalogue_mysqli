@@ -189,14 +189,14 @@ $queryString_ManageUsers = sprintf("&totalRows_ManageUsers=%d%s", $totalRows_Man
           <h2><a href="../logout.php">Log Out</a></h2>
     	</div>
     <div id="contentRight">
-      <table class="TableStyleBig center WidthAuto">
+      <table class="TableWidth670 center WidthAuto">
         <tr>
           <td align="right" valign="top">Showing:&nbsp;<?php echo ($startRow_ManageUsers + 1) ?> to <?php echo min($startRow_ManageUsers + $maxRows_ManageUsers, $totalRows_ManageUsers) ?> of <?php echo $totalRows_ManageUsers ?></td>
         </tr>
         <tr>
           <td align="center" valign="top"><?php if ($totalRows_ManageUsers > 0) { // Show if recordset not empty ?>
             <?php do { ?>
-                <table class="TableStyleAccount TableStyle center WidthAuto">
+                <table class="TableWidth500 TableStyle center WidthAuto">
                   <tr>
                     <td>Registration Date: <?php echo $row_ManageUsers['registration']; ?></td>
                   </tr>
