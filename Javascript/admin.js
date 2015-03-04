@@ -77,6 +77,16 @@ $(document).ready(function ()
             }
         });
     }
+
+    function refresh() {
+      $.ajax({
+          url: "",
+          context: document.body,
+          success: function(s){
+              $(this).html(s);
+          }
+      });
+    }
 /*
     $.ajaxSetup({ cache: false });
     setInterval(function() {
@@ -86,7 +96,7 @@ $(document).ready(function ()
 */
     function update(){
       //location.reload();
-      $('#list').load('PHP/adminUsers.php');
+      $('#list').load('PHP/adminUsers.php');  
       //Reload
       $.ajax({
           url: "",
@@ -95,6 +105,8 @@ $(document).ready(function ()
               $(this).html(s);
           }
       });
+
+
     }
 
     function deleteUser()
@@ -148,6 +160,22 @@ $(document).ready(function ()
             }
         });
     }
-
+    /*
+    var interval = 10000;
+    var autoRefresh = function()
+    {
+      $.ajax({
+            url: "",
+            context: document.body,
+            success: function(html) {
+                $(this).html(html);
+                setTimeout(function() {
+                    autoRefresh();
+                }, interval);
+            }
+        });
+    }
+    autoRefresh();
+    */
 });
 // JavaScript Document  
