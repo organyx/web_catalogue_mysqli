@@ -36,36 +36,39 @@ $(document).ready(function ()
                 $('div#result').html(response);
 
 
-                $('.DeleteUserButton2').click(function ()
+                $('#DeleteUserButton2').click(function ()
                 {
                     deleteUser();
                 });
 
-                $('.ApproveUserButton2').click(function ()
+                $('#ApproveUserButton2').click(function ()
                 {
                     approveUser();
                 });
 
-                $('.MakeAdminButton2').click(function ()
+                $('#MakeAdminButton2').click(function ()
                 {
                     makeUserAdmin();
                 });
-                $('.DeleteUserForm2').submit(function (e)
+                $('#DeleteUserForm2').submit(function (e)
                 {
                     e.preventDefault();
                     deleteUser();
+                    update();
                     return false;
                 });
-                $('.ApproveUserForm2').submit(function (e)
+                $('#ApproveUserForm2').submit(function (e)
                 {
                     e.preventDefault();
                     approveUser();
+                    update();
                     return false;
                 });
-                $('.MakeAdminForm2').submit(function (e)
+                $('#MakeAdminForm2').submit(function (e)
                 {
                     e.preventDefault();
                     makeUserAdmin();
+                    update();
                     return false;
                 });
 
@@ -81,11 +84,23 @@ $(document).ready(function ()
     }, 3000); 
     
 */
+    function update(){
+      //location.reload();
+      $('#list').load('PHP/adminUsers.php');
+      //Reload
+      $.ajax({
+          url: "",
+          context: document.body,
+          success: function(s,x){
+              $(this).html(s);
+          }
+      });
+    }
 
     function deleteUser()
     {
         //var name = $('input#email').val();
-        var del = $('.DeleteUserForm2').serialize();
+        var del = $('#DeleteUserForm2').serialize();
         $.ajax(
         {
             type: 'post',
@@ -94,7 +109,7 @@ $(document).ready(function ()
             success: function (data)
             {
                 $('div#result').html(data);
-                $('#list').load('PHP/adminUsers.php');
+                //$('#list').load('PHP/adminUsers.php');
             }
         });
     }
@@ -102,7 +117,7 @@ $(document).ready(function ()
     function approveUser()
     {
         //var name = $('input#email').val();
-        var app = $('.ApproveUserForm2').serialize();
+        var app = $('#ApproveUserForm2').serialize();
         $.ajax(
         {
             type: 'post',
@@ -111,7 +126,7 @@ $(document).ready(function ()
             success: function (data)
             {
                 $('div#result').html(data);
-                $('#list').load('PHP/adminUsers.php');
+               // $('#list').load('PHP/adminUsers.php');
             }
         });
     }
@@ -120,7 +135,7 @@ $(document).ready(function ()
     function makeUserAdmin()
     {
         //var name = $('input#email').val();
-        var make = $('.MakeAdminForm2').serialize();
+        var make = $('#MakeAdminForm2').serialize();
         $.ajax(
         {
             type: 'post',
@@ -129,7 +144,7 @@ $(document).ready(function ()
             success: function (data)
             {
                 $('div#result').html(data);
-                $('#list').load('PHP/adminUsers.php');
+               // $('#list').load('PHP/adminUsers.php');
             }
         });
     }
