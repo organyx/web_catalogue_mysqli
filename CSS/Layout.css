@@ -275,7 +275,9 @@ h6 {
   float: none;
 }
 
-
+.off {
+	display: none;
+}
 
 
 

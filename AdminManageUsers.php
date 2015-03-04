@@ -58,7 +58,22 @@
           <h2><a href="LogOut.php">Log Out</a></h2>
     	</div>
     <div id="contentRight">
+    
       <?php include "PHP/AdminSearchAction.php" ?>
+      <!--
+      <div id="grid" class="search">
+        <form id="searchForm" method="post">  
+          <label for="email">Find User: </label>
+          <input type="text" id="email" name="email" placeholder="Email..." />
+          <button type="submit" id="btnSearch" class="btnSearch">Search</button>  
+          <button type="button" id="reset" class="reset">Reset</button>  
+        </form>
+      </div>
+      
+
+      <div id="result"></div>
+      <div id="returnmessage"></div>
+      -->
       <?php include "PHP/adminUsers.php" ?>
     </div>
   </div>

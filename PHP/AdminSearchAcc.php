@@ -184,21 +184,21 @@ if(isset($_POST['name']))
       
                     <table class="center">
                       <tr>
-                        <td><form action="<?php echo $editFormAction; ?>" id="DeleteUserForm2" name="DeleteUserForm2" method="POST">
-                          <input name="DeleteUserHiddenField2" type="hidden" id="DeleteUserHiddenField2" value="<?php echo $row_ManageUsers['userID']; ?>">
-                          <input type="submit" name="DeleteUserButton2" id="DeleteUserButton2" value="Delete User">
+                        <td><form action="<?php echo $editFormAction; ?>" id="DeleteUserForm2" class="DeleteUserForm2" name="DeleteUserForm2" method="POST">
+                          <input name="DeleteUserHiddenField2" type="hidden" id="DeleteUserHiddenField2" class="DeleteUserHiddenField2" value="<?php echo $row_User['userID']; ?>">
+                          <input type="submit" name="DeleteUserButton2" id="DeleteUserButton2" class="DeleteUserButton2" value="Delete User">
                         </form></td>
-                        <td><form action="<?php echo $editFormAction; ?>" id="ApproveUserForm2" name="ApproveUserForm2" method="POST">
-                          <input name="ApproveUserHiddenField2" type="hidden" id="ApproveUserHiddenField2" value="<?php echo "CURRENT_TIMESTAMP()"; ?>">
-                          <input name="ApproveIDhiddenField2" type="hidden" id="ApproveIDhiddenField2" value="<?php echo $row_ManageUsers['userID']; ?>">
-                          <input type="submit" name="ApproveUserButton2" id="ApproveUserButton2" value="Approve User">
-                          <input type="hidden" name="MM_update2" value="ApproveUserForm2">
+                        <td><form action="<?php echo $editFormAction; ?>" id="ApproveUserForm2" class="ApproveUserForm2" name="ApproveUserForm2" method="POST">
+                          <input name="ApproveUserHiddenField2" type="hidden" id="ApproveUserHiddenField2" class="ApproveUserHiddenField2" value="<?php echo "CURRENT_TIMESTAMP()"; ?>">
+                          <input name="ApproveIDhiddenField2" type="hidden" id="ApproveIDhiddenField2" class="ApproveIDhiddenField2" value="<?php echo $row_User['userID']; ?>">
+                          <input type="submit" name="ApproveUserButton2" id="ApproveUserButton2" class="ApproveUserButton2" value="Approve User">
+                          <input type="hidden" name="MM_update2" class="MM_update2" value="ApproveUserForm2">
                         </form></td>
-                        <td><form action="<?php echo $editFormAction; ?>" id="MakeAdminForm2" name="MakeAdminForm2" method="POST">
-                        <input name="MakeUserAdminHiddenField2" type="hidden" id="ApproveUserHiddenField2" value="<?php echo "2"; ?>">
-                          <input type="submit" name="MakeAdminButton2" id="MakeAdminButton2" value="Give Admin Rights">
-                          <input name="MakeUserAdminIDhiddenField2" type="hidden" id="ApproveIDhiddenField2" value="<?php echo $row_ManageUsers['userID']; ?>">
-                          <input type="hidden" name="MM_update2" value="MakeAdminForm2">
+                        <td><form action="<?php echo $editFormAction; ?>" id="MakeAdminForm2" class="MakeAdminForm2" name="MakeAdminForm2" method="POST">
+                        <input name="MakeUserAdminHiddenField2" type="hidden" id="ApproveUserHiddenField2" class="ApproveUserHiddenField2" value="<?php echo "2"; ?>">
+                          <input type="submit" name="MakeAdminButton2" id="MakeAdminButton2" class="MakeAdminButton2" value="Give Admin Rights">
+                          <input name="MakeUserAdminIDhiddenField2" type="hidden" id="ApproveIDhiddenField2" class="ApproveIDhiddenField2" value="<?php echo $row_User['userID']; ?>">
+                          <input type="hidden" name="MM_update2" class="MM_update2" value="MakeAdminForm2">
                         </form></td>
                       </tr>
                     </table>
