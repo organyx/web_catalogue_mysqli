@@ -63,8 +63,9 @@
     
       <?php include "PHP/AdminSearchAction.php" ?>
 
+      <div id="list">
       <?php include "PHP/adminUsers.php" ?>
-    
+      </div>
     </div>
   </div>
   <div id="Footer">

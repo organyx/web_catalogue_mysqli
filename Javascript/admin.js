@@ -1,160 +1,138 @@
-$(document).ready(function(){
 
-    $('#btnSearch').click(function(){
-       makeAjaxRequest();
+$(document).ready(function ()
+{
+
+    $('#btnSearch').click(function ()
+    {
+        makeAjaxRequest();
     });
 
-     
-    $('#searchForm').submit(function(e){
+
+    $('#searchForm').submit(function (e)
+    {
         e.preventDefault();
         makeAjaxRequest();
         return false;
     });
 
-    $("#reset").click(function(e){
-            $('#result').empty();
-            $('#searchForm').closest('#searchForm').find("input[type=text]").val("");
-      });
+    $("#reset").click(function (e)
+    {
+        $('#result').empty();
+        $('#searchForm').closest('#searchForm').find("input[type=text]").val("");
+    });
 
 
-    function makeAjaxRequest() {
-    $.ajax({
-        url: 'PHP/AdminSearchAcc.php',
-        type: 'post',
-        data: {name: $('input#email').val()},
-        success: function(response) {
-            $('div#result').html(response);
+    function makeAjaxRequest()
+    {
+        $.ajax(
+        {
+            url: 'PHP/AdminSearchAcc.php',
+            type: 'post',
+            data: {
+                name: $('input#email').val()
+            },
+            success: function (response)
+            {
+                $('div#result').html(response);
 
-/*
-            switch(response.type) {
-                case "delete":  
-                    var del = $('#DeleteUserForm2').serialize();
-                    $.ajax({
-                      type: 'post',
-                      url: 'PHP/AdminSearchAcc.php',
-                      data: del,
-                      success: function(data) {
-                        $('div#result').html(data);
-                      },
-                    });
-                    break;
-                case "approve":
-                    var app = $('#ApproveUserForm2').serialize();
-                    $.ajax({
-                      type: 'post',
-                      url: 'PHP/AdminSearchAcc.php',
-                      data: app,
-                      success: function(data) {
-                        $('div#result').html(data);
-                      },
-                    });
-                    break;
-                case "make":
-                    var make = $('#MakeAdminForm2').serialize();
-                    $.ajax({
-                      type: 'post',
-                      url: 'PHP/AdminSearchAcc.php',
-                      data: make,
-                      success: function(data) {
-                        $('div#result').html(data);
-                      },
-                    });
-                    break;
 
-            }*/
-
-                $('.DeleteUserButton2').click(function(){
-                    deleteUser();     
+                $('.DeleteUserButton2').click(function ()
+                {
+                    deleteUser();
                 });
 
-                $('.ApproveUserButton2').click(function(){
+                $('.ApproveUserButton2').click(function ()
+                {
                     approveUser();
                 });
 
-                 $('.MakeAdminButton2').click(function(){
-                    makeUserAdmin();     
+                $('.MakeAdminButton2').click(function ()
+                {
+                    makeUserAdmin();
                 });
-                $('.DeleteUserForm2').submit(function(e){
+                $('.DeleteUserForm2').submit(function (e)
+                {
                     e.preventDefault();
                     deleteUser();
                     return false;
                 });
-                $('.ApproveUserForm2').submit(function(e){
+                $('.ApproveUserForm2').submit(function (e)
+                {
                     e.preventDefault();
                     approveUser();
                     return false;
                 });
-                $('.MakeAdminForm2').submit(function(e){
+                $('.MakeAdminForm2').submit(function (e)
+                {
                     e.preventDefault();
                     makeUserAdmin();
                     return false;
                 });
 
-            function deleteUser() {
-                //var name = $('input#email').val();
-                        var del = $('.DeleteUserForm2').serialize();
-                        $.ajax({
-                          type: 'post',
-                          url: 'PHP/AdminSearchAcc.php',
-                          data: del,
-                          success: function(data) {
-                            $('div#result').html(data);
-                          },
-                        });
-            }
 
-            function approveUser() {
-                   //var name = $('input#email').val();
-                        var app = $('.ApproveUserForm2').serialize();
-                        $.ajax({
-                          type: 'post',
-                          url: 'PHP/AdminSearchAcc.php',
-                          data: app,
-                          success: function(data) {
-                            $('div#result').html(data);
-                          },
-                        });
-            }
 
-           
-            function makeUserAdmin() {
-                //var name = $('input#email').val();
-                        var make = $('.MakeAdminForm2').serialize();
-                        $.ajax({
-                          type: 'post',
-                          url: 'PHP/AdminSearchAcc.php',
-                          data: make,
-                          success: function(data) {
-                            $('div#result').html(data);
-                          },
-                        });
-            }   
-           
+            }
+        });
+    }
+/*
+    $.ajaxSetup({ cache: false });
+    setInterval(function() {
+    $('#list').load('PHP/adminUsers.php');
+    }, 3000); 
+    
+*/
+
+    function deleteUser()
+    {
+        //var name = $('input#email').val();
+        var del = $('.DeleteUserForm2').serialize();
+        $.ajax(
+        {
+            type: 'post',
+            url: 'PHP/AdminSearchAcc.php',
+            data: del,
+            success: function (data)
+            {
+                $('div#result').html(data);
+                $('#list').load('PHP/adminUsers.php');
             }
         });
     }
 
-    
+    function approveUser()
+    {
+        //var name = $('input#email').val();
+        var app = $('.ApproveUserForm2').serialize();
+        $.ajax(
+        {
+            type: 'post',
+            url: 'PHP/AdminSearchAcc.php',
+            data: app,
+            success: function (data)
+            {
+                $('div#result').html(data);
+                $('#list').load('PHP/adminUsers.php');
+            }
+        });
+    }
 
-       
 
-
-    // function toSomething() {
-    //     var thisIsBull = $('#shit').serialize();
-    //     $.ajax({
-    //         type: 'post',
-    //         url: 'PHP/AdminSearchAcc.php',
-    //         data: thisIsBull,
-    //         success: function(data) {
-    //             $('div#result').html(data);
-    //         }
-    //     });
-    // }
-           
-
-
-            
-
+    function makeUserAdmin()
+    {
+        //var name = $('input#email').val();
+        var make = $('.MakeAdminForm2').serialize();
+        $.ajax(
+        {
+            type: 'post',
+            url: 'PHP/AdminSearchAcc.php',
+            data: make,
+            success: function (data)
+            {
+                $('div#result').html(data);
+                $('#list').load('PHP/adminUsers.php');
+            }
+        });
+    }
 
 });
-// JavaScript Document
+// JavaScript Document  

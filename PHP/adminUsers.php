@@ -1,5 +1,20 @@
-<?php require_once('Helpers/security.php'); ?>
-<?php require_once('Connections/WebCatalogue.php'); ?>
+<?php  
+
+if(file_exists('Helpers/security.php') || file_exists('Connections/WebCatalogue.php'))
+{
+  require_once('Helpers/security.php'); 
+   require_once('Connections/WebCatalogue.php'); 
+}
+
+
+if(file_exists('../Helpers/security.php') || file_exists('../Connections/WebCatalogue.php'))
+{
+  require_once('../Helpers/security.php'); 
+   require_once('../Connections/WebCatalogue.php'); 
+}
+
+?>
+
 <?php
 if (!isset($_SESSION)) {
   session_start();
