@@ -107,6 +107,13 @@ if (isset($_POST[$MM_flag])) {
     exit;
   }
 
+  if(empty($_POST['title']))
+  {
+    echo "Please enter website title.";
+    $flag = false;
+    exit;
+  }
+
   $passwordToConfirm = $_POST['password'];
   $passwordConfirm = $_POST['passwordwc'];
   if($passwordToConfirm != $passwordConfirm)

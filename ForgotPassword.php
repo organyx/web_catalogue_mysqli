@@ -21,16 +21,13 @@
   <div id="NavBar">
     	<nav>
         	<ul>
-                <li><a href="Index.php">Main</a></li>
-                <li><a href="Register.php">Register</a></li>
-                <li><a href="ForgotPassword.php">Forgot Password</a></li>
-            </ul>
-            
-                  
-              <div id="log">
+            <li><a href="Index.php">Main</a></li>
+            <li><a href="Register.php">Register</a></li>
+            <li><a href="ForgotPassword.php">Forgot Password</a></li>
+          </ul> 
+          <div id="log">
             <?php include "PHP/Login_Include.php" ?>
-            </div>
-                 
+          </div>    
     </nav>
   </div>
   <div id="Content">
@@ -42,7 +39,6 @@
     	  <h6>Type in your email <br>to recieve your password</h6>
     	</div>
     <div id="contentRight">
-     	
 
         <form method="POST" id="sendPassForm" action="javascript:void(null);" >
        
