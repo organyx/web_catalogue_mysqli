@@ -32,8 +32,6 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 }
 
-//echo "<pre>" . print_r($_POST) . "</pre>";
-
 $passCheck = false;
 $passwordToConfirm = $_POST['password'];
 $passwordConfirm = $_POST['passwordwc'];

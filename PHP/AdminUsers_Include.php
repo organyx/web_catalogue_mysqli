@@ -15,6 +15,7 @@ if(file_exists('../Helpers/security.php') || file_exists('../Connections/WebCata
 
 ?>
 
+
 <?php
 if (!isset($_SESSION)) {
   session_start();

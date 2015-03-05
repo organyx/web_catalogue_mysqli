@@ -45,7 +45,7 @@
         <li><a href="ForgotPassword.php">Forgot Password</a></li>
       </ul>
       <div id="log">
-     <?php include "log.php" ?>
+     <?php include "Login_Include.php" ?>
       </div>
     </nav>
   </div>
@@ -60,7 +60,7 @@
       <h6>&nbsp;</h6>
     </div>
     <div id="contentRight">
-      <?php include "PHP/list.php" ?>
+      <?php include "PHP/Index_Include.php" ?>
     </div>
   </div>
   <div id="Footer">

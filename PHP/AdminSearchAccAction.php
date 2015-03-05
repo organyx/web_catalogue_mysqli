@@ -72,7 +72,6 @@ if ((isset($_POST["MM_update2"])) && ($_POST["MM_update2"] == "MakeAdminForm2"))
   echo "User is new Admin";
 }
 
-//echo print_r($_POST);
 if(isset($_POST['name']))
 {
   if(($_POST['name'] != "")){

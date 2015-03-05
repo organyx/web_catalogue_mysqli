@@ -44,7 +44,7 @@
             </ul>
               <div id="log">
 
-            <?php include "log.php" ?>
+            <?php include "Login_Include.php" ?>
             
             </div>
         </nav>
@@ -61,10 +61,10 @@
     	</div>
     <div id="contentRight">
     
-      <?php include "PHP/AdminSearchAction.php" ?>
+      <?php include "PHP/AdminSearch_Include.php" ?>
 
       <div id="list">
-      <?php include "PHP/adminUsers.php" ?>
+      <?php include "PHP/AdminUsers_Include.php" ?>
       </div>
     </div>
   </div>

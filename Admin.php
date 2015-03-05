@@ -25,7 +25,7 @@
           </ul>
             
              <div id="log">
-            <?php include "log.php" ?>
+            <?php include "Login_Include.php" ?>
             </div>
         </nav>
   </div>

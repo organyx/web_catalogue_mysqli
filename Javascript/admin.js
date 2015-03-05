@@ -26,7 +26,7 @@ $(document).ready(function ()
     {
         $.ajax(
         {
-            url: 'PHP/AdminSearchAcc.php',
+            url: 'PHP/AdminSearchAccAction.php',
             type: 'post',
             data: {
                 name: $('input#email').val()
@@ -96,7 +96,7 @@ $(document).ready(function ()
 */
     function update(){
       //location.reload();
-      $('#list').load('PHP/adminUsers.php');  
+      $('#list').load('PHP/AdminUsers_Include.php');  
       //Reload
       $.ajax({
           url: "",
@@ -116,7 +116,7 @@ $(document).ready(function ()
         $.ajax(
         {
             type: 'post',
-            url: 'PHP/AdminSearchAcc.php',
+            url: 'PHP/AdminSearchAccAction.php',
             data: del,
             success: function (data)
             {
@@ -133,7 +133,7 @@ $(document).ready(function ()
         $.ajax(
         {
             type: 'post',
-            url: 'PHP/AdminSearchAcc.php',
+            url: 'PHP/AdminSearchAccAction.php',
             data: app,
             success: function (data)
             {
@@ -151,7 +151,7 @@ $(document).ready(function ()
         $.ajax(
         {
             type: 'post',
-            url: 'PHP/AdminSearchAcc.php',
+            url: 'PHP/AdminSearchAccAction.php',
             data: make,
             success: function (data)
             {

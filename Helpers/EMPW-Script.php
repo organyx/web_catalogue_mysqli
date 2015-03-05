@@ -39,7 +39,7 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 
 $colname_EmailPassword = "-1";
-if (isset($_SESSION['EMPW'])) {
+if (isset($_SESSION['EMPW']) && filter_var($_SESSION['EMPW'], FILTER_VALIDATE_EMAIL)) {
   $colname_EmailPassword = $_SESSION['EMPW'];
 }
 ((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
@@ -47,8 +47,6 @@ $query_EmailPassword = sprintf("SELECT * FROM `users` WHERE email = %s", GetSQLV
 $EmailPassword = mysqli_query( $WebCatalogue, $query_EmailPassword) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
 $row_EmailPassword = mysqli_fetch_assoc($EmailPassword);
 $totalRows_EmailPassword = mysqli_num_rows($EmailPassword);
-
-((mysqli_free_result($EmailPassword) || (is_object($EmailPassword) && (get_class($EmailPassword) == "mysqli_result"))) ? true : false);
 ?>
 <?php 
 
@@ -67,8 +65,15 @@ if($totalRows_EmailPassword > 0)
 
 else
 {
-	echo "Email not Found.";
+	if(filter_var($_SESSION['EMPW'], FILTER_VALIDATE_EMAIL))
+  {
+    echo "Email not Found.";
+  }
+  else
+  {
+    echo "Invalid email format.";
+  }
 }
 
-
+((mysqli_free_result($EmailPassword) || (is_object($EmailPassword) && (get_class($EmailPassword) == "mysqli_result"))) ? true : false);
 ?>

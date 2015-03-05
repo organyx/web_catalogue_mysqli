@@ -1,9 +1,9 @@
 <?php require_once('../Connections/WebCatalogue.php'); 
       require_once('../Helpers/security.php');
 
-      error_reporting(E_ALL); // or E_STRICT
-  ini_set("display_errors",1);
-  ini_set("memory_limit","1024M");
+  //     error_reporting(E_ALL); // or E_STRICT
+  // ini_set("display_errors",1);
+  // ini_set("memory_limit","1024M");
       
 if (!function_exists("GetSQLValueString")) {
   function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "")
@@ -176,17 +176,15 @@ if (isset($_POST[$MM_flag])) {
     } else {
       //Change absolute to relative when moving
         if (move_uploaded_file($_FILES['file']['tmp_name'], $_SERVER["DOCUMENT_ROOT"] . "/web_catalogue_mysqli/" . $target_file)) {
-            echo "The file ". basename($_FILES['file']["name"]). " has been uploaded.";
+            echo "The file ". basename($_FILES['file']["name"]). " has been uploaded.<br/>";
             $flag = true;
         } else {
              echo "Sorry, your file was not uploaded. Failed to move. <br/>" . "<br/> Move to: ". "Assets/img/" . basename($_POST['email']) . "/" . basename($_FILES["file"]["name"]) ."<br/>";
              $flag = false;
-             //echo var_dump(is_writable("D:\SOFTWARE\xampp\htdocs\web_catalogue_mysqli\Assets\img\p@d.l"));
         }
     }
   }
-
-  if($_FILES['file']['size'] == 0)
+  else
   {
      copy("../Assets/img/default.png", "../Assets/img/" . basename($_POST['email']) . "/default.png");
   }
@@ -203,11 +201,6 @@ if (isset($_POST[$MM_flag])) {
 }
 
 
-$editFormAction = $_SERVER['PHP_SELF'];
-if (isset($_SERVER['QUERY_STRING'])) {
-  $editFormAction .= "?" . htmlentities($_SERVER['QUERY_STRING']);
-}
-
 if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "RegisterForm") && $flag == true) {
   $insertSQL = sprintf("INSERT INTO users (email, password, first_name, last_name, `language`, url, title, `description`, preview, preview_thumb) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
                        GetSQLValueString($_POST['email'], "text"),
@@ -223,19 +216,9 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "RegisterForm") && $
 
   ((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
   $Result1 = mysqli_query( $WebCatalogue, $insertSQL) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
-  echo "<br/><br/>Registration Succesful. <br/>";
+  echo "Registration Succesful.";
 } else {
-  echo "<br/>Registration Failed. <br/>";
+  echo "Registration Failed.";
 }
 
-((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
-$query_Registration = "SELECT * FROM `users`";
-$Registration = mysqli_query( $WebCatalogue, $query_Registration) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
-$row_Registration = mysqli_fetch_assoc($Registration);
-$totalRows_Registration = mysqli_num_rows($Registration);
-
-?>
-
-<?php
-((mysqli_free_result($Registration) || (is_object($Registration) && (get_class($Registration) == "mysqli_result"))) ? true : false);
 ?>

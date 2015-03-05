@@ -50,11 +50,6 @@ $User = mysqli_query( $WebCatalogue, $query_User) or die(((is_object($GLOBALS["_
 $row_User = mysqli_fetch_assoc($User);
 $totalRows_User = mysqli_num_rows($User);
 
-((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
-$query_ManageUsers = "SELECT * FROM users ORDER BY registration DESC";
-$ManageUsers = mysqli_query( $WebCatalogue, $query_ManageUsers) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
-$row_ManageUsers = mysqli_fetch_assoc($ManageUsers);
-$totalRows_ManageUsers = mysqli_num_rows($ManageUsers);
 ?>
 
 <div id="PageHeading">
