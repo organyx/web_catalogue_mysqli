@@ -1,5 +1,14 @@
 <?php @session_start(); ?>
-<?php require_once('Connections/WebCatalogue.php'); ?>
+<?php 
+if(file_exists('Connections/WebCatalogue.php'))
+{
+  require_once('Connections/WebCatalogue.php'); 
+}
+
+if(file_exists('../Connections/WebCatalogue.php'))
+{
+   require_once('../Connections/WebCatalogue.php'); 
+} ?>
 
 <?php
 if (!function_exists("GetSQLValueString")) {

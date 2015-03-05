@@ -117,11 +117,8 @@ $totalRows_SelectedUser = mysqli_num_rows($SelectedUser);
       </div>
     	<div id="contentLeft">
     	  <h2>Account info</h2><br>
-        <?php if ($_SESSION['lvl'] == 2) { ?>
-          <h2><a href="AdminManageUsers.php">Manage Users</a></h2><br>
-          <?php } ?>
-    	  <h2><a href="Update.php">Update Account</a></h2><br>
-    	  <h2><a href="LogOut.php">Log Out</a></h2><br>
+        
+    	  <h2><a href="Account.php">Account</a></h2><br>
     	  <br>
     	</div>
     <div id="contentRight">
