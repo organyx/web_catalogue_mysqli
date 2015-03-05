@@ -2,6 +2,7 @@
 	require_once('Helpers/deleteUser.php');				?>
 <?php require_once('Helpers/security.php'); ?>
 <?php require_once('Connections/WebCatalogue.php'); ?>
+<?php include "PHP/adminAccess.php" ?>
 
 <!doctype html>
 <html>
