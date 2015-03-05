@@ -78,15 +78,15 @@ $(document).ready(function ()
         });
     }
 
-    function refresh() {
-      $.ajax({
-          url: "",
-          context: document.body,
-          success: function(s){
-              $(this).html(s);
-          }
-      });
-    }
+    // function refresh() {
+    //   $.ajax({
+    //       url: "",
+    //       context: document.body,
+    //       success: function(s){
+    //           $(this).html(s);
+    //       }
+    //   });
+    // }
 /*
     $.ajaxSetup({ cache: false });
     setInterval(function() {
@@ -111,7 +111,6 @@ $(document).ready(function ()
 
     function deleteUser()
     {
-        //var name = $('input#email').val();
         var del = $('#DeleteUserForm2').serialize();
         $.ajax(
         {
@@ -121,14 +120,12 @@ $(document).ready(function ()
             success: function (data)
             {
                 $('div#result').html(data);
-                //$('#list').load('PHP/adminUsers.php');
             }
         });
     }
 
     function approveUser()
     {
-        //var name = $('input#email').val();
         var app = $('#ApproveUserForm2').serialize();
         $.ajax(
         {
@@ -138,7 +135,6 @@ $(document).ready(function ()
             success: function (data)
             {
                 $('div#result').html(data);
-               // $('#list').load('PHP/adminUsers.php');
             }
         });
     }
@@ -146,7 +142,6 @@ $(document).ready(function ()
 
     function makeUserAdmin()
     {
-        //var name = $('input#email').val();
         var make = $('#MakeAdminForm2').serialize();
         $.ajax(
         {
@@ -156,7 +151,6 @@ $(document).ready(function ()
             success: function (data)
             {
                 $('div#result').html(data);
-               // $('#list').load('PHP/adminUsers.php');
             }
         });
     }

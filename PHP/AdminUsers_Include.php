@@ -18,35 +18,48 @@ if(file_exists('../Helpers/security.php') || file_exists('../Connections/WebCata
 
 <?php
 if (!function_exists("GetSQLValueString")) {
-function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "")
-{
+  function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "")
+  {
 
-  Global $WebCatalogue;
+    Global $WebCatalogue;
 
-  if (PHP_VERSION < 6) {
-    $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
+    if (PHP_VERSION < 6) {
+      $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
+    }
+    $theValue = mysqli_real_escape_string($WebCatalogue, $theValue);
+    switch ($theType) {
+      case "text":
+        $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
+        break;   
+      case "long":
+      case "int":
+        $theValue = ($theValue != "") ? intval($theValue) : "NULL";
+        break;
+      case "double":
+        $theValue = ($theValue != "") ? doubleval($theValue) : "NULL";
+        break;
+      case "date":
+        $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
+        break;
+      case "defined":
+        $theValue = ($theValue != "") ? $theDefinedValue : $theNotDefinedValue;
+        break;
+    }
+     return $theValue;
   }
-  $theValue = mysqli_real_escape_string($WebCatalogue, $theValue);
-  switch ($theType) {
-    case "text":
-      $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
-      break;   
-    case "long":
-    case "int":
-      $theValue = ($theValue != "") ? intval($theValue) : "NULL";
-      break;
-    case "double":
-      $theValue = ($theValue != "") ? doubleval($theValue) : "NULL";
-      break;
-    case "date":
-      $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
-      break;
-    case "defined":
-      $theValue = ($theValue != "") ? $theDefinedValue : $theNotDefinedValue;
-      break;
-  }
-   return $theValue;
 }
+
+if(!function_exists("GetUserByID"))
+{
+  function GetUserByID($id)
+  {
+    Global $WebCatalogue;
+
+    $query_User = sprintf("SELECT * FROM `users` WHERE userID = %s", GetSQLValueString($id, "text"));
+    $User = mysqli_query( $WebCatalogue, $query_User) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
+    $row_User = mysqli_fetch_assoc($User);
+    return $row_User['email'];
+  }
 }
 
 $currentPage = $_SERVER["PHP_SELF"];
@@ -60,20 +73,18 @@ if ((isset($_POST['DeleteUserHiddenField'])) && ($_POST['DeleteUserHiddenField']
   $deleteSQL = sprintf("DELETE FROM `users` WHERE userID=%s",
                        GetSQLValueString($_POST['DeleteUserHiddenField'], "int"));
 
-  ((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
   $Result1 = mysqli_query( $WebCatalogue, $deleteSQL) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
 
-  //echo "User Deleted";
+  echo "User " . GetUserByID($_POST['DeleteUserHiddenField']) . " has been Deleted";
 }
 
 if ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "ApproveUserForm")) {
   $updateSQL = sprintf("UPDATE `users` SET approval=CURRENT_TIMESTAMP() WHERE userID=%s",
                        GetSQLValueString($_POST['ApproveIDhiddenField'], "int"));
 
-  ((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
   $Result1 = mysqli_query( $WebCatalogue, $updateSQL) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
 
-  //echo "User Approved";
+  echo "User " . GetUserByID($_POST['ApproveIDhiddenField']) . " is Approved";
 }
 
 if ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "MakeAdminForm")) {
@@ -81,17 +92,16 @@ if ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "MakeAdminForm")) {
                        GetSQLValueString($_POST['MakeUserAdminHiddenField'], "int"),
                        GetSQLValueString($_POST['MakeUserAdminIDhiddenField'], "int"));
 
-  ((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
   $Result1 = mysqli_query( $WebCatalogue, $updateSQL) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
 
-  //echo "User is new Admin";
+  echo "User " . GetUserByID($_POST['MakeUserAdminIDhiddenField']) . " is new Admin";
 }
 
 $colname_User = "-1";
 if (isset($_SESSION['MM_Username'])) {
   $colname_User = $_SESSION['MM_Username'];
 }
-((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
+
 $query_User = sprintf("SELECT * FROM `users` WHERE email = %s", GetSQLValueString($colname_User, "text"));
 $User = mysqli_query( $WebCatalogue, $query_User) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
 $row_User = mysqli_fetch_assoc($User);
@@ -104,7 +114,7 @@ if (isset($_GET['pageNum_ManageUsers'])) {
 }
 $startRow_ManageUsers = $pageNum_ManageUsers * $maxRows_ManageUsers;
 
-((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
+
 $query_ManageUsers = "SELECT * FROM users ORDER BY registration DESC";
 $query_limit_ManageUsers = sprintf("%s LIMIT %d, %d", $query_ManageUsers, $startRow_ManageUsers, $maxRows_ManageUsers);
 $ManageUsers = mysqli_query( $WebCatalogue, $query_limit_ManageUsers) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));

@@ -51,7 +51,7 @@ $colname_User = "-1";
 if (isset($_SESSION['MM_Username'])) {
   $colname_User = $_SESSION['MM_Username'];
 }
-((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
+
 $query_User = sprintf("SELECT * FROM `users` WHERE email = %s", GetSQLValueString($colname_User, "text"));
 $User = mysqli_query( $WebCatalogue, $query_User) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
 $row_User = mysqli_fetch_assoc($User);
@@ -64,7 +64,6 @@ if (isset($_GET['pageNum_ManageUsers'])) {
 }
 $startRow_ManageUsers = $pageNum_ManageUsers * $maxRows_ManageUsers;
 
-((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
 $query_ManageUsers = "SELECT * FROM `users` WHERE NOT `approval` = '0000-00-00 00:00:00' ORDER BY registration DESC";
 $query_limit_ManageUsers = sprintf("%s LIMIT %d, %d", $query_ManageUsers, $startRow_ManageUsers, $maxRows_ManageUsers);
 $ManageUsers = mysqli_query( $WebCatalogue, $query_limit_ManageUsers) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));

@@ -44,14 +44,13 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 
 function getUserLevel() {
-  $con=mysqli_connect("localhost","root","","web_catalogue");
-  $query = "SELECT `Userlevel` FROM `users` WHERE `email` = '". $_POST['Email'] ."'";
-  $result = mysqli_query($con, $query);
+  Global $WebCatalogue;
+  $query = sprintf("SELECT `Userlevel` FROM `users` WHERE `email` = %s", GetSQLValueString($_POST['Email'], "text"));
+  $result = mysqli_query($WebCatalogue, $query);
   $row2 = mysqli_fetch_assoc($result);
   return $row2['Userlevel'];
 }
 
-((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
 $query_Login = "SELECT * FROM users";
 $Login = mysqli_query( $WebCatalogue, $query_Login) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
 $row_Login = mysqli_fetch_assoc($Login);
@@ -77,7 +76,6 @@ if (isset($_POST['Email'])) {
   $MM_redirectLoginSuccess = "Account.php";
   $MM_redirectLoginFailed = "Index.php";
   $MM_redirecttoReferrer = true;
-  ((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
   	
   $LoginRS__query=sprintf("SELECT email, password, Userlevel FROM users WHERE email=%s AND password=%s",
   GetSQLValueString($loginUsername, "text"), GetSQLValueString($password, "text")); 

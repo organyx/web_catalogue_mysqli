@@ -72,7 +72,6 @@ if (isset($_POST[$MM_flag])) {
 
 
   $LoginRS__query = sprintf("SELECT email FROM `users` WHERE email=%s", GetSQLValueString($loginUsername, "text"));
-  ((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
   $LoginRS=mysqli_query( $WebCatalogue, $LoginRS__query) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
   $loginFoundUser = mysqli_num_rows($LoginRS);
 
@@ -214,7 +213,6 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "RegisterForm") && $
                        GetSQLValueString($user_printscreen_location, "text"),
                        GetSQLValueString($user_printscreen_location, "text"));
 
-  ((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
   $Result1 = mysqli_query( $WebCatalogue, $insertSQL) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
   echo "Registration Succesful.";
 } else {

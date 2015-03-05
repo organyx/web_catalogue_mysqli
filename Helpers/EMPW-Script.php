@@ -8,8 +8,7 @@
 if (!function_exists("GetSQLValueString")) {
 function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "")
 {
-/*Global variable $con is necessary, because it is not known inside the function and you need it for mysqli_real_escape_string($con, $theValue); the Variable $con ist defined as mysqli_connect("localhost","user","password", "database") with an include-script.
-*/
+
   Global $WebCatalogue;
 
   if (PHP_VERSION < 6) {
@@ -42,7 +41,7 @@ $colname_EmailPassword = "-1";
 if (isset($_SESSION['EMPW']) && filter_var($_SESSION['EMPW'], FILTER_VALIDATE_EMAIL)) {
   $colname_EmailPassword = $_SESSION['EMPW'];
 }
-((bool)mysqli_query( $WebCatalogue, "USE $database_WebCatalogue"));
+
 $query_EmailPassword = sprintf("SELECT * FROM `users` WHERE email = %s", GetSQLValueString($colname_EmailPassword, "text"));
 $EmailPassword = mysqli_query( $WebCatalogue, $query_EmailPassword) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
 $row_EmailPassword = mysqli_fetch_assoc($EmailPassword);
@@ -68,6 +67,9 @@ else
 	if(filter_var($_SESSION['EMPW'], FILTER_VALIDATE_EMAIL))
   {
     echo "Email not Found.";
+  }
+  elseif (empty($_SESSION['EMPW'])) {
+    echo "Email field is empty.";
   }
   else
   {
