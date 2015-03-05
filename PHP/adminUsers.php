@@ -3,7 +3,7 @@
 if(file_exists('Helpers/security.php') || file_exists('Connections/WebCatalogue.php'))
 {
   require_once('Helpers/security.php'); 
-   require_once('Connections/WebCatalogue.php'); 
+  require_once('Connections/WebCatalogue.php'); 
 }
 
 

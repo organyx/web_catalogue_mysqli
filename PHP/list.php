@@ -1,4 +1,17 @@
 <?php
+if(file_exists('Helpers/security.php') || file_exists('Connections/WebCatalogue.php'))
+{
+  require_once('Helpers/security.php'); 
+  require_once('Connections/WebCatalogue.php'); 
+}
+
+
+if(file_exists('../Helpers/security.php') || file_exists('../Connections/WebCatalogue.php'))
+{
+  require_once('../Helpers/security.php'); 
+   require_once('../Connections/WebCatalogue.php'); 
+}
+
 
 if (!function_exists("GetSQLValueString")) {
 function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "")
