@@ -139,7 +139,7 @@ $totalRows_SelectedUser = mysqli_num_rows($SelectedUser);
               <td>URL: <a target="_blank" href="<?php echo $row_SelectedUser['url']; ?>"> <?php echo $row_SelectedUser['url']; ?></a></td>
               <td width="140" height="140" rowspan="3" class="TableStyleBorderLeft">
 			  <a class="fancybox"  href="<?php echo $row_SelectedUser['preview_thumb']; ?>">
-			  <img src="<?php echo $row_SelectedUser['preview_thumb']; ?>" alt="" height="140px" width="140px" class="img-thumbnail">
+			  <img src="<?php echo $row_SelectedUser['preview_thumb']; ?>" alt="Preview Thumb" height="140px" width="140px" class="img-thumbnail">
               </td>
             </tr>
             <tr>

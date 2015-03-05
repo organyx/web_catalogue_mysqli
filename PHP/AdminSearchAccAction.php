@@ -36,6 +36,20 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 }
 
+
+if(!function_exists("GetUserByID"))
+{
+  function GetUserByID($id)
+  {
+    Global $WebCatalogue;
+
+    $query_User = sprintf("SELECT * FROM `users` WHERE userID = %s", GetSQLValueString($id, "text"));
+    $User = mysqli_query( $WebCatalogue, $query_User) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
+    $row_User = mysqli_fetch_assoc($User);
+    return $row_User['email'];
+  }
+}
+
 $editFormAction = $_SERVER['PHP_SELF'];
 if (isset($_SERVER['QUERY_STRING'])) {
   $editFormAction .= "?" . htmlentities($_SERVER['QUERY_STRING']);
@@ -47,7 +61,7 @@ if ((isset($_POST['DeleteUserHiddenField2'])) && ($_POST['DeleteUserHiddenField2
 
   $Result1 = mysqli_query( $WebCatalogue, $deleteSQL) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
 
-  echo "User Deleted";
+  echo "User " . GetUserByID($_POST['DeleteUserHiddenField2']) . " Deleted";
 }
 
 if ((isset($_POST["MM_update2"])) && ($_POST["MM_update2"] == "ApproveUserForm2")) {
@@ -56,7 +70,7 @@ if ((isset($_POST["MM_update2"])) && ($_POST["MM_update2"] == "ApproveUserForm2"
 
   $Result1 = mysqli_query( $WebCatalogue, $updateSQL) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
 
-  echo "User Approved";
+  echo "User " . GetUserByID($_POST['ApproveIDhiddenField2']) . " Approved";
 }
 
 if ((isset($_POST["MM_update2"])) && ($_POST["MM_update2"] == "MakeAdminForm2")) {
@@ -66,7 +80,7 @@ if ((isset($_POST["MM_update2"])) && ($_POST["MM_update2"] == "MakeAdminForm2"))
 
   $Result1 = mysqli_query( $WebCatalogue, $updateSQL) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
 
-  echo "User is new Admin";
+  echo "User " . GetUserByID($_POST['MakeUserAdminIDhiddenField2']) . " is new Admin";
 }
 
 if(isset($_POST['name']))
@@ -112,7 +126,7 @@ if(isset($_POST['name']))
               <td>URL: <a target="_blank" href="<?php echo $row_User['url']; ?>"> <?php echo $row_User['url']; ?></a></td>
               <td width="145" height="145" rowspan="3" class="TableStyleBorderLeft">
         <a class="fancybox"  href="<?php echo $row_User['preview_thumb']; ?>">
-        <img src="<?php echo $row_User['preview_thumb']; ?>" alt="" height="140px" width="140px" class="img-thumbnail">
+        <img src="<?php echo $row_User['preview_thumb']; ?>" alt="Preview Thumb" height="140px" width="140px" class="img-thumbnail">
               </td>
             </tr>
             <tr>

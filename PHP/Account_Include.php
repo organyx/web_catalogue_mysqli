@@ -124,7 +124,7 @@ $totalRows_ManageUsers = mysqli_num_rows($ManageUsers);
               <td>URL: <a target="_blank" href="<?php echo $row_User['url']; ?>"> <?php echo $row_User['url']; ?></a></td>
               <td width="145" height="145" rowspan="3" class="TableStyleBorderLeft">
 			  <a class="fancybox"  href="<?php echo $row_User['preview_thumb']; ?>">
-			  <img src="<?php echo $row_User['preview_thumb']; ?>" alt="" height="140px" width="140px" class="img-thumbnail">
+			  <img src="<?php echo $row_User['preview_thumb']; ?>" alt="Preview Thumb" height="140px" width="140px" class="img-thumbnail">
               </td>
             </tr>
             <tr>

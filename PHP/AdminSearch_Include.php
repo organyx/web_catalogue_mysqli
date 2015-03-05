@@ -7,5 +7,7 @@
 </form>
 </div>
 
-<div id="result" class="result"></div>
-<div id="returnmessage" class="returnmessage"></div>
+<div class="ret">
+	<div id="result" class="result"></div>
+	<div id="returnmessage" class="returnmessage"></div>
+</div>

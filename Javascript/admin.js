@@ -1,26 +1,20 @@
-
 $(document).ready(function ()
 {
-
     $('#btnSearch').click(function ()
     {
         makeAjaxRequest();
     });
-
-
     $('#searchForm').submit(function (e)
     {
         e.preventDefault();
         makeAjaxRequest();
         return false;
     });
-
     $("#reset").click(function (e)
     {
         $('#result').empty();
         $('#searchForm').closest('#searchForm').find("input[type=text]").val("");
     });
-
 
     function makeAjaxRequest()
     {
@@ -34,18 +28,14 @@ $(document).ready(function ()
             success: function (response)
             {
                 $('div#result').html(response);
-
-
                 $('#DeleteUserButton2').click(function ()
                 {
                     deleteUser();
                 });
-
                 $('#ApproveUserButton2').click(function ()
                 {
                     approveUser();
                 });
-
                 $('#MakeAdminButton2').click(function ()
                 {
                     makeUserAdmin();
@@ -71,13 +61,9 @@ $(document).ready(function ()
                     update();
                     return false;
                 });
-
-
-
             }
         });
     }
-
     // function refresh() {
     //   $.ajax({
     //       url: "",
@@ -94,19 +80,21 @@ $(document).ready(function ()
     }, 3000); 
     
 */
-    function update(){
-      //location.reload();
-      $('#list').load('PHP/AdminUsers_Include.php');  
-      //Reload
-      $.ajax({
-          url: "",
-          context: document.body,
-          success: function(s,x){
-              $(this).html(s);
-          }
-      });
 
-
+    function update()
+    {
+        //location.reload();
+        $('#list').load('PHP/AdminUsers_Include.php');
+        //Reload
+        $.ajax(
+        {
+            url: "",
+            context: document.body,
+            success: function (s, x)
+            {
+                $(this).html(s);
+            }
+        });
     }
 
     function deleteUser()
@@ -139,7 +127,6 @@ $(document).ready(function ()
         });
     }
 
-
     function makeUserAdmin()
     {
         var make = $('#MakeAdminForm2').serialize();
@@ -154,7 +141,7 @@ $(document).ready(function ()
             }
         });
     }
-    /*
+/*
     var interval = 10000;
     var autoRefresh = function()
     {
@@ -172,4 +159,4 @@ $(document).ready(function ()
     autoRefresh();
     */
 });
-// JavaScript Document  
+// JavaScript Document
