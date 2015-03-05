@@ -2,7 +2,7 @@
 if(isset($_GET['a'])){
     $_SESSION['link']=$_GET['a'];
  }
- //echo "UserID : ".$_SESSION['link'];
+
 ?>
 <?php
 if (!isset($_SESSION)) {
@@ -53,8 +53,7 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers,
 if (!function_exists("GetSQLValueString")) {
 function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "")
 {
-/*Global variable $con is necessary, because it is not known inside the function and you need it for mysqli_real_escape_string($con, $theValue); the Variable $con ist defined as mysqli_connect("localhost","user","password", "database") with an include-script.
-*/
+
   Global $WebCatalogue;
 
   if (PHP_VERSION < 6) {

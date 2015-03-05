@@ -8,8 +8,7 @@
 if (!function_exists("GetSQLValueString")) {
   function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "")
   {
-  /*Global variable $con is necessary, because it is not known inside the function and you need it for mysqli_real_escape_string($con, $theValue); the Variable $con ist defined as mysqli_connect("localhost","user","password", "database") with an include-script.
-  */
+ 
     Global $WebCatalogue;
 
     if (PHP_VERSION < 6) {
@@ -38,22 +37,8 @@ if (!function_exists("GetSQLValueString")) {
   }
 }
 
-/*
-echo "<pre>" . print_r($_POST) . "</pre>";
-if(isset($_FILES)) {
-  echo "<pre>" . print_r($_FILES) . "</pre>";
-}
 
-if(isset($_REQUEST)) {
-  echo "<pre>" . print_r($_REQUEST) . "</pre>";
-}
-
-if(isset($_GET)) {
-  echo "<pre>" . print_r($_GET) . "</pre>";
-}*/
-
-
-// *** Redirect if username exists
+// *** Check if username exists
 $MM_flag="MM_insert";
 if (isset($_POST[$MM_flag])) {
 
@@ -97,13 +82,6 @@ if (isset($_POST[$MM_flag])) {
     echo "Username Already Exists.";
     $flag = false;
     exit;
-    //append the username to the redirect page
-    /*
-    if (substr_count($MM_dupKeyRedirect,"?") >=1) $MM_qsChar = "&";
-    $MM_dupKeyRedirect = $MM_dupKeyRedirect . $MM_qsChar ."requsername=".$loginUsername;
-    header ("Location: $MM_dupKeyRedirect");
-    exit;
-  */
   }
 
 
@@ -129,18 +107,12 @@ if (isset($_POST[$MM_flag])) {
     $flag = false;
     exit;
   }
-  /*
-  if(isset($_POST['file1'])){
-    echo "<pre>" . print_r($_POST['file1'][0]) . "</pre>";
-  }*/
 
-  //echo "PIC <pre>" . print_r($_POST['picture1']) . "</pre>";
   $passwordToConfirm = $_POST['password'];
   $passwordConfirm = $_POST['passwordwc'];
   if($passwordToConfirm != $passwordConfirm)
   {
     echo "Passwords don't match.";
-    //header ("Location: $MM_dupKeyRedirect");
     $flag = false;
     exit;
   }
@@ -150,47 +122,11 @@ if (isset($_POST[$MM_flag])) {
     $secure_password = base64_encode($secure_password);
     $flag = true;
   }
-  /*
-  if(!isset($_FILES['file1']))
-  {
-    $_FILES['file1'] = $_POST['file1'][0];
-    $_FILES['file1']['tmp_name'] = $_POST['file1'][0]['name'];
-    echo "<pre>".print_r($_FILES['file1'])."</pre><br/>";
-  }
-  else
-  {
-    echo "<pre>".print_r($_FILES['file1'])."</pre><br/>";
-  }
-  */
+
 
   $default_picture = "Assets/img/default.png/";
   $user_folder_path = "Assets/img/" . basename($_POST['email']) . "/";
   $user_folder_path_check = "../Assets/img/" . basename($_POST['email']) . "/";
-/*
-  if(isset($_FILES['file'])) {
-  $up = is_uploaded_file($_FILES['file']['name']);
-  $b = is_writable($user_folder_path_check);
-
-  if (is_writable($user_folder_path_check)) 
-  {
-    echo "Writable? : " . $b . "<br/>";
-    echo "Is Uploaded? : " . $up . "<br/>";
-    echo $_FILES["file"]["name"]. "<br/>";
-    echo $user_folder_path_check . $_FILES["file"]["name"]. "<br/>";
-    $moved = move_uploaded_file($_FILES['file']['tmp_name'], "D:/SOFTWARE/xampp/htdocs/web_catalogue_mysqli/Assets/img/5@3.com/".$_FILES['file']['name']);
-    if($moved){
-      echo $moved;
-      echo "File moved<br/>";
-    }
-    else {
-      echo $moved;
-      echo "File not moved<br/>";
-    }
-  }
-}*/
-
-
-
 
 
   if (!file_exists($user_folder_path_check) && !is_dir($user_folder_path_check) && !is_writable($user_folder_path_check)) 
