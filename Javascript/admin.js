@@ -36,10 +36,10 @@ $(document).ready(function ()
                 {
                     approveUser();
                 });
-                $('#MakeAdminButton2').click(function ()
-                {
-                    makeUserAdmin();
-                });
+                // $('#MakeAdminButton2').click(function ()
+                // {
+                //     makeUserAdmin();
+                // });
                 $('#DeleteUserForm2').submit(function (e)
                 {
                     e.preventDefault();
@@ -54,13 +54,13 @@ $(document).ready(function ()
                     update();
                     return false;
                 });
-                $('#MakeAdminForm2').submit(function (e)
-                {
-                    e.preventDefault();
-                    makeUserAdmin();
-                    update();
-                    return false;
-                });
+                // $('#MakeAdminForm2').submit(function (e)
+                // {
+                //     e.preventDefault();
+                //     makeUserAdmin();
+                //     update();
+                //     return false;
+                // });
             }
         });
     }
@@ -127,20 +127,20 @@ $(document).ready(function ()
         });
     }
 
-    function makeUserAdmin()
-    {
-        var make = $('#MakeAdminForm2').serialize();
-        $.ajax(
-        {
-            type: 'post',
-            url: 'PHP/AdminSearchAccAction.php',
-            data: make,
-            success: function (data)
-            {
-                $('div#result').html(data);
-            }
-        });
-    }
+    // function makeUserAdmin()
+    // {
+    //     var make = $('#MakeAdminForm2').serialize();
+    //     $.ajax(
+    //     {
+    //         type: 'post',
+    //         url: 'PHP/AdminSearchAccAction.php',
+    //         data: make,
+    //         success: function (data)
+    //         {
+    //             $('div#result').html(data);
+    //         }
+    //     });
+    // }
 /*
     var interval = 10000;
     var autoRefresh = function()

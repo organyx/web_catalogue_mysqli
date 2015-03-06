@@ -73,15 +73,15 @@ if ((isset($_POST["MM_update2"])) && ($_POST["MM_update2"] == "ApproveUserForm2"
   echo "User " . GetUserByID($_POST['ApproveIDhiddenField2']) . " Approved";
 }
 
-if ((isset($_POST["MM_update2"])) && ($_POST["MM_update2"] == "MakeAdminForm2")) {
-  $updateSQL = sprintf("UPDATE users SET Userlevel=%s WHERE userID=%s",
-                       GetSQLValueString($_POST['MakeUserAdminHiddenField2'], "int"),
-                       GetSQLValueString($_POST['MakeUserAdminIDhiddenField2'], "int"));
+// if ((isset($_POST["MM_update2"])) && ($_POST["MM_update2"] == "MakeAdminForm2")) {
+//   $updateSQL = sprintf("UPDATE users SET Userlevel=%s WHERE userID=%s",
+//                        GetSQLValueString($_POST['MakeUserAdminHiddenField2'], "int"),
+//                        GetSQLValueString($_POST['MakeUserAdminIDhiddenField2'], "int"));
 
-  $Result1 = mysqli_query( $WebCatalogue, $updateSQL) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
+//   $Result1 = mysqli_query( $WebCatalogue, $updateSQL) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
 
-  echo "User " . GetUserByID($_POST['MakeUserAdminIDhiddenField2']) . " is new Admin";
-}
+//   echo "User " . GetUserByID($_POST['MakeUserAdminIDhiddenField2']) . " is new Admin";
+// }
 
 if(isset($_POST['name']))
 {
@@ -157,12 +157,14 @@ if(isset($_POST['name']))
                           <input type="submit" name="ApproveUserButton2" id="ApproveUserButton2" class="ApproveUserButton2" value="Approve User">
                           <input type="hidden" name="MM_update2" class="MM_update2" value="ApproveUserForm2">
                         </form></td>
+                        <!--
                         <td><form action="<?php echo $editFormAction; ?>" id="MakeAdminForm2" class="MakeAdminForm2" name="MakeAdminForm2" method="POST">
                         <input name="MakeUserAdminHiddenField2" type="hidden" id="ApproveUserHiddenField2" class="ApproveUserHiddenField2" value="<?php echo "2"; ?>">
                           <input type="submit" name="MakeAdminButton2" id="MakeAdminButton2" class="MakeAdminButton2" value="Give Admin Rights">
                           <input name="MakeUserAdminIDhiddenField2" type="hidden" id="ApproveIDhiddenField2" class="ApproveIDhiddenField2" value="<?php echo $row_User['userID']; ?>">
                           <input type="hidden" name="MM_update2" class="MM_update2" value="MakeAdminForm2">
                         </form></td>
+                        -->
                       </tr>
                     </table>
                     
