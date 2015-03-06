@@ -64,7 +64,7 @@ if (isset($_GET['pageNum_ManageUsers'])) {
 }
 $startRow_ManageUsers = $pageNum_ManageUsers * $maxRows_ManageUsers;
 
-$query_ManageUsers = "SELECT * FROM `users` WHERE NOT `approval` = '0000-00-00 00:00:00' ORDER BY registration DESC";
+$query_ManageUsers = "SELECT * FROM `users` WHERE NOT `approval` = '0000-00-00 00:00:00' AND NOT `Userlevel` = '2' ORDER BY registration DESC";
 $query_limit_ManageUsers = sprintf("%s LIMIT %d, %d", $query_ManageUsers, $startRow_ManageUsers, $maxRows_ManageUsers);
 $ManageUsers = mysqli_query( $WebCatalogue, $query_limit_ManageUsers) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
 $row_ManageUsers = mysqli_fetch_assoc($ManageUsers);
@@ -91,7 +91,8 @@ if (!empty($_SERVER['QUERY_STRING'])) {
     $queryString_ManageUsers = "&" . htmlentities(implode("&", $newParams));
   }
 }
-$queryString_ManageUsers = sprintf("&totalRows_ManageUsers=%d%s", $totalRows_ManageUsers, $queryString_ManageUsers);
+$queryString_ManageUsers = sprintf("&totalRows_ManageUsers=%d%s", $totalRows_ManageUsers, $queryString_ManageUsers); 
+$i = 0;
 ?>
 
 <table class="TableWidth670 center WidthAuto">
@@ -99,15 +100,17 @@ $queryString_ManageUsers = sprintf("&totalRows_ManageUsers=%d%s", $totalRows_Man
           <td align="right" valign="top">Showing:&nbsp;<?php echo ($startRow_ManageUsers + 1) ?> to <?php echo min($startRow_ManageUsers + $maxRows_ManageUsers, $totalRows_ManageUsers) ?> of <?php echo $totalRows_ManageUsers ?></td>
         </tr>
         <tr>
-          <td align="center" valign="top"><?php if ($totalRows_ManageUsers > 0) { $i = 0;// Show if recordset not empty ?>
+          <td align="center" valign="top"><?php if ($totalRows_ManageUsers > 0) { // Show if recordset not empty ?>
               <?php do { ?>
                 <table border="1" class="TableWidth630 TableStyle center WidthAuto">
-                
-                  <tr><?php echo ($startRow_ManageUsers + 1) + $i ?>
+                  
+                  <tr>
+                    <td><?php echo ($startRow_ManageUsers + 1) + $i . "." ?></td>
                     <td width="400" height="50" align="center" ><h2><a href="UserWeb.php?a=<?php echo $row_ManageUsers['userID']; ?>"><?php echo $row_ManageUsers['title']; ?></a></h2></td>
                     <td width="200" rowspan="2" align="center" ><a class="fancybox"  href="<?php echo $row_ManageUsers['preview_thumb']; ?>"> <img src="<?php echo $row_ManageUsers['preview_thumb']; ?>" alt="Preview Thumb" height="140px" width="140px" class="img-thumbnail"/></a></td>
                   </tr>
                   <tr>
+                    <td></td>
                     <td height="50" align="center" ><a href="<?php echo $row_ManageUsers['url']; ?>"><?php echo $row_ManageUsers['url']; ?></a></td>
                   </tr>
                 </table>

@@ -157,7 +157,15 @@ $queryString_ManageUsers = sprintf("&totalRows_ManageUsers=%d%s", $totalRows_Man
                     <td>Registration Date: <?php echo $row_ManageUsers['registration']; ?></td>
                   </tr>
                   <tr>
-                    <td>Approval Date: <?php echo $row_ManageUsers['approval']; ?></td>
+                    <td 
+
+                    <?php if($row_ManageUsers['approval'] == "0000-00-00 00:00:00") {?> 
+                      style="color:red;"
+                    <?php } else { ?>
+                      style="color:green;"
+                     <?php } ?>
+
+                    >Approval Date: <?php echo $row_ManageUsers['approval']; ?></td>
                   </tr>
                   <tr>
                     <td>User: <?php echo $row_ManageUsers['first_name']; ?> <?php echo $row_ManageUsers['last_name']; ?> | Account: <?php echo $row_ManageUsers['email']; ?></td>
