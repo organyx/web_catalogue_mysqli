@@ -1,38 +1,35 @@
 <?php require_once('Connections/WebCatalogue.php'); ?>
 
 <?php
-
-
 if (!function_exists("GetSQLValueString")) {
 function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "")
-{
+  {
+    Global $WebCatalogue;
 
-  Global $WebCatalogue;
-
-  if (PHP_VERSION < 6) {
-    $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
+    if (PHP_VERSION < 6) {
+      $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
+    }
+    $theValue = mysqli_real_escape_string($WebCatalogue, $theValue);
+    switch ($theType) {
+      case "text":
+        $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
+        break;   
+      case "long":
+      case "int":
+        $theValue = ($theValue != "") ? intval($theValue) : "NULL";
+        break;
+      case "double":
+        $theValue = ($theValue != "") ? doubleval($theValue) : "NULL";
+        break;
+      case "date":
+        $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
+        break;
+      case "defined":
+        $theValue = ($theValue != "") ? $theDefinedValue : $theNotDefinedValue;
+        break;
+    }
+     return $theValue;
   }
-  $theValue = mysqli_real_escape_string($WebCatalogue, $theValue);
-  switch ($theType) {
-    case "text":
-      $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
-      break;   
-    case "long":
-    case "int":
-      $theValue = ($theValue != "") ? intval($theValue) : "NULL";
-      break;
-    case "double":
-      $theValue = ($theValue != "") ? doubleval($theValue) : "NULL";
-      break;
-    case "date":
-      $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
-      break;
-    case "defined":
-      $theValue = ($theValue != "") ? $theDefinedValue : $theNotDefinedValue;
-      break;
-  }
-   return $theValue;
-}
 }
 
 $editFormAction = $_SERVER['PHP_SELF'];
@@ -63,9 +60,6 @@ $totalRows_User = mysqli_num_rows($User);
     	  <h6>&nbsp;</h6>
     	</div>
     <div id="contentRight">
-    
-
-     
       <form method="POST" id="updateForm" action="javascript:void(null);" >
       <div class="ui-form ui-500">
         <div class="ui-page">
