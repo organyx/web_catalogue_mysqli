@@ -43,25 +43,25 @@
         <form method="POST" id="sendPassForm" action="javascript:void(null);" >
        
         <div class="ui-form ui-200">
-        <div class="ui-page">
-             <div class="ui-field">
-                <label></label>
-                <div>
-                    <p id="returnmessage"></p>
-                </div>
-            </div>
-            <div class="ui-field">
-                <label>Email:</label>
-                <div>
-                    <input name="email" type="email" id="email" maxlength="100" size="60"/>
-                </div>
-            </div>
-        </div>
-    
-        <div class="ui-buttons">
-            <button type="submit" id="sendPass" class="btn" name="send">Send</button>
-            <button type="button" id="reset" class="btn" name="reset">Reset</button>
-        </div>
+          <div class="ui-page">
+               <div class="ui-field">
+                  <label></label>
+                  <div>
+                      <p id="returnmessage"></p>
+                  </div>
+              </div>
+              <div class="ui-field">
+                  <label>Email:</label>
+                  <div>
+                      <input name="email" type="email" id="email" maxlength="100" size="51"/>
+                  </div>
+              </div>
+          </div>
+      
+          <div class="ui-buttons">
+              <button type="submit" id="sendPass" class="btn" name="send" >Send</button>
+              <button type="button" id="reset" class="btn" name="reset" >Reset</button>
+          </div>
         </div>
     </form>
 

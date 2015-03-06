@@ -90,19 +90,19 @@ $totalRows_User = mysqli_num_rows($User);
             <div class="ui-field">
                 <label>Language:</label>
                 <div>
-                    <input name="lang" id="lang" maxlength="100" size="51" value="<?php echo $row_User['language']; ?>"/>
+                    <input name="lang" id="lang" type="text" maxlength="100" size="51" value="<?php echo $row_User['language']; ?>"/>
                 </div>
             </div>
             <div class="ui-field">
                 <label>Url:</label>
                 <div>
-                    <input name="url" id="url" maxlength="100" size="51" value="<?php echo $row_User['url']; ?>"/>
+                    <input name="url" id="url" type="text" maxlength="100" size="51" value="<?php echo $row_User['url']; ?>"/>
                 </div>
             </div>
             <div class="ui-field">
                 <label>Title:</label>
                 <div>
-                    <input name="title" id="title" maxlength="100" size="51" value="<?php echo $row_User['title']; ?>"/>
+                    <input name="title" id="title" type="text" maxlength="100" size="51" value="<?php echo $row_User['title']; ?>"/>
                 </div>
             </div>
             <div class="ui-field">

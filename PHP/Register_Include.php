@@ -78,7 +78,7 @@ if (isset($_SERVER['QUERY_STRING'])) {
         </div>
 
         <div class="ui-buttons"> 
-            <input type="button" value="Reset" name="reset" id="reset" class="btn"/>
+            <input type="button" value="Reset" name="reset" id="reset" class="btn" />
             <input type="submit" value="Register" name="submit" id="register" class="btn" />
         </div>
       </form>

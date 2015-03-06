@@ -257,9 +257,17 @@ h6 {
 }
 
 .ui-form .ui-buttons input[type="submit"],
-.ui-form .ui-buttons button {
+.ui-form .ui-buttons input[type="button"],
+.ui-form .ui-buttons button
+ {
   min-width: 80px;
   margin-right: 5px;
+}
+
+.ui-form .ui-field input[type="text"],
+.ui-form .ui-field input[type="email"],
+.ui-form .ui-field input[type="password"] {
+	width: 385px;
 }
 
 .ui-field > label {
