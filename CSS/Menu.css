@@ -19,7 +19,7 @@ nav ul li {
 	height:60px;
 	text-align:center;
 	line-height:55px;
-	font-family:Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size:17px;
 }
 
@@ -30,7 +30,6 @@ nav ul li a {
 
 nav ul li:hover {
 	background-color:rgb(242,242,242);
-
 }
 
 nav ul li:hover a{
@@ -50,6 +49,12 @@ nav label {
 
 #log {
 	float: right;
+}
+
+#something {
+	float: right;
+	text-decoration: none;
+	position: relative;
 }
 
 #login input[type="text"],
@@ -85,7 +90,6 @@ nav label {
 	}
 	
 	nav ul li {
-		float:left;
 		height:30px;
 		line-height:20px;
 		font-size:13px;
