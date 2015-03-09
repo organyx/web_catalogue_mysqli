@@ -61,11 +61,11 @@
         <h2><a href="LogOut.php">Log Out</a></h2>
     	</div>
     <div id="contentRight">
-    
-      <?php include "PHP/AdminSearch_Include.php" ?>
-
+      <div id="saerch">
+        <?php include "PHP/AdminSearch_Include.php" ?>
+      </div>
       <div id="list">
-      <?php include "PHP/AdminUsers_Include.php" ?>
+        <?php include "PHP/AdminUsers_Include.php" ?>
       </div>
     </div>
   </div>

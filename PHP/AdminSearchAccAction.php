@@ -106,7 +106,7 @@ if(isset($_POST['name']))
 <?php if(isset($_POST['name']) && ($_POST['name'] != "")) { ?>
   <?php if($totalRows_User > 0 ) { ?>
   
-    <div id="contentRight">
+    <div>
      
       <table class="TableWidth670 center WidthAuto">
         <tr>
@@ -167,8 +167,8 @@ if(isset($_POST['name']))
                         -->
                       </tr>
                     </table>
-                    
-    </div>
+        </div>            
+    
     <?php } else { ?>
     <div><p>User not found.</p></div>
     <?php } } ?>
