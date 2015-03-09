@@ -52,6 +52,12 @@ nav label {
 	float: right;
 }
 
+#login input[type="text"],
+#login input[type="password"]
+{
+	width: 180px;
+}
+
 #LoginForm {
 	text-align: right;
 }
