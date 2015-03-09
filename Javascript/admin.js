@@ -38,7 +38,7 @@ $(document).ready(function ()
                 });
                 // $('#MakeAdminButton2').click(function ()
                 // {
-                //     makeUserAdmin();
+                //     newAdmin();
                 // });
                 $('#DeleteUserForm2').submit(function (e)
                 {
@@ -57,7 +57,7 @@ $(document).ready(function ()
                 // $('#MakeAdminForm2').submit(function (e)
                 // {
                 //     e.preventDefault();
-                //     makeUserAdmin();
+                //     newAdmin();
                 //     update();
                 //     return false;
                 // });
@@ -127,7 +127,7 @@ $(document).ready(function ()
         });
     }
 
-    // function makeUserAdmin()
+    // function newAdmin()
     // {
     //     var make = $('#MakeAdminForm2').serialize();
     //     $.ajax(
@@ -141,22 +141,22 @@ $(document).ready(function ()
     //         }
     //     });
     // }
-/*
-    var interval = 10000;
-    var autoRefresh = function()
-    {
-      $.ajax({
-            url: "",
-            context: document.body,
-            success: function(html) {
-                $(this).html(html);
-                setTimeout(function() {
-                    autoRefresh();
-                }, interval);
-            }
-        });
-    }
-    autoRefresh();
-    */
+
+    // var interval = 20000;
+    // var autoRefresh = function()
+    // {
+    //   $.ajax({
+    //         url: "",
+    //         context: document.body,
+    //         success: function(html) {
+    //             $(this).html(html);
+    //             setTimeout(function() {
+    //                 autoRefresh();
+    //             }, interval);
+    //         }
+    //     });
+    // }
+    // autoRefresh();
+    
 });
 // JavaScript Document
