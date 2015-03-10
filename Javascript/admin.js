@@ -36,10 +36,6 @@ $(document).ready(function ()
                 {
                     approveUser();
                 });
-                // $('#MakeAdminButton2').click(function ()
-                // {
-                //     newAdmin();
-                // });
                 $('#DeleteUserForm2').submit(function (e)
                 {
                     e.preventDefault();
@@ -54,37 +50,15 @@ $(document).ready(function ()
                     update();
                     return false;
                 });
-                // $('#MakeAdminForm2').submit(function (e)
-                // {
-                //     e.preventDefault();
-                //     newAdmin();
-                //     update();
-                //     return false;
-                // });
             }
         });
     }
-    // function refresh() {
-    //   $.ajax({
-    //       url: "",
-    //       context: document.body,
-    //       success: function(s){
-    //           $(this).html(s);
-    //       }
-    //   });
-    // }
-/*
-    $.ajaxSetup({ cache: false });
-    setInterval(function() {
-    $('#list').load('PHP/adminUsers.php');
-    }, 3000); 
-    
-*/
 
     function update()
     {
-        //location.reload();
         $('#list').load('PHP/AdminUsers_Include.php');
+
+        setTimeout(function(){
         //Reload
         $.ajax(
         {
@@ -95,6 +69,10 @@ $(document).ready(function ()
                 $(this).html(s);
             }
         });
+
+        }, 5000 ); // 5 seconds
+        
+        
     }
 
     function deleteUser()
@@ -125,38 +103,6 @@ $(document).ready(function ()
                 $('div#result').html(data);
             }
         });
-    }
-
-    // function newAdmin()
-    // {
-    //     var make = $('#MakeAdminForm2').serialize();
-    //     $.ajax(
-    //     {
-    //         type: 'post',
-    //         url: 'PHP/AdminSearchAccAction.php',
-    //         data: make,
-    //         success: function (data)
-    //         {
-    //             $('div#result').html(data);
-    //         }
-    //     });
-    // }
-
-    // var interval = 20000;
-    // var autoRefresh = function()
-    // {
-    //   $.ajax({
-    //         url: "",
-    //         context: document.body,
-    //         success: function(html) {
-    //             $(this).html(html);
-    //             setTimeout(function() {
-    //                 autoRefresh();
-    //             }, interval);
-    //         }
-    //     });
-    // }
-    // autoRefresh();
-    
+    }  
 });
 // JavaScript Document

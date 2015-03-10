@@ -44,10 +44,8 @@
             <?php include "PHP/UseWeb_Include.php" ?>
         </div>
         <div id="Footer">
-            <p>
-                <a href="Admin.php">Admin</a>
-            </p>
         </div>
     </div>
-</body>undefined</html>
+</body></html>
 
+ 

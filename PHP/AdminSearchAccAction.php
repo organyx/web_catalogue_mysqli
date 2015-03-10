@@ -108,12 +108,12 @@ if(isset($_POST['name']))
   
     <div>
      
-      <table class="TableWidth670 center WidthAuto">
+      <table class="width-670 center WidthAuto">
         <tr>
           <td align="center">Account: <?php echo $row_User['email']; ?></td>
         </tr>
         <tr>
-          <td><table class="TableWidth500 TableStyle center WidthAuto">
+          <td><table class="width-500 TableStyle center WidthAuto">
             <tr>
               <td valign="top">&nbsp;</td>
               <td align="right" valign="top">Registration date : </td>
@@ -172,3 +172,9 @@ if(isset($_POST['name']))
     <?php } else { ?>
     <div><p>User not found.</p></div>
     <?php } } ?>
+
+
+<?php
+if(isset($User)){
+((mysqli_free_result($User) || (is_object($User) && (get_class($User) == "mysqli_result"))) ? true : false);}
+?>

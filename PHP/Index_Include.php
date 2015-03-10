@@ -95,14 +95,14 @@ $queryString_ManageUsers = sprintf("&totalRows_ManageUsers=%d%s", $totalRows_Man
 $i = 0;
 ?>
 
-<table class="TableWidth670 center WidthAuto">
+<table class="width-670 center WidthAuto">
         <tr>
           <td align="right" valign="top">Showing:&nbsp;<?php echo ($startRow_ManageUsers + 1) ?> to <?php echo min($startRow_ManageUsers + $maxRows_ManageUsers, $totalRows_ManageUsers) ?> of <?php echo $totalRows_ManageUsers ?></td>
         </tr>
         <tr>
           <td align="center" valign="top"><?php if ($totalRows_ManageUsers > 0) { // Show if recordset not empty ?>
               <?php do { ?>
-                <table border="1" class="TableWidth630 TableStyle center WidthAuto">
+                <table border="1" class="width-630 TableStyle center WidthAuto">
                   
                   <tr>
                     <td><?php echo ($startRow_ManageUsers + 1) + $i . "." ?></td>

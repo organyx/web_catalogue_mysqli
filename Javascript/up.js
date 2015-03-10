@@ -1,6 +1,5 @@
 $(document).ready(function ()
 {
-
     function update()
     {
         var msg = $('#updateForm').serialize();
@@ -18,13 +17,11 @@ $(document).ready(function ()
                 alert('Error: ' + xhr.responseCode);
             }
         });
-
     }
 
     $("#update").click(function (e)
     {
         update();
     });
-
 });
 // JavaScript Document 

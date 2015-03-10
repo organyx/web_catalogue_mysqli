@@ -145,14 +145,14 @@ if (!empty($_SERVER['QUERY_STRING'])) {
 $queryString_ManageUsers = sprintf("&totalRows_ManageUsers=%d%s", $totalRows_ManageUsers, $queryString_ManageUsers);
 ?>
 
-<table class="TableWidth670 center WidthAuto">
+<table class="width-670 center WidthAuto">
         <tr>
           <td align="right" valign="top">Showing:&nbsp;<?php echo ($startRow_ManageUsers + 1) ?> to <?php echo min($startRow_ManageUsers + $maxRows_ManageUsers, $totalRows_ManageUsers) ?> of <?php echo $totalRows_ManageUsers ?></td>
         </tr>
         <tr>
           <td align="center" valign="top"><?php if ($totalRows_ManageUsers > 0) { // Show if recordset not empty ?>
             <?php do { ?>
-                <table class="TableWidth500 TableStyle center WidthAuto">
+                <table class="width-500 TableStyle center WidthAuto">
                   <tr>
                     <td>Registration Date: <?php echo $row_ManageUsers['registration']; ?></td>
                   </tr>
@@ -214,8 +214,9 @@ $queryString_ManageUsers = sprintf("&totalRows_ManageUsers=%d%s", $totalRows_Man
         </tr>
       </table>
 <?php
-
-((mysqli_free_result($User) || (is_object($User) && (get_class($User) == "mysqli_result"))) ? true : false);
-
-((mysqli_free_result($ManageUsers) || (is_object($ManageUsers) && (get_class($ManageUsers) == "mysqli_result"))) ? true : false);
+if(isset($User)){
+((mysqli_free_result($User) || (is_object($User) && (get_class($User) == "mysqli_result"))) ? true : false);}
+if(isset($ManageUsers)){
+((mysqli_free_result($ManageUsers) || (is_object($ManageUsers) && (get_class($ManageUsers) == "mysqli_result"))) ? true : false);}
 ?>
+

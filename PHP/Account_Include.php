@@ -106,12 +106,12 @@ $totalRows_ManageUsers = mysqli_num_rows($ManageUsers);
     	  <br>
     	</div>
     <div id="contentRight">
-      <table class="TableWidth670 center WidthAuto">
+      <table class="width-670 center WidthAuto">
         <tr>
           <td align="center">Account: <?php echo $row_User['email']; ?></td>
         </tr>
         <tr>
-          <td><table class="TableWidth500 TableStyle center WidthAuto">
+          <td><table class="width-500 TableStyle center WidthAuto">
             <tr>
               <td valign="top">&nbsp;</td>
               <td align="right" valign="top">Registration date : </td>
@@ -123,8 +123,8 @@ $totalRows_ManageUsers = mysqli_num_rows($ManageUsers);
             <tr>
               <td>URL: <a target="_blank" href="<?php echo $row_User['url']; ?>"> <?php echo $row_User['url']; ?></a></td>
               <td width="145" height="145" rowspan="3" class="TableStyleBorderLeft">
-			  <a class="fancybox"  href="<?php echo $row_User['preview_thumb']; ?>">
-			  <img src="<?php echo $row_User['preview_thumb']; ?>" alt="Preview Thumb" height="140px" width="140px" class="img-thumbnail">
+        			  <a class="fancybox"  href="<?php echo $row_User['preview_thumb']; ?>">
+        			  <img src="<?php echo $row_User['preview_thumb']; ?>" alt="Preview Thumb" height="140px" width="140px" class="img-thumbnail">
               </td>
             </tr>
             <tr>

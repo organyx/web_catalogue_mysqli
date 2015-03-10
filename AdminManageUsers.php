@@ -70,7 +70,7 @@
     </div>
   </div>
   <div id="Footer">
-    	<p><a href="Admin.php">Admin</a></p>
+    	
   </div>
 </div>
 </body>
