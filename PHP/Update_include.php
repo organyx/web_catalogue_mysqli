@@ -113,7 +113,7 @@ $totalRows_User = mysqli_num_rows($User);
                 </div>
             </div>
             <div class="ui-field">
-                <label>Password:</label>
+                <label>New Password:</label>
                 <div>
                     <input name="password" id="password" type="password" maxlength="100" size="51" value="<?php $dec_pass = base64_decode($row_User['password']); echo aes_decrypt($dec_pass);  ?>"/>
                 </div>
@@ -158,3 +158,9 @@ $totalRows_User = mysqli_num_rows($User);
     </form>
   
     </div>
+
+
+<?php
+((mysqli_free_result($User) || (is_object($User) && (get_class($User) == "mysqli_result"))) ? true : false);
+
+?>

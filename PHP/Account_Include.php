@@ -143,3 +143,12 @@ $totalRows_ManageUsers = mysqli_num_rows($ManageUsers);
         </tr>
       </table>
     </div>
+
+
+<?php
+if(isset($User)) {
+((mysqli_free_result($User) || (is_object($User) && (get_class($User) == "mysqli_result"))) ? true : false); }
+
+if(isset($ManageUsers)) {
+((mysqli_free_result($ManageUsers) || (is_object($ManageUsers) && (get_class($ManageUsers) == "mysqli_result"))) ? true : false); }
+?>

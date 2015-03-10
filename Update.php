@@ -23,10 +23,10 @@
   <div id="NavBar">
     	<nav>
         	<ul>
-                <li><a href="Index.php">Main</a></li>
-                <li><a href="Register.php">Register</a></li>
-           		<li><a href="ForgotPassword.php">Forgot Password</a></li>
-           </ul>
+            <li><a href="Index.php">Main</a></li>
+            <li><a href="Register.php">Register</a></li>
+           	<li><a href="ForgotPassword.php">Forgot Password</a></li>
+          </ul>
             
             <div id="log">
             <?php include "PHP/Login_Include.php" ?>
@@ -42,7 +42,3 @@
 </div>
 </body>
 </html>
-<?php
-((mysqli_free_result($User) || (is_object($User) && (get_class($User) == "mysqli_result"))) ? true : false);
-
-?>
