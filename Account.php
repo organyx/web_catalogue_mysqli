@@ -1,6 +1,9 @@
 <?php require_once('Connections/WebCatalogue.php'); ?>
 <?php require_once('Helpers/security.php'); ?>
-<!doctype html><html><head><script src="Javascript/jquery-2.1.3.min.js" type="text/javascript"></script><link href="CSS/Layout.css" rel="stylesheet" type="text/css"><link href="CSS/Menu.css" rel="stylesheet" type="text/css">
+<!doctype html><html><head>
+<script src="Javascript/jquery-2.1.3.min.js" type="text/javascript"></script>
+<link href="CSS/Layout.css" rel="stylesheet" type="text/css">
+<link href="CSS/Menu.css" rel="stylesheet" type="text/css">
 <!-- Add fancyBox -->
 <link rel="stylesheet" href="Javascript/fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
 <script type="text/javascript" src="Javascript/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
@@ -16,6 +19,7 @@
     $(".fancybox").fancybox();
   });
 </script>
+
 <meta charset="utf-8">
     <title>My Account</title>
 </head>
@@ -47,3 +51,4 @@
         </div>
     </div>
 </body></html>
+

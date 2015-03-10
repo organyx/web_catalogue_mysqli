@@ -11,9 +11,6 @@
 <link href="font-awesome-4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
 <script src="Javascript/jquery-2.1.3.min.js" type="text/javascript"></script>
-<!--
-<script type="text/javascript" src="Javascript/list.js"></script>
--->
 <!-- Add fancyBox -->
 <link rel="stylesheet" href="Javascript/fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
 <script type="text/javascript" src="Javascript/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
