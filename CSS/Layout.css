@@ -153,6 +153,14 @@ h6 {
   margin-right: auto;
 }
 
+.width-50 {
+  width: 50px;
+}
+
+.width-300 {
+  width: 300px;
+}
+
 .width-670 {
   width: 670px;
 }

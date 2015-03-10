@@ -113,29 +113,32 @@ if (isset($_POST['Email'])) {
       <form ACTION="<?php echo $loginFormAction; ?>" id="LoginForm" name="LoginForm" method="POST">
       <table id="login">
         <tr>
-          <td align="right"><label for="Email">Email:</label>
+          <td><label for="Email">Email:</label>
           <input type="text" name="Email" id="Email"></td>
-          <td width="50" rowspan="2"><input type="submit" name="submit" id="submit" value="Submit"></td>
+          <td class="width-50" rowspan="2"><input type="submit" name="submit" id="submit" value="Submit"></td>
         </tr>
         <tr>
-          <td align="right"><label for="Password" style="text-align: left">Password:</label>
+          <td><label for="Password" style="text-align: left">Password:</label>
           <input type="password" name="Password" id="Password"></td>
         </tr>
       </table>
       </form>
       <?php } else { ?>
-      <table id="logged" width="300" align="right">
+      <table id="logged" class="width-300">
         <tr>
-          <td align="right"><label>User: <?php echo $_SESSION['MM_Username']; ?></label></td>
-          <td align="right"><a class="link" href="LogOut.php">LogOut</a></td>
+          <td><label>User: <?php echo $_SESSION['MM_Username']; ?></label></td>
+          <td><a class="link" href="LogOut.php">LogOut</a></td>
         </tr>
         <tr>
           <td><?php echo $_SESSION['lvl'] ?></td>
-          <td align="right"><a class="link" href="Account.php">My Account</a></td>
+          <td><a class="link" href="Account.php">My Account</a></td>
         </tr>
       </table>
       
       <?php }  
-((mysqli_free_result($Login) || (is_object($Login) && (get_class($Login) == "mysqli_result"))) ? true : false);
+if(isset($Login)) {
+((mysqli_free_result($Login) || (is_object($Login) && (get_class($Login) == "mysqli_result"))) ? true : false);}
 
+if(isset($LoginRS)) {
+((mysqli_free_result($LoginRS) || (is_object($LoginRS) && (get_class($LoginRS) == "mysqli_result"))) ? true : false);}
 ?>
