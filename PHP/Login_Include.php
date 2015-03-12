@@ -126,7 +126,7 @@ if (isset($_POST['Email'])) {
       <?php } else { ?>
       <table id="logged" class="width-300">
         <tr>
-          <td><label>User: <?php echo $_SESSION['MM_Username']; ?></label></td>
+          <td><label><?php echo $_SESSION['MM_Username']; ?></label></td>
           <td><a class="link" href="LogOut.php">LogOut</a></td>
         </tr>
         <tr>

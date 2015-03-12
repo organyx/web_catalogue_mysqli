@@ -1,11 +1,6 @@
 <?php require_once('../Connections/WebCatalogue.php'); 
       require_once('../Helpers/security.php');
 
-  //     error_reporting(E_ALL); // or E_STRICT
-  // ini_set("display_errors",1);
-  // ini_set("memory_limit","1024M");
-
-
 // *** Check if username exists
 $MM_flag="MM_insert";
 if (isset($_POST[$MM_flag])) {

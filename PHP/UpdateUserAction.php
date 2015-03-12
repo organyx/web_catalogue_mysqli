@@ -76,7 +76,7 @@ if(isset($_FILES['file']) && $_FILES['file']['size'] != 0) {
             $flag = true;
         } else {
             // echo "Sorry, your file was not uploaded. Failed to move. <br/>" . "<br/> Move to: ". "Assets/img/" . basename($_SESSION['MM_Username']) . "/" . basename($_FILES["file"]["name"]) ."<br/>";
-             $flag = false;
+            $flag = false;
         }
     }
   }

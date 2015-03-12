@@ -1,6 +1,6 @@
 $(document).ready(function ()
 {
-    $("#update").click(function (e)
+    $("#update").click(function ()
     {
         update();
         refresh();
@@ -57,7 +57,7 @@ $(document).ready(function ()
             }
         });
         }, 5000 ); // 5 seconds
-            
     }
+
 });
 // JavaScript Document 

@@ -92,7 +92,7 @@ $totalRows_ManageUsers = mysqli_num_rows($ManageUsers);
         <tr>
           <td><table class="width-500 TableStyle center WidthAuto">
             <tr>
-              <td valign="top">&nbsp;</td>
+              <td><?php echo ($row_User['approval'] == "0000-00-00 00:00:00") ? "Awaiting Approval" : "Approved" ?></td>
               <td align="right" valign="top">Registration date : </td>
             </tr>
             <tr>
