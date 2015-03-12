@@ -1,4 +1,13 @@
-<?php require_once('Connections/WebCatalogue.php');
+<?php 
+  if(file_exists('Connections/WebCatalogue.php'))
+  {
+    require_once('Connections/WebCatalogue.php'); 
+  }
+
+  if(file_exists('../Connections/WebCatalogue.php'))
+  {
+    require_once('../Connections/WebCatalogue.php'); 
+  }
 
   if(file_exists('Helpers/security.php'))
   {
@@ -85,7 +94,7 @@ $totalRows_User = mysqli_num_rows($User);
     	</div>
     <div id="contentRight">
       <form method="POST" id="updateForm" action="javascript:void(null);" >
-      <div class="ui-form ui-500">
+      <div class="ui-form ui-600">
         <div class="ui-page">
           <div class="ui-field">
                 <label></label>
@@ -127,6 +136,17 @@ $totalRows_User = mysqli_num_rows($User);
                 <label>Description:</label>
                 <div>
                     <textarea name="descr" id="descr" style="width: 385px; height: 80px;"><?php echo $row_User['description']; ?></textarea>
+                </div>
+            </div>
+            <div class="ui-field">
+                <div class="up_pic center">
+                    <a class="fancybox"  href="<?php echo $row_User['preview_thumb']; ?>"> <img src="<?php echo $row_User['preview_thumb']; ?>" alt="Preview Thumb" height="140px" width="140px" class="img-thumbnail"/></a>
+                </div>
+            </div>
+            <div class="ui-field">
+                <label>Picture:</label>
+                <div>
+                    <input name="file" id="file" type="file" title="file" style="width: 385px; height: 30px;"/>
                 </div>
             </div>
             <input name="UserIDhiddenField" type="hidden" id="UserIDhiddenField"  value="<?php echo $row_User['userID']; ?>">  
