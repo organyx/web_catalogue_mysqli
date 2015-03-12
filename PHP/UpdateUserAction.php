@@ -19,8 +19,9 @@ if(isset($_POST["MM_update"]) && isset($passwordToConfirm) &&(isset($passwordCon
     $cleansedstring = preg_replace('#\W#', '', $passwordConfirm);
     //$secure_password = aes_encrypt($passwordConfirm);
     //$secure_password = base64_encode($secure_password);
-    $secure_password = aes_encrypt($cleansedstring);
-    $secure_password = base64_encode($secure_password);
+    $secure_password = password_hash($passwordConfirm, PASSWORD_BCRYPT);
+    // $secure_password = aes_encrypt($cleansedstring);
+    // $secure_password = base64_encode($secure_password);
     $passCheck = true;
     //echo $passwordConfirm . "<br/>";
     //echo aes_encrypt($passwordConfirm) . "<br/>";
@@ -85,7 +86,7 @@ if(isset($_FILES['file']) && $_FILES['file']['size'] != 0) {
  $user_printscreen_location = $user_folder_path . basename($_FILES['file']['name']);
 
 
-if ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "UpdateForm") && ($passCheck == true) && ($flag == false)) {
+if ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "UpdateForm") && ($passCheck == true) && ($flag == false) && (($_POST['password'] != "") && ($_POST['passwordwc'] != ""))  ) {
   $updateSQL = sprintf("UPDATE users SET password=%s, language=%s, url=%s, title=%s, `description`=%s WHERE userID=%s",
                        GetSQLValueString($secure_password, "text"),
 					             GetSQLValueString($_POST['lang'], "text"),
@@ -98,9 +99,35 @@ if ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "UpdateForm") && ($p
 
   echo "Record Updated";
 }
-elseif ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "UpdateForm") && ($passCheck == true) && ($flag == true)) {
+elseif ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "UpdateForm") && ($passCheck == true) && ($flag == true) && (($_POST['password'] != "") && ($_POST['passwordwc'] != ""))  ) {
   $updateSQL = sprintf("UPDATE users SET password=%s, language=%s, url=%s, title=%s, `description`=%s, `preview`=%s, `preview_thumb`=%s  WHERE userID=%s",
                        GetSQLValueString($secure_password, "text"),
+                       GetSQLValueString($_POST['lang'], "text"),
+                       GetSQLValueString($_POST['url'], "text"),
+                       GetSQLValueString($_POST['title'], "text"),
+                       GetSQLValueString($_POST['descr'], "text"),
+                       GetSQLValueString($user_printscreen_location, "text"),
+                       GetSQLValueString($user_printscreen_location, "text"),
+                       GetSQLValueString($_POST['UserIDhiddenField'], "int"));
+
+  $Result1 = mysqli_query( $WebCatalogue, $updateSQL) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
+
+  echo "Record Updated";
+}
+elseif ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "UpdateForm") && ($passCheck == true) && ($flag == false) && (($_POST['password'] == "") && ($_POST['passwordwc'] == "")) ) {
+  $updateSQL = sprintf("UPDATE users SET language=%s, url=%s, title=%s, `description`=%s  WHERE userID=%s",
+                       GetSQLValueString($_POST['lang'], "text"),
+                       GetSQLValueString($_POST['url'], "text"),
+                       GetSQLValueString($_POST['title'], "text"),
+                       GetSQLValueString($_POST['descr'], "text"),
+                       GetSQLValueString($_POST['UserIDhiddenField'], "int"));
+
+  $Result1 = mysqli_query( $WebCatalogue, $updateSQL) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
+
+  echo "Record Updated";
+}
+elseif ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "UpdateForm") && ($passCheck == true) && ($flag == true) && (($_POST['password'] == "") && ($_POST['passwordwc'] == ""))  ) {
+  $updateSQL = sprintf("UPDATE users SET language=%s, url=%s, title=%s, `description`=%s, `preview`=%s, `preview_thumb`=%s  WHERE userID=%s",
                        GetSQLValueString($_POST['lang'], "text"),
                        GetSQLValueString($_POST['url'], "text"),
                        GetSQLValueString($_POST['title'], "text"),

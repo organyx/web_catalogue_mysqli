@@ -70,18 +70,31 @@ if (isset($_GET['accesscheck'])) {
 
 if (isset($_POST['Email'])) {
   $loginUsername=$_POST['Email'];
-  $enc_pass = aes_encrypt($_POST['Password']);
-  $password=base64_encode($enc_pass);
+  // $enc_pass = aes_encrypt($_POST['Password']);
+  // $password=base64_encode($enc_pass);
+  $password = $_POST['Password'];
   $MM_fldUserAuthorization = "Userlevel";
   $MM_redirectLoginSuccess = "Account.php";
   $MM_redirectLoginFailed = "Index.php";
   $MM_redirecttoReferrer = true;
   	
-  $LoginRS__query=sprintf("SELECT email, password, Userlevel FROM users WHERE email=%s AND password=%s",
-  GetSQLValueString($loginUsername, "text"), GetSQLValueString($password, "text")); 
+  $LoginRS__query=sprintf("SELECT email, password, Userlevel FROM users WHERE email=%s",
+  GetSQLValueString($loginUsername, "text")); 
    
   $LoginRS = mysqli_query( $WebCatalogue, $LoginRS__query) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
-  $loginFoundUser = mysqli_num_rows($LoginRS);
+  
+  $row_LoginRS = mysqli_fetch_assoc($LoginRS);
+
+  echo $row_LoginRS['password'];
+  if(password_verify($password, $row_LoginRS['password']))
+  {
+    $loginFoundUser = mysqli_num_rows($LoginRS);
+  }
+  else
+  {
+    $loginFoundUser = false;
+  }
+
   if ($loginFoundUser) {
 	 
     //$loginStrGroup  = mysqli_result($LoginRS,0,'Userlevel');

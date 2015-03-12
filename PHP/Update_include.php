@@ -105,13 +105,13 @@ $totalRows_User = mysqli_num_rows($User);
             <div class="ui-field">
                 <label>New Password:</label>
                 <div>
-                    <input name="password" id="password" type="password" maxlength="100" size="51" value="<?php $dec_pass = base64_decode($row_User['password']); echo aes_decrypt($dec_pass);  ?>"/>
+                    <input name="password" id="password" type="password" maxlength="100" size="51"/>
                 </div>
             </div>
             <div class="ui-field">
                 <label>Confirm Password:</label>
                 <div>
-                    <input name="passwordwc" id="passwordwc" type="password" maxlength="100" size="51" value="<?php $dec_pass = base64_decode($row_User['password']); echo aes_decrypt($dec_pass);  ?>"/>
+                    <input name="passwordwc" id="passwordwc" type="password" maxlength="100" size="51" />
                 </div>
             </div>
             <div class="ui-field">

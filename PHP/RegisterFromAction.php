@@ -87,8 +87,9 @@ if (isset($_POST[$MM_flag])) {
   }
   else
   {
-    $secure_password = aes_encrypt($passwordConfirm);
-    $secure_password = base64_encode($secure_password);
+    // $secure_password = aes_encrypt($passwordConfirm);
+    // $secure_password = base64_encode($secure_password);
+    $secure_password = password_hash($passwordToConfirm, PASSWORD_BCRYPT);
     $flag = true;
   }
 
