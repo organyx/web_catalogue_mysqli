@@ -4,38 +4,6 @@
   //     error_reporting(E_ALL); // or E_STRICT
   // ini_set("display_errors",1);
   // ini_set("memory_limit","1024M");
-      
-if (!function_exists("GetSQLValueString")) {
-  function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "")
-  {
- 
-    Global $WebCatalogue;
-
-    if (PHP_VERSION < 6) {
-      $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
-    }
-    $theValue = mysqli_real_escape_string($WebCatalogue, $theValue);
-    switch ($theType) {
-      case "text":
-        $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
-        break;   
-      case "long":
-      case "int":
-        $theValue = ($theValue != "") ? intval($theValue) : "NULL";
-        break;
-      case "double":
-        $theValue = ($theValue != "") ? doubleval($theValue) : "NULL";
-        break;
-      case "date":
-        $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
-        break;
-      case "defined":
-        $theValue = ($theValue != "") ? $theDefinedValue : $theNotDefinedValue;
-        break;
-    }
-     return $theValue;
-  }
-}
 
 
 // *** Check if username exists

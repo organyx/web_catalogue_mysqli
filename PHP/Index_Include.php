@@ -12,39 +12,6 @@ if(file_exists('../Helpers/security.php') || file_exists('../Connections/WebCata
    require_once('../Connections/WebCatalogue.php'); 
 }
 
-
-if (!function_exists("GetSQLValueString")) {
-  function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "")
-  {
-
-    Global $WebCatalogue;
-
-    if (PHP_VERSION < 6) {
-      $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
-    }
-    $theValue = mysqli_real_escape_string($WebCatalogue, $theValue);
-    switch ($theType) {
-      case "text":
-        $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
-        break;   
-      case "long":
-      case "int":
-        $theValue = ($theValue != "") ? intval($theValue) : "NULL";
-        break;
-      case "double":
-        $theValue = ($theValue != "") ? doubleval($theValue) : "NULL";
-        break;
-      case "date":
-        $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
-        break;
-      case "defined":
-        $theValue = ($theValue != "") ? $theDefinedValue : $theNotDefinedValue;
-        break;
-    }
-     return $theValue;
-  }
-}
-
 $currentPage = $_SERVER["PHP_SELF"];
 
 $colname_User = "-1";
@@ -129,7 +96,6 @@ $i = 0;
         </tr>
       </table>
 
-
 <?php
 
 if(isset($User)) {
@@ -138,6 +104,5 @@ if(isset($User)) {
 
 if(isset($ManageUsers)) {
 ((mysqli_free_result($ManageUsers) || (is_object($ManageUsers) && (get_class($ManageUsers) == "mysqli_result"))) ? true : false); }
-
 
 ?>
