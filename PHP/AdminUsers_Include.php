@@ -84,7 +84,7 @@ if (isset($_GET['pageNum_ManageUsers'])) {
 $startRow_ManageUsers = $pageNum_ManageUsers * $maxRows_ManageUsers;
 
 
-$query_ManageUsers = "SELECT * FROM users ORDER BY registration DESC";
+$query_ManageUsers = "SELECT * FROM users WHERE NOT `Userlevel` = '2' ORDER BY registration DESC";
 $query_limit_ManageUsers = sprintf("%s LIMIT %d, %d", $query_ManageUsers, $startRow_ManageUsers, $maxRows_ManageUsers);
 $ManageUsers = mysqli_query( $WebCatalogue, $query_limit_ManageUsers) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
 $row_ManageUsers = mysqli_fetch_assoc($ManageUsers);

@@ -6,16 +6,12 @@ body {
 #Holder {
   width: 980px;
   height: auto;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 21px;
-  margin-bottom: 21px;
+  margin: 21px auto;
 }
 
 #Header {
   height: 70px;
-  background-image: url(../Assets/img/logo.png);
-  background-repeat: no-repeat;
+  background: url(../Assets/img/logo.png) no-repeat;
   margin-bottom: 11px;
 }
 
@@ -178,7 +174,7 @@ h6 {
 }
 
 .TableStyle {
-  border-spacing: 0px;
+  border-spacing: 0;
   border-collapse: collapse;
   box-sizing: border-box;
   background-color: transparent;
@@ -233,7 +229,7 @@ h6 {
   background-color: #f5f6f7;
   border: 1px solid #c0c0c0;
   border-radius: 3px;
-  padding: 0px;
+  padding: 0;
   overflow: hidden !important;
   min-height: 100px;
 }
@@ -245,9 +241,9 @@ h6 {
   bottom: 0;
   text-align: center;
   border-top: 1px solid #d5d8d8;
-  border-bottom: 0px solid #d5d8d8;
+  border-bottom: 0 solid #d5d8d8;
   background-color: #fafafa;
-  padding: 15px 0px !important;
+  padding: 15px 0 !important;
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
 }
@@ -283,7 +279,7 @@ h6 {
   margin-top: 7px;
   margin-bottom: 3px;
   width: 140px;
-  padding: 0px;
+  padding: 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

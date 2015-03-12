@@ -19,11 +19,6 @@ if (isset($_SESSION['MM_Username'])) {
   $colname_User = $_SESSION['MM_Username'];
 }
 
-$query_User = sprintf("SELECT * FROM `users` WHERE email = %s", GetSQLValueString($colname_User, "text"));
-$User = mysqli_query( $WebCatalogue, $query_User) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
-$row_User = mysqli_fetch_assoc($User);
-$totalRows_User = mysqli_num_rows($User);
-
 $maxRows_ManageUsers = 10;
 $pageNum_ManageUsers = 0;
 if (isset($_GET['pageNum_ManageUsers'])) {
@@ -97,10 +92,6 @@ $i = 0;
       </table>
 
 <?php
-
-if(isset($User)) {
-((mysqli_free_result($User) || (is_object($User) && (get_class($User) == "mysqli_result"))) ? true : false); }
-
 
 if(isset($ManageUsers)) {
 ((mysqli_free_result($ManageUsers) || (is_object($ManageUsers) && (get_class($ManageUsers) == "mysqli_result"))) ? true : false); }
