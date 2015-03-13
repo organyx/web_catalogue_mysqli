@@ -35,7 +35,7 @@
    	  </div>
     	<div id="contentLeft">
     	  
-    	  <h6>Type in your email <br>to recieve new password</h6>
+    	  <h6>Enter your email <br>to recieve new password</h6>
     	</div>
     <div id="contentRight">
 

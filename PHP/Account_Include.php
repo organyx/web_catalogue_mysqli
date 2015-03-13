@@ -76,7 +76,7 @@ $totalRows_ManageUsers = mysqli_num_rows($ManageUsers);
     	  <h1>Welcome,  <?php echo $row_User['first_name']; ?> <?php echo $row_User['last_name']; ?>!</h1>
       </div>
     	<div id="contentLeft">
-    	  <h2>Account info</h2><br>
+    	  <h2>Account links</h2><br>
           <?php if ($_SESSION['lvl'] == 2) { ?>
           <h2><a href="AdminManageUsers.php">Manage Users</a></h2><br>
           <?php } ?>

@@ -64,7 +64,7 @@ $totalRows_SelectedUser = mysqli_num_rows($SelectedUser);
         <tr>
           <td><table id="selectedUser" class="TableStyle center WidthAuto">
             <tr>
-              <td align="left" valign="top">Email: <?php echo $row_SelectedUser['email']; ?></td>
+              <td align="left" valign="top"></td>
               <td align="right" valign="top">Registration date : </td>
             </tr>
             <tr>

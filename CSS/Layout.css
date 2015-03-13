@@ -7,6 +7,7 @@ body {
   width: 980px;
   height: auto;
   margin: 21px auto;
+  min-width: 320px;
 }
 
 #Header {
@@ -24,11 +25,10 @@ body {
 #contentLeft {
   width: 100%;
   min-width: 280px;
-  
   padding-top: 11px;
   text-align: center;
-    border-bottom: 1px solid #000000;
-    padding-bottom: 15px;
+  border-bottom: 1px solid #000000;
+  padding-bottom: 15px;
 }
 
 #contentLeft a {
@@ -39,7 +39,6 @@ body {
 #contentRight {
   min-width: 680px;
   width: 100%;
-  
   min-height: 350px;
 }
 
@@ -227,6 +226,7 @@ h6 {
 }
 
 .ui-form {
+  
   position: relative;
   color: #000000;
   background-color: #f5f6f7;
@@ -313,8 +313,6 @@ h6 {
   text-align: center;
 }
 
-
-
 .off {
   display: none;
 }
@@ -328,17 +326,6 @@ h6 {
     padding: 9px;
   }
 
-  #contentLeft {
-    width: 100%;
-    text-align: center;
-    border-bottom: 1px solid #000000;
-    padding-bottom: 15px;
-  }
-
-  #contentRight {
-    width: 100%;
-  }
-
   #Footer {
     height: 50px;
   }
@@ -349,7 +336,6 @@ h6 {
 }
 
 @media screen and (max-width:478px) {
-	
   .updateLayout td {
     display: block;
   }
