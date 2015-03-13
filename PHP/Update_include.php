@@ -97,44 +97,43 @@ $totalRows_User = mysqli_num_rows($User);
       <div class="ui-form ui-600">
         <div class="ui-page">
           <div class="ui-field">
-                <label></label>
                 <div>
                     <p id="returnmessage"></p>
                 </div>
             </div>
             <div class="ui-field">
-                <label>New Password:</label>
-                <div>
+                <div class="ui-table">
+                    <label>New Password:</label>
                     <input name="password" id="password" type="password" maxlength="100" size="51"/>
                 </div>
             </div>
             <div class="ui-field">
-                <label>Confirm Password:</label>
-                <div>
+                <div class="ui-table">
+                    <label>Confirm Password:</label>
                     <input name="passwordwc" id="passwordwc" type="password" maxlength="100" size="51" />
                 </div>
             </div>
             <div class="ui-field">
-                <label>Language:</label>
-                <div>
+                <div class="ui-table">
+                    <label>Language:</label>
                     <input name="lang" id="lang" type="text" maxlength="100" size="51" value="<?php echo $row_User['language']; ?>"/>
                 </div>
             </div>
             <div class="ui-field">
-                <label>Url:</label>
-                <div>
+                <div class="ui-table">
+                    <label>Url:</label>
                     <input name="url" id="url" type="text" maxlength="100" size="51" value="<?php echo $row_User['url']; ?>"/>
                 </div>
             </div>
             <div class="ui-field">
-                <label>Title:</label>
-                <div>
+                <div class="ui-table">
+                    <label>Title:</label>
                     <input name="title" id="title" type="text" maxlength="100" size="51" value="<?php echo $row_User['title']; ?>"/>
                 </div>
             </div>
             <div class="ui-field">
-                <label>Description:</label>
-                <div>
+                <div class="ui-table">
+                    <label>Description:</label>
                     <textarea name="descr" id="descr" style="width: 385px; height: 80px;"><?php echo $row_User['description']; ?></textarea>
                 </div>
             </div>
@@ -144,8 +143,8 @@ $totalRows_User = mysqli_num_rows($User);
                 </div>
             </div>
             <div class="ui-field">
-                <label>Picture:</label>
-                <div>
+                <div class="ui-table">
+                    <label>Picture:</label>
                     <input name="file" id="file" type="file" title="file" style="width: 385px; height: 30px;"/>
                 </div>
             </div>

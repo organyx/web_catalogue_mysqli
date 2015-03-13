@@ -44,14 +44,13 @@
         <div class="ui-form ui-200">
           <div class="ui-page">
                <div class="ui-field">
-                  <label></label>
                   <div>
                       <p id="returnmessage"></p>
                   </div>
               </div>
               <div class="ui-field">
-                  <label>Email:</label>
-                  <div>
+                  <div class="ui-table">
+                      <label>Email:</label>
                       <input name="email" type="email" id="email" maxlength="100" size="51"/>
                   </div>
               </div>

@@ -46,17 +46,7 @@
       </div>
     </nav>
   </div>
-  <div id="Content">
-    <div id="PageHeading">
-      <h1>Main</h1>
-    </div>
-    <div id="contentLeft">
-      <h2>Links</h2><br>
-      <h2><a href="Account.php">Account</a></h2>
-      <br>
-      <h6>&nbsp;</h6>
-    </div>
-    <div id="contentRight">
+    <div id="Content">
       <?php include "PHP/Index_Include.php" ?>
     </div>
   </div>

@@ -22,10 +22,13 @@ body {
 }
 
 #contentLeft {
-  width: 280px;
-  float: left;
-  padding-left: 11px;
+  width: 100%;
+  min-width: 280px;
+  
   padding-top: 11px;
+  text-align: center;
+    border-bottom: 1px solid #000000;
+    padding-bottom: 15px;
 }
 
 #contentLeft a {
@@ -34,9 +37,9 @@ body {
 }
 
 #contentRight {
-  width: 680px;
-  float: right;
-  border-left: 1px solid #000000;
+  min-width: 680px;
+  width: 100%;
+  
   min-height: 350px;
 }
 
@@ -232,6 +235,7 @@ h6 {
   padding: 0;
   overflow: hidden !important;
   min-height: 100px;
+  text-align: center;
 }
 
 .ui-form .ui-buttons {
@@ -269,8 +273,16 @@ h6 {
 
 .ui-form .ui-field input[type="text"],
 .ui-form .ui-field input[type="email"],
-.ui-form .ui-field input[type="password"] {
+.ui-form .ui-field input[type="password"],
+.ui-form .ui-field input[type="file"],
+.ui-form .ui-field textarea {
   width: 385px;
+  float: right;
+}
+
+.ui-table {
+  width: 680px;
+  margin: 0 auto;
 }
 
 .ui-field > label {
@@ -283,23 +295,25 @@ h6 {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  text-align: right;
+  text-align: left;
   min-height: 20px;
   color: #666;
 }
 
 .ui-field > div {
   margin-bottom: 3px;
-  margin-left: 128px;
   padding: 3px;
   min-height: 28px;
   float: none;
+  clear: both;
 }
 
 .ui-field .up_pic {
   margin-left: 0;
   text-align: center;
 }
+
+
 
 .off {
   display: none;

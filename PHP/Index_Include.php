@@ -57,39 +57,50 @@ $queryString_ManageUsers = sprintf("&totalRows_ManageUsers=%d%s", $totalRows_Man
 $i = 0;
 ?>
 
-<table class="width-670 center WidthAuto">
-        <tr>
-          <td align="right" valign="top">Showing:&nbsp;<?php echo ($startRow_ManageUsers + 1) ?> to <?php echo min($startRow_ManageUsers + $maxRows_ManageUsers, $totalRows_ManageUsers) ?> of <?php echo $totalRows_ManageUsers ?></td>
-        </tr>
-        <tr>
-          <td align="center" valign="top"><?php if ($totalRows_ManageUsers > 0) { // Show if recordset not empty ?>
-              <?php do { ?>
-                <table border="1" class="width-630 TableStyle center WidthAuto">
-                  
-                  <tr>
-                    <td><?php echo ($startRow_ManageUsers + 1) + $i . "." ?></td>
-                    <td width="400" height="50" align="center" ><h2><a href="UserWeb.php?a=<?php echo urlencode($row_ManageUsers['userID']); ?>"><?php echo $row_ManageUsers['title']; ?></a></h2></td>
-                    <td width="200" rowspan="2" align="center" ><a class="fancybox"  href="<?php echo $row_ManageUsers['preview_thumb']; ?>"> <img src="<?php echo $row_ManageUsers['preview_thumb']; ?>" alt="Preview Thumb" height="140px" width="140px" class="img-thumbnail"/></a></td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td height="50" align="center" ><a href="<?php echo $row_ManageUsers['url']; ?>"><?php echo $row_ManageUsers['url']; ?></a></td>
-                  </tr>
-                </table>
-                <br>
-                <?php $i++;} while ($row_ManageUsers = mysqli_fetch_assoc($ManageUsers)); ?>
-          <?php } // Show if recordset not empty ?></td>
-        </tr>
-        <tr>
-          <td align="right" valign="top"><?php if ($pageNum_ManageUsers < $totalPages_ManageUsers) { // Show if not last page ?>
-              <a href="<?php printf("%s?pageNum_ManageUsers=%d%s", $currentPage, min($totalPages_ManageUsers, $pageNum_ManageUsers + 1), $queryString_ManageUsers); ?>">Next</a>
-              <?php } // Show if not last page ?>
-            |
-            <?php if ($pageNum_ManageUsers > 0) { // Show if not first page ?>
-              <a href="<?php printf("%s?pageNum_ManageUsers=%d%s", $currentPage, max(0, $pageNum_ManageUsers - 1), $queryString_ManageUsers); ?>">Previous</a>
-              <?php } // Show if not first page ?></td>
-        </tr>
-      </table>
+    <div id="PageHeading">
+      <h1>Main</h1>
+    </div>
+    <?php if(isset($_SESSION['MM_Username'])) { ?>
+    <div id="contentLeft">
+      <h2>Links</h2><br>
+      <h2><a href="Account.php">Account</a></h2>
+    </div>
+     <?php } ?>
+
+    <div id="contentRight">
+      <table class="width-670 center WidthAuto">
+              <tr>
+                <td align="right" valign="top">Showing:&nbsp;<?php echo ($startRow_ManageUsers + 1) ?> to <?php echo min($startRow_ManageUsers + $maxRows_ManageUsers, $totalRows_ManageUsers) ?> of <?php echo $totalRows_ManageUsers ?></td>
+              </tr>
+              <tr>
+                <td align="center" valign="top"><?php if ($totalRows_ManageUsers > 0) { // Show if recordset not empty ?>
+                    <?php do { ?>
+                      <table border="1" class="width-630 TableStyle center WidthAuto">
+                        
+                        <tr>
+                          <td><?php echo ($startRow_ManageUsers + 1) + $i . "." ?></td>
+                          <td width="400" height="50" align="center" ><h2><a href="UserWeb.php?a=<?php echo urlencode($row_ManageUsers['userID']); ?>"><?php echo $row_ManageUsers['title']; ?></a></h2></td>
+                          <td width="200" rowspan="2" align="center" ><a class="fancybox"  href="<?php echo $row_ManageUsers['preview_thumb']; ?>"> <img src="<?php echo $row_ManageUsers['preview_thumb']; ?>" alt="Preview Thumb" height="140px" width="140px" class="img-thumbnail"/></a></td>
+                        </tr>
+                        <tr>
+                          <td></td>
+                          <td height="50" align="center" ><a href="<?php echo $row_ManageUsers['url']; ?>"><?php echo $row_ManageUsers['url']; ?></a></td>
+                        </tr>
+                      </table>
+                      <br>
+                      <?php $i++;} while ($row_ManageUsers = mysqli_fetch_assoc($ManageUsers)); ?>
+                <?php } // Show if recordset not empty ?></td>
+              </tr>
+              <tr>
+                <td align="right" valign="top"><?php if ($pageNum_ManageUsers < $totalPages_ManageUsers) { // Show if not last page ?>
+                    <a href="<?php printf("%s?pageNum_ManageUsers=%d%s", $currentPage, min($totalPages_ManageUsers, $pageNum_ManageUsers + 1), $queryString_ManageUsers); ?>">Next</a>
+                    <?php } // Show if not last page ?>
+                  |
+                  <?php if ($pageNum_ManageUsers > 0) { // Show if not first page ?>
+                    <a href="<?php printf("%s?pageNum_ManageUsers=%d%s", $currentPage, max(0, $pageNum_ManageUsers - 1), $queryString_ManageUsers); ?>">Previous</a>
+                    <?php } // Show if not first page ?></td>
+              </tr>
+            </table>
 
 <?php
 
