@@ -64,8 +64,8 @@
     
     <div class="social">
     	<a href="#"><i class="fa fa-facebook fa-2x"></i></a>
-        <a href="#"><i class="fa fa-twitter fa-2x"></i></a>
-        <a href="#"><i class="fa fa-google-plus fa-2x"></i></a>
+      <a href="#"><i class="fa fa-twitter fa-2x"></i></a>
+      <a href="#"><i class="fa fa-google-plus fa-2x"></i></a>
     </div>
   </div>
 </div>
