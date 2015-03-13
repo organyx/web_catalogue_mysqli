@@ -17,20 +17,12 @@ if(isset($_POST["MM_update"]) && isset($passwordToConfirm) &&(isset($passwordCon
   {
     $passwordConfirm = $_POST['password'];
     $cleansedstring = preg_replace('#\W#', '', $passwordConfirm);
-    //$secure_password = aes_encrypt($passwordConfirm);
-    //$secure_password = base64_encode($secure_password);
     $secure_password = password_hash($passwordConfirm, PASSWORD_BCRYPT);
-    // $secure_password = aes_encrypt($cleansedstring);
-    // $secure_password = base64_encode($secure_password);
     $passCheck = true;
-    //echo $passwordConfirm . "<br/>";
-    //echo aes_encrypt($passwordConfirm) . "<br/>";
-    //echo $secure_password . "<br/>";
   }
 }
 
 $flag = false;
-//echo "<pre>" . print_r($_SESSION) . "</pre>";
 $user_folder_path = "Assets/img/" . basename($_SESSION['MM_Username']) . "/";
 
 if(isset($_FILES['file']) && $_FILES['file']['size'] != 0) {
@@ -73,10 +65,8 @@ if(isset($_FILES['file']) && $_FILES['file']['size'] != 0) {
     } else {
       //Change absolute to relative when moving
         if (move_uploaded_file($_FILES['file']['tmp_name'], $_SERVER["DOCUMENT_ROOT"] . "/web_catalogue_mysqli/" . $target_file)) {
-            //echo "The file ". basename($_FILES['file']["name"]). " has been uploaded.<br/>";
             $flag = true;
         } else {
-            // echo "Sorry, your file was not uploaded. Failed to move. <br/>" . "<br/> Move to: ". "Assets/img/" . basename($_SESSION['MM_Username']) . "/" . basename($_FILES["file"]["name"]) ."<br/>";
             $flag = false;
         }
     }

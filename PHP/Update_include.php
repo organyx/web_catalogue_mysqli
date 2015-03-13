@@ -103,48 +103,50 @@ $totalRows_User = mysqli_num_rows($User);
             </div>
             <div class="ui-field">
                 <div class="ui-table">
-                    <label>New Password:</label>
+                    <label for="password">New Password:</label>
                     <input name="password" id="password" type="password" maxlength="100" size="51"/>
                 </div>
             </div>
             <div class="ui-field">
                 <div class="ui-table">
-                    <label>Confirm Password:</label>
+                    <label for="passwordwc">Confirm Password:</label>
                     <input name="passwordwc" id="passwordwc" type="password" maxlength="100" size="51" />
                 </div>
             </div>
             <div class="ui-field">
                 <div class="ui-table">
-                    <label>Language:</label>
+                    <label for="lang">Language:</label>
                     <input name="lang" id="lang" type="text" maxlength="100" size="51" value="<?php echo $row_User['language']; ?>"/>
                 </div>
             </div>
             <div class="ui-field">
                 <div class="ui-table">
-                    <label>Url:</label>
+                    <label for="url">Url:</label>
                     <input name="url" id="url" type="text" maxlength="100" size="51" value="<?php echo $row_User['url']; ?>"/>
                 </div>
             </div>
             <div class="ui-field">
                 <div class="ui-table">
-                    <label>Title:</label>
+                    <label for="title">Title:</label>
                     <input name="title" id="title" type="text" maxlength="100" size="51" value="<?php echo $row_User['title']; ?>"/>
                 </div>
             </div>
             <div class="ui-field">
                 <div class="ui-table">
-                    <label>Description:</label>
+                    <label for="descr">Description:</label>
                     <textarea name="descr" id="descr" style="width: 385px; height: 80px;"><?php echo $row_User['description']; ?></textarea>
                 </div>
             </div>
             <div class="ui-field">
                 <div class="up_pic center">
+                    <br>
                     <a class="fancybox"  href="<?php echo $row_User['preview_thumb']; ?>"> <img src="<?php echo $row_User['preview_thumb']; ?>" alt="Preview Thumb" height="140px" width="140px" class="img-thumbnail"/></a>
+                    <br>
                 </div>
             </div>
             <div class="ui-field">
                 <div class="ui-table">
-                    <label>Picture:</label>
+                    <label for="file">New picture:</label>
                     <input name="file" id="file" type="file" title="file" style="width: 385px; height: 30px;"/>
                 </div>
             </div>
@@ -156,8 +158,7 @@ $totalRows_User = mysqli_num_rows($User);
         </div>
         </div>
     </form>
-  
-    </div>
+  </div>
 
 
 <?php

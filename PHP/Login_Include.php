@@ -70,8 +70,6 @@ if (isset($_GET['accesscheck'])) {
 
 if (isset($_POST['Email'])) {
   $loginUsername=$_POST['Email'];
-  // $enc_pass = aes_encrypt($_POST['Password']);
-  // $password=base64_encode($enc_pass);
   $password = $_POST['Password'];
   $MM_fldUserAuthorization = "Userlevel";
   $MM_redirectLoginSuccess = "Account.php";
@@ -97,7 +95,6 @@ if (isset($_POST['Email'])) {
 
   if ($loginFoundUser) {
 	 
-    //$loginStrGroup  = mysqli_result($LoginRS,0,'Userlevel');
 	$loginStrGroup  = getUserLevel();
   
  

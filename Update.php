@@ -2,8 +2,6 @@
 	require_once('Helpers/security.php');
 	?>
 
-
-
 <!doctype html>
 <html>
 <head>

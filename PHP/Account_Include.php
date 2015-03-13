@@ -71,7 +71,6 @@ $row_ManageUsers = mysqli_fetch_assoc($ManageUsers);
 $totalRows_ManageUsers = mysqli_num_rows($ManageUsers);
 ?>
 
-
 <div id="PageHeading">
     	  <h1>Welcome,  <?php echo $row_User['first_name']; ?> <?php echo $row_User['last_name']; ?>!</h1>
       </div>

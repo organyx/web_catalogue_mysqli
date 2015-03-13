@@ -89,7 +89,8 @@ else
   {
     echo "Email not Found.";
   }
-  elseif (empty($_SESSION['EMPW'])) {
+  elseif (empty($_SESSION['EMPW'])) 
+  {
     echo "Email field is empty.";
   }
   else

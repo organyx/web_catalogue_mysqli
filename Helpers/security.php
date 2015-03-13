@@ -12,9 +12,7 @@ function mysql_aes_key($key)
 	}
 	return $new_key;
 }
-/*
-$decrypted_value = rtrim($decrypted_value, "..16");
-*/
+
 function aes_encrypt($val)
 {
 	$key = mysql_aes_key($GLOBALS['key']);
