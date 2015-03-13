@@ -91,18 +91,14 @@ if (isset($_POST[$MM_flag])) {
     $flag = true;
   }
 
-
   $default_picture = "Assets/img/default.png/";
   $user_folder_path = "Assets/img/" . basename($_POST['email']) . "/";
   $user_folder_path_check = "../Assets/img/" . basename($_POST['email']) . "/";
-
 
   if (!file_exists($user_folder_path_check) && !is_dir($user_folder_path_check) && !is_writable($user_folder_path_check)) 
   {
      $dir = mkdir("../Assets/img/" . basename($_POST['email']), 0777, true);
   }
-  
-  
 
   if(isset($_FILES['file']) && $_FILES['file']['size'] != 0) {
     $target_dir = "Assets/img/" . basename($_POST['email']) . "/";

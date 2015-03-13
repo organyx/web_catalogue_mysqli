@@ -88,9 +88,7 @@ $totalRows_User = mysqli_num_rows($User);
     	<div id="contentLeft">
     	  <h2>Update Your Account</h2><br>
           <h2><a href="Account.php">My Account</a></h2><br>
-    	  <h2><a href="LogOut.php">Log Out</a></h2><br>
-    	  <br>
-    	  <h6>&nbsp;</h6>
+    	  <h2><a href="LogOut.php">Log Out</a></h2>
     	</div>
     <div id="contentRight">
       <form method="POST" id="updateForm" action="javascript:void(null);" >

@@ -80,8 +80,7 @@ $totalRows_ManageUsers = mysqli_num_rows($ManageUsers);
           <h2><a href="AdminManageUsers.php">Manage Users</a></h2><br>
           <?php } ?>
     	  <h2><a href="Update.php">Update Account</a></h2><br>
-    	  <h2><a href="LogOut.php">Log Out</a></h2><br>
-    	  <br>
+    	  <h2><a href="LogOut.php">Log Out</a></h2>
     	</div>
     <div id="contentRight">
       <table class="width-670 center WidthAuto">

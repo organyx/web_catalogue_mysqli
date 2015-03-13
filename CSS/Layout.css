@@ -20,6 +20,7 @@ body {
   height: auto;
   clear: both;
   overflow: auto;
+  font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 #contentLeft {
@@ -39,7 +40,7 @@ body {
 #contentRight {
   min-width: 680px;
   width: 100%;
-  min-height: 350px;
+  min-height: 200px;
 }
 
 #contentRight a {
@@ -147,8 +148,7 @@ h6 {
 }
 
 .center {
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
 }
 
 .width-50 {
@@ -159,20 +159,20 @@ h6 {
   width: 300px;
 }
 
-.width-670 {
-  width: 670px;
+.width-400 {
+  width: 400px;
 }
 
 .width-500 {
   width: 500px;
 }
 
-.width-400 {
-  width: 400px;
-}
-
 .width-630 {
   width: 630px;
+}
+
+.width-670 {
+  width: 670px;
 }
 
 .TableStyle {
@@ -300,6 +300,7 @@ h6 {
 }
 
 .ui-field > div {
+  font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin-bottom: 3px;
   padding: 3px;
   min-height: 28px;
