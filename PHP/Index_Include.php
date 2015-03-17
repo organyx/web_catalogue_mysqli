@@ -108,3 +108,4 @@ if(isset($ManageUsers)) {
 ((mysqli_free_result($ManageUsers) || (is_object($ManageUsers) && (get_class($ManageUsers) == "mysqli_result"))) ? true : false); }
 
 ?>
+

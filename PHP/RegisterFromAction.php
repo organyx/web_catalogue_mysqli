@@ -16,8 +16,7 @@ if (isset($_POST[$MM_flag])) {
     exit;
   }
 
-  if(filter_var($loginUsername, FILTER_VALIDATE_EMAIL)) {
-    
+  if(filter_var($loginUsername, FILTER_VALIDATE_EMAIL)) {    
   }
   else {
     echo "Invalid email format.";
@@ -25,14 +24,12 @@ if (isset($_POST[$MM_flag])) {
     exit;
   }
   if(ctype_alpha($_POST['first_name']) && ctype_alpha($_POST['last_name'])) {
-    
   }
   else {
     echo "Personal fields contain invalid data.";
     $flag = false;
     exit;
   }
-
 
   $LoginRS__query = sprintf("SELECT email FROM `users` WHERE email=%s", GetSQLValueString($loginUsername, "text"));
   $LoginRS=mysqli_query( $WebCatalogue, $LoginRS__query) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
@@ -45,7 +42,6 @@ if (isset($_POST[$MM_flag])) {
     $flag = false;
     exit;
   }
-
 
   if(empty($_POST['password'])) 
   {
@@ -61,8 +57,7 @@ if (isset($_POST[$MM_flag])) {
     exit;
   }
 
-  if(filter_var($_POST['url'], FILTER_VALIDATE_URL)) {
-    
+  if(filter_var($_POST['url'], FILTER_VALIDATE_URL)) {    
   }
   else {
     echo "Url is broken.";

@@ -63,7 +63,7 @@ if(isset($_FILES['file']) && $_FILES['file']['size'] != 0) {
         echo "Sorry, your file was not uploaded.";
     // if everything is ok, try to upload file
     } else {
-      //Change absolute to relative when moving
+      //Change absolute to relative when moving to the Server
         if (move_uploaded_file($_FILES['file']['tmp_name'], $_SERVER["DOCUMENT_ROOT"] . "/web_catalogue_mysqli/" . $target_file)) {
             $flag = true;
         } else {
@@ -72,9 +72,7 @@ if(isset($_FILES['file']) && $_FILES['file']['size'] != 0) {
     }
   }
 
-
- $user_printscreen_location = $user_folder_path . basename($_FILES['file']['name']);
-
+$user_printscreen_location = $user_folder_path . basename($_FILES['file']['name']);
 
 if ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "UpdateForm") && ($passCheck == true) && ($flag == false) && (($_POST['password'] != "") && ($_POST['passwordwc'] != ""))  ) {
   $updateSQL = sprintf("UPDATE users SET password=%s, language=%s, url=%s, title=%s, `description`=%s WHERE userID=%s",
