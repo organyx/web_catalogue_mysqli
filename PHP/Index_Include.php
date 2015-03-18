@@ -76,7 +76,6 @@ $i = 0;
                 <td align="center" valign="top"><?php if ($totalRows_ManageUsers > 0) { // Show if recordset not empty ?>
                     <?php do { ?>
                       <table border="1" class="width-630 TableStyle center WidthAuto">
-                        
                         <tr>
                           <td><?php echo ($startRow_ManageUsers + 1) + $i . "." ?></td>
                           <td width="400" height="50" align="center" ><h2><a href="UserWeb.php?a=<?php echo urlencode($row_ManageUsers['userID']); ?>"><?php echo $row_ManageUsers['title']; ?></a></h2></td>

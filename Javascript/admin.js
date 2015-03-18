@@ -71,8 +71,6 @@ $(document).ready(function ()
         });
 
         }, 5000 ); // 5 seconds
-        
-        
     }
 
     function deleteUser()

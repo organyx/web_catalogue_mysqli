@@ -37,17 +37,15 @@
 <div id="Holder">
   <div id="Header"></div>
   <div id="NavBar">
-    	<nav>
+    	  <nav>
         	<ul>
          		<li><a href="Index.php">Main</a></li>
                 <li><a href="Register.php">Register</a></li>
                 <li><a href="ForgotPassword.php">Forgot Password</a></li>
             </ul>
               <div id="log">
-
-            <?php include "PHP/Login_Include.php" ?>
-            
-            </div>
+                <?php include "PHP/Login_Include.php" ?>
+              </div>
         </nav>
   </div>
   <div id="Content">

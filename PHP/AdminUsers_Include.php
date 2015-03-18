@@ -140,7 +140,7 @@ $queryString_ManageUsers = sprintf("&totalRows_ManageUsers=%d%s", $totalRows_Man
                     <td>User: <?php echo $row_ManageUsers['first_name']; ?> <?php echo $row_ManageUsers['last_name']; ?> | Account: <?php echo $row_ManageUsers['email']; ?></td>
                   </tr>
                   <tr>
-                  	<td>Status: <?php echo ($row_ManageUsers['Userlevel'] == 1 ? "User" : "Admin"); ?></td>     
+                  	<td>Status: <?php echo ($row_ManageUsers['approval'] !== "0000-00-00 00:00:00" ? "Approved" : "Awaiting Approval"); ?></td>     
                   </tr>
                   <tr>
                     <td><table class="center">
@@ -173,13 +173,15 @@ $queryString_ManageUsers = sprintf("&totalRows_ManageUsers=%d%s", $totalRows_Man
           <?php } // Show if recordset not empty ?></td>
         </tr>
         <tr>
-          <td align="right" valign="top"><?php if ($pageNum_ManageUsers < $totalPages_ManageUsers) { // Show if not last page ?>
+          <td align="right" valign="top">
+              <?php if ($pageNum_ManageUsers < $totalPages_ManageUsers) { // Show if not last page ?>
               <a href="<?php printf("%s?pageNum_ManageUsers=%d%s", $currentPage, min($totalPages_ManageUsers, $pageNum_ManageUsers + 1), $queryString_ManageUsers); ?>">Next</a>
               <?php } // Show if not last page ?>
-|
-<?php if ($pageNum_ManageUsers > 0) { // Show if not first page ?>
-  <a href="<?php printf("%s?pageNum_ManageUsers=%d%s", $currentPage, max(0, $pageNum_ManageUsers - 1), $queryString_ManageUsers); ?>">Previous</a>
-  <?php } // Show if not first page ?>          </td>
+              |
+              <?php if ($pageNum_ManageUsers > 0) { // Show if not first page ?>
+                <a href="<?php printf("%s?pageNum_ManageUsers=%d%s", $currentPage, max(0, $pageNum_ManageUsers - 1), $queryString_ManageUsers); ?>">Previous</a>
+              <?php } // Show if not first page ?>
+          </td>
         </tr>
       </table>
 <?php
